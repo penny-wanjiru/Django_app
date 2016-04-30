@@ -1,0 +1,52 @@
+body{
+    background-image: url('../img/sunrise.jpg');
+    background-size: cover;
+    }
+
+  /* label color */
+   .input-field label {
+     color: #255 ;
+   }
+   /* label focus color */
+   .input-field input[type=text]:focus + label {
+     color: #29b6f6 ;
+   }
+   /* label underline focus color */
+   .input-field input[type=text]:focus {
+     border-bottom: 1px solid #29b6f6;
+     box-shadow: 0 1px 0 0 #29b6f6 ;
+   }
+   /* valid color */
+   .input-field input[type=text].valid {
+     border-bottom: 1px solid #000 ;
+     box-shadow: 0 1px 0 0 #000 ;
+   }
+   /* invalid color */
+   .input-field input[type=text].invalid {
+     border-bottom: 1px solid #000 ;
+     box-shadow: 0 1px 0 0 #000 ;
+   }
+   /* icon prefix focus color */
+   .input-field .prefix.active {
+     color: #000 ;
+   }
+
+.name{
+  margin-top: 100px;
+  opacity: 10.6;
+}   
+.card{
+
+  background: rgb(255, 255, 255); 
+  background: rgba(255, 255, 255, .5); 
+}
+.btns{
+    color: red;
+}
+
+.h3{
+  font-family: "Art Brewery";
+    src: url(..static/fonts/Art Brewery.ttf) format("truetype");
+}
+
+
