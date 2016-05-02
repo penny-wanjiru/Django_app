@@ -49,4 +49,8 @@ body{
     src: url(..static/fonts/Art Brewery.ttf) format("truetype");
 }
 
+.errors {
+  color: white;
+}
+
 
