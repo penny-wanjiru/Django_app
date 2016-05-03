@@ -2,3 +2,5 @@ venv
 
 # staticfiles
 bucketlist/app/static/
+
+debug_toolbar
