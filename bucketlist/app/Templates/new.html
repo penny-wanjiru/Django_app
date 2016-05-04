@@ -1,12 +1,13 @@
 {% extends "header.html" %}
+
 {% block title %}Suggest an idea!{% endblock %}
 
 {% block content %}
-    <div class="row">
-        <form action="" method="POST">
-            {{ form.as_p }}
-            {% csrf_token %}
+    <div class="col-sm-6 col-sm-offset-3">
+    <h1>{{ title }}</h1>
+        <form action="" method="POST" action="/register">{% csrf_token %}
+            {{ form }}
             <input type="submit" class="button">
         </form>
     </div>
-{% endblock %}
+{% endblock content%}

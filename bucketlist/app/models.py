@@ -1,17 +1,29 @@
 from __future__ import unicode_literals
+from datetime import datetime
 
-from django.db import models
 from django.contrib.auth.models import User
 
+from django.db import models
 
-class UserProfile(models.Model):
-    # This line is required. Links UserProfile to a User model instance.
-    user = models.OneToOneField(User)
 
-    # The additional attributes we wish to include.
-    created = models.DateTimeField(auto_now_add=True)
-    modified = models.DateTimeField(auto_now=True)
+class BucketList(models.Model):
+    name = models.CharField(unique=True, max_length=255,
+                            default="BucketList")
+    date_created = models.DateField(auto_now_add=True, editable=False)
+    date_updated = models.DateField(auto_now=True)
+    user = models.ForeignKey(User)
 
-    # Override the __unicode__() method to return out something meaningful!
     def __unicode__(self):
-        return self.user.username
+        return u'%s' % self.name
+
+
+class BucketListItem(models.Model):
+    name = models.CharField(unique=True, max_length=255,
+                            default="BucketlistItem")
+    date_created = models.DateField(auto_now_add=True, editable=False)
+    date_updated = models.DateField(auto_now=True)
+    done = models.BooleanField(default=False)
+    bucketlist = models.ForeignKey(BucketList)
+
+    def __unicode__(self):
+        return u'%s' % self.name
