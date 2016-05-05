@@ -19,8 +19,11 @@ from rest_framework.permissions import (
     IsAuthenticatedOrReadOnly,
 )
 from django.db.models import Q
+from rest_framework.pagination import (LimitOffsetPagination, PageNumberPagination)
 from .permissions import IsOwnerOrReadOnly
 from app.models import BucketList, BucketListItem
+from .pagination import BucketlistLimitOffsetPagination, BucketlistPageNumberPagination
+
 
 
 class BucketListCreateAPIview(CreateAPIView):
@@ -33,6 +36,7 @@ class BucketListCreateAPIview(CreateAPIView):
 
 class BucketListAPIview(ListAPIView):
     serializer_class = BucketlistSerializer
+    pagination_class = BucketlistPageNumberPagination
 
     def get_queryset(self, *args, **kwargs):
         queryset_list = BucketList.objects.all()
