@@ -66,3 +66,4 @@ class BucketListUpdateAPIview(UpdateAPIView):
 class BucketListDeleteAPIview(DestroyAPIView):
     queryset = BucketList.objects.all()
     serializer_class = BucketlistDetailSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
