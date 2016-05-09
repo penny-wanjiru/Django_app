@@ -1,5 +1,5 @@
 from __future__ import unicode_literals
-from datetime import datetime
+
 
 from django.contrib.auth.models import User
 
@@ -20,10 +20,10 @@ class BucketList(models.Model):
 class BucketListItem(models.Model):
     name = models.CharField(unique=True, max_length=255,
                             default="BucketlistItem")
-    date_created = models.DateField(auto_now_add=True, editable=False)
     date_updated = models.DateField(auto_now=True)
+    date_created = models.DateField(auto_now_add=True, editable=False)
     done = models.BooleanField(default=False)
-    bucketlist = models.ForeignKey(BucketList)
+    bucketlist = models.ForeignKey(BucketList, related_name="items")
 
     def __unicode__(self):
         return u'%s' % self.name

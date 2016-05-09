@@ -1,7 +1,6 @@
 from .serializers import (
-    BucketlistSerializer,
-    BucketlistDetailSerializer,
-    BucketlistCreateUpdateSerializer
+    BucketlistSerializer,  
+    BucketlistItemSerializer,
      )
 
 from rest_framework.generics import (
@@ -25,14 +24,14 @@ from app.models import BucketList, BucketListItem
 from .pagination import BucketlistLimitOffsetPagination, BucketlistPageNumberPagination
 
 
-
 class BucketListCreateAPIview(CreateAPIView):
     queryset = BucketList.objects.all()
-    serializer_class = BucketlistCreateUpdateSerializer
+    serializer_class = BucketlistSerializer
     permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
 
 class BucketListAPIview(ListAPIView):
     serializer_class = BucketlistSerializer
@@ -45,18 +44,17 @@ class BucketListAPIview(ListAPIView):
             queryset_list = queryset_list.filter(
                 Q(name__icontains=query)
                 ).distinct()
-        return queryset_list    
-
+        return queryset_list
 
 
 class BucketListDetailAPIview(RetrieveAPIView):
     queryset = BucketList.objects.all()
-    serializer_class = BucketlistDetailSerializer
+    serializer_class = BucketlistSerializer
 
 
 class BucketListUpdateAPIview(UpdateAPIView):
     queryset = BucketList.objects.all()
-    serializer_class = BucketlistCreateUpdateSerializer
+    serializer_class = BucketlistSerializer
     permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
 
     def perform_update(self, serializer):
@@ -65,5 +63,42 @@ class BucketListUpdateAPIview(UpdateAPIView):
 
 class BucketListDeleteAPIview(DestroyAPIView):
     queryset = BucketList.objects.all()
-    serializer_class = BucketlistDetailSerializer
+    serializer_class = BucketlistSerializer
     permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+
+
+class BucketlistItemUpdateAPIview(UpdateAPIView):
+    serializer_class = BucketlistItemSerializer
+
+    def get_queryset(self):
+        list_id = self.kwargs['list_id']
+        item_id = self.kwargs['pk']
+        bucketlistitem = BucketListItem.objects.filter(
+            id=item_id, bucketlist=list_id)
+        return bucketlistitem
+
+
+class BucketlistItemAPIview(CreateAPIView):
+    serializer_class = BucketlistItemSerializer
+    search_fields = ('name', )
+
+    def get_queryset(self):
+        list_id = self.kwargs['pk']
+        return BucketListItem.objects.filter(bucketlist=list_id)
+
+
+class BucketlistDetailItemAPIview(RetrieveAPIView):
+    serializer_class = BucketlistItemSerializer
+
+    def get_queryset(self):
+        list_id = self.kwargs['pk']
+        return BucketListItem.objects.filter(bucketlist=list_id)
+
+
+class BucketlistDeleteItemAPIview(DestroyAPIView):
+    serializer_class = BucketlistItemSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+
+    def delete_queryset(self):
+        list_id = self.kwargs['pk']
+        return BucketListItem.objects.filter(bucketlist=list_id)
