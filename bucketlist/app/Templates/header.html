@@ -5,15 +5,25 @@
       <!--Import Google Icon Font-->
       <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <!--Import materialize.css-->
+      
       <link type="text/css" rel="stylesheet" href="../static/css/materialize.min.css"  media="screen,projection"/>
+      <link rel="stylesheet" href="../static/css/animate.css">
       <link rel="stylesheet" type="text/css" href="../static/my-css/app.css">
+
       <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu">
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     {% load static %}
-    </head>
+    <style type="text/css">
+        body{
+        background-image: url('../static/img/sunrise.jpg') ;
+        background-size: cover 
+      }
 
+    </style>
+    </head>
     <body>
+    
       <div class="row">
         {% include "includes/flash-messages.html" %}
 
@@ -25,6 +35,14 @@
       <div class="panel is-selected" style="position:absolute; left:0%;"></div>
       <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
       <script type="text/javascript" src="../static/js/materialize.min.js"></script>
+      <script type="text/javascript">
+        $(document).ready(function(){
+        // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+        $('.modal-trigger').leanModal();
+        });
+      </script>
+
+
     </body>
 
   </html>

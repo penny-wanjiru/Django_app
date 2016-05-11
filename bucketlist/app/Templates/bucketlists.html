@@ -1,0 +1,82 @@
+{% extends "header.html" %}
+{% load static %}
+
+{% block content %}
+
+    <style type="text/css">
+        body{
+        background-image: url('../static/img/the image.png') ;
+        background-size: repeat-x repeat-y!important;  }
+
+    </style>
+    {% block navbar %}
+      {% include "includes/navbar.html" %}
+    {% endblock %}
+    <div>
+        <div class="row" ng-controller="mainCtrl">
+            <div class="s10 offset-s1 col">
+                <h2 style="font-family: Ubuntu; font-size: 35px;">Bucketlists</h2>
+                <!-- <h4 style="font-family: Bakery; font-size: 20px;">Do something cool today</h4>  -->
+
+            </div>
+
+            <div class="s10 offset-s1 col">
+                <div class="row">
+            <div class="col m4 animated fadeInUp"
+                style="-webkit-animation-duration:300ms" >
+                <div class="card #ffecb3 blue lighten-">
+                    <div class="card-content center-align">
+                        <div class="card-title truncate"><!-- {{u.user.username}} --></div>
+                        <!-- <img class="circle" src="{{u.user.picture.medium}}"> -->
+                        <p class="blue-text text-darken-4">This is some description or profile text here..</p>
+                        <br>
+                        <div class="row">
+                            <div class="col m2 hide-on-small-only">&nbsp;</div>
+                            <div class="col m2 s6 center-align"><a href=""><i class="white-text small mdi-action-face-unlock"></i></a></div>
+                            <div class="col m2 s6 center-align"><a href=""><i class="white-text small mdi-action-highlight-remove"></i></a></div>
+                            <div class="col m2 s6 center-align"><a href=""><i class="white-text small mdi-action-alarm-on"></i></a></div>
+                            <div class="col m2 s6 center-align"><a href=""><i class="white-text small mdi-action-account-balance"></i></a></div>
+                            <div class="col m2 .hide-on-small-only">&nbsp;</div>
+                        </div>
+                    </div>
+                    <div class="card-action center-align truncate">
+                        <a href="#" class="blue-text text-darken-4"><!-- {{u.user.location.city}}, {{u.user.location.state}} --></a>
+                    </div>
+                    <div class="fixed-action-btn horizontal click-to-toggle" style="bottom: 45px; right: 24px;">
+                        <a class="btn-floating btn-large #00e5ff cyan accent-3">
+                          <i class="material-icons">menu</i>
+                        </a>
+                        <ul>
+                          <li><a class="btn-floating blue"><i class="material-icons">mode_edit</i></a></li>
+                         
+                          <li><a class="btn-floating green"><i class="material-icons">visibility</i></a></li>
+                          <li><a class="btn-floating red"><i class="material-icons">delete</i></a></li>
+                        </ul>
+                    </div>
+                      </div>
+                  
+                </div><!--/card-->
+
+
+                <a class="btn-floating btn-large waves-effect waves-light #ec407a pink lighten-1 btn modal-trigger" data-target="modal1"><i class="material-icons">add</i></a>
+                <!-- Modal Structure -->
+                <div id="modal1" class="modal">
+                    <div class="modal-content">
+                      <h4>Add a bucketlist</h4>
+                      <div class="input-field col s12">
+                        <input placeholder="New bucketlist name" id="new_item_name" type="text" class="validate ng-valid ng-dirty ng-touched ng-empty" ng-model="new_item_name">
+                        <label for="new_item_name" class="active">Bucketlist Name</label>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">close</a> 
+                      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">create</a>
+                    </div>
+                </div>
+
+            </div>
+            </div>
+            </div>
+        </div>
+    </div>
+{% endblock %} 

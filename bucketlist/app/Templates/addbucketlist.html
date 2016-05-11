@@ -1,0 +1,23 @@
+
+
+<div id="create_bucketlist_item" class="modal" style="z-index: 1003; display: none; opacity: 0; transform: scaleX(0.7); top: 142.609px;">
+          <div class="modal-content" style="height: 10em;">
+            <h4 class="ng-binding">Create item in "legacy"</h4>
+            <form class="col s12 ng-valid ng-dirty">
+              <div class="row">
+                <div class="input-field col s12">
+                  <input placeholder="New item name" id="new_item_name" type="text" class="validate ng-valid ng-dirty valid ng-touched ng-empty" ng-model="new_item_name">
+                  <label for="new_item_name" class="active">Item Name</label>
+                </div>
+                <div class="input-field col s12">
+                  <input placeholder="Status" id="new_item_status" type="checkbox" class="validate ng-untouched ng-valid ng-dirty ng-empty" ng-model="new_item_status">
+                  <label for="new_item_status">Done</label>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <a class="modal-action modal-close waves-effect waves-green btn-flat indigo darken-4 white-text" ng-click="addItem()">Create</a>
+            <a class="modal-action modal-close waves-effect waves-green btn-flat">Dismiss</a>
+          </div>
+</div>
