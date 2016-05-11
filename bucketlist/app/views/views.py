@@ -10,9 +10,11 @@ from django.shortcuts import render, redirect
 from .forms import UserRegistrationForm, UserLoginForm
 
 
-class index(TemplateView):
+class index_view(TemplateView):
+    template_name = "bucketlists.html"
+
     def get(self, request):
-        return render(request, 'header.html')
+        return render(request, 'bucketlists.html')
 
 
 class login_view(TemplateView):
@@ -37,6 +39,7 @@ class logout_view(TemplateView):
 
 
 class register_view(TemplateView):
+    template_name = "new.html"
 
     def post(request):
         title = "Register"

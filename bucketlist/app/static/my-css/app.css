@@ -1,6 +1,7 @@
 /*body{
-    background-image: url('../img/sunrise.jpg');
-    background-size: cover;
+    background-image: url('../img/bestbucket.png') ;
+    background-size: repeat-x repeat-y;
+
     }*/
 
   /* label color */
@@ -40,6 +41,11 @@
   background: rgb(255, 255, 255); 
   background: rgba(255, 255, 255, .5); 
 }
+.item-card{
+  
+  background: rgb(255, 255, 255); 
+  background: rgba(255, 255, 255, .5); 
+}
 .btns{
     color: red;
 }
@@ -53,4 +59,15 @@
   color: white;
 }
 
+.nav-wrapper{
+  
+  background-color: rgba(16, 14, 14, 0.9);
+  
+}
+
+.pull-left{    
+  margin-left: 20px;
+  margin-top: 15px;
+}
+  
 

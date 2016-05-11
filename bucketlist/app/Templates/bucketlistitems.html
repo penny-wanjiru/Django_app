@@ -1,0 +1,48 @@
+{% extends "header.html" %}
+{% load static %}
+
+{% block content %}
+  <div class="row" id="signup" style="background-image: url('../img/sunrise.jpg');">
+          <div class="name col m6 offset-m3">
+            <div class="item-card">
+              <div class="card-content">
+                  <!-- task-card -->
+                  <ul id="task-card" class="collection with-header">
+                    <li class="collection-header cyan">
+                        <h4 class="task-card-title" style="font-family:bakery;, font-size:20px;">Lets do this thang!</h4>
+                        <p class="task-card-date" style="font-family:Ubuntu;">SURFING</p>
+                    </li>
+                    <li class="collection-item dismissable">
+                        <input type="checkbox" id="task1" />
+                        <label for="task1">Create Mobile App UI. <a href="#" class="secondary-content"><span class="ultra-small">Today</span></a>
+                        </label>
+                        <span class="task-cat teal">Mobile App</span>
+                    </li>
+                    <li class="collection-item dismissable">
+                        <input type="checkbox" id="task2" />
+                        <label for="task2">Check the new API standards. <a href="#" class="secondary-content"><span class="ultra-small">Monday</span></a>
+                        </label>
+                        <span class="task-cat purple">Web API</span>
+                    </li>
+                    <li class="collection-item dismissable">
+                        <input type="checkbox" id="task3" checked="checked" />
+                        <label for="task3">Check the new Mockup of ABC. <a href="#" class="secondary-content"><span class="ultra-small">Wednesday</span></a>
+                        </label>
+                        <span class="task-cat pink">Mockup</span>
+                    </li>
+                    <li class="collection-item dismissable">
+                        <input type="checkbox" id="task4" checked="checked" />
+                        <label for="task4">I did it !</label>
+                        <span class="task-cat cyan">Mobile App</span>
+                    </li>
+                  </ul>
+                  <!-- task-card -->
+                   
+              </div> 
+            </div>
+          </div>
+  </div> 
+
+ </div>              
+{% endblock %}           
+
