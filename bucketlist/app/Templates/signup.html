@@ -2,6 +2,7 @@
 {% load static %}
 {% block content %}
 <div class="row" id="signup">
+
         <div class="name col m4 offset-m7">
           <div class="card">
             <div class="card-content">
@@ -12,9 +13,10 @@
                       
                     </div>
                     <div class="row " >
-                        <form class="col s12" method="POST" action="/register">
+                        <form class="col s12" method='POST' action="/">
                           {% csrf_token %}
-                          <div class="row">
+                          {{ form }}
+                          <!-- <div class="row">
                             <div class="input-field col s10">
                               <input id="first_name" type="text" class="validate" name="firstname" required>
                               <label for="first_name" style="font-family: Ubuntu; ">First Name</label>
@@ -40,8 +42,8 @@
                               <input  id="password" type="text" class="validate" name="password">
                               <label for="Password" style="font-family: Ubuntu; ">Password</label>
                               
-                            </div>
-                          </div>
+                            </div> -->
+                        <!--   </div>
                           {% if form.errors %}
                               {% for field in form %}
                                   {% for error in field.errors %}
@@ -50,8 +52,8 @@
                                       </div>
                                   {% endfor %}
                               {% endfor %}
-                          {% endif %}
-                          <input type="submit" class="button">
+                          {% endif %} -->
+                          <input type="submit" value="signup"class="button">
                           <!-- <div class="btns col m6">
                             <button class="btn 
                             btn-large #29b6f6 light-blue lighten-1 waves-effect waves-dark " style="font-family: Ubuntu; " type="submit" name="signup">SIGN UP</button>

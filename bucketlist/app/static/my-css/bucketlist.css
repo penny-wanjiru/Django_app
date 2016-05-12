@@ -1,0 +1,5 @@
+#main{
+  background-image: url('../img/the_image.png');
+  height:750px;
+  background-size: repeat-x repeat-y;
+}

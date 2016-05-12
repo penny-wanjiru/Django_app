@@ -2,17 +2,10 @@
 {% load static %}
 
 {% block content %}
-
-    <style type="text/css">
-        body{
-        background-image: url('../static/img/the image.png') ;
-        background-size: repeat-x repeat-y!important;  }
-
-    </style>
     {% block navbar %}
       {% include "includes/navbar.html" %}
     {% endblock %}
-    <div>
+    <div id="main">
         <div class="row" ng-controller="mainCtrl">
             <div class="s10 offset-s1 col">
                 <h2 style="font-family: Ubuntu; font-size: 35px;">Bucketlists</h2>

@@ -5,7 +5,7 @@
 {% block content %}
     <div class="col-sm-6 col-sm-offset-3">
     <h1>{{ title }}</h1>
-        <form action="" method="POST" action="/register">{% csrf_token %}
+        <form action="" method="POST" action="/">{% csrf_token %}
             {{ form }}
             <input type="submit" class="button">
         </form>
