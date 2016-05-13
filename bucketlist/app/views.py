@@ -40,7 +40,7 @@ class login_view(View):
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password")
             user = authenticate(username=username, password=password)
-            print 'niga is a`ight'
+            print 'panda'
             login(request, user)
             return redirect("/")
         return render(request, "userform.html", {"form": form, "title": title})
@@ -72,3 +72,10 @@ class register_view(TemplateView):
             "title": title
         }
         return render(request, "new.html", context)
+
+class bucketlist_view(View):
+
+    def bucketlist(self, request):
+
+        return render(request, "bucketlists.html", 
+

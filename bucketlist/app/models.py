@@ -1,27 +1,21 @@
 from __future__ import unicode_literals
 
-
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 
 from django.db import models
 
 
-class SignUp(models.Model):
-    username = models.CharField(max_length=255)
-    email = models.EmailField()
-    password = models.CharField(max_length=255)
+class CustomUser(AbstractUser):
     password_two = models.CharField(max_length=255, default='password')
 
-    def __unicode__(self):
-        return u'%s' % self.email
+# class SignUp(models.Model):
+#     username = models.CharField(max_length=255)
+#     email = models.EmailField()
+#     password = models.CharField(max_length=255)
+#     password_two = models.CharField(max_length=255, default='password')
 
-
-class SignIn(models.Model):
-    username = models.CharField(max_length=255)
-    password = models.CharField(max_length=255)
-
-    def __unicode__(self):
-        return u'%s' % self.username        
+#     def __unicode__(self):
+#         return u'%s' % self.email
 
 
 class BucketList(models.Model):
@@ -29,7 +23,7 @@ class BucketList(models.Model):
                             default="BucketList")
     date_created = models.DateField(auto_now_add=True, editable=False)
     date_updated = models.DateField(auto_now=True)
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(CustomUser)
 
     def __unicode__(self):
         return u'%s' % self.name
