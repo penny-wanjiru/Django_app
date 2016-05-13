@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django import forms
-from .models import SignUp, SignIn
+from .models import CustomUser
 from django.contrib.auth import(
     authenticate,
     get_user_model,
@@ -8,12 +8,10 @@ from django.contrib.auth import(
     logout,
 )
 
-User = get_user_model()
-
 
 class SignUpForm(forms.ModelForm):
     class Meta:
-        model = SignUp
+        model = CustomUser
         fields = ['username', 'email', 'password', 'password_two']
 
     def clean(self):
@@ -29,8 +27,8 @@ class SignUpForm(forms.ModelForm):
 
 class UserLoginForm(forms.ModelForm):
     class Meta:
-        model = SignUp
-        exclude = ['password_two', 'email']
+        model = CustomUser
+        fields = ['username', 'password']
 
     def clean(self):
         username = self.cleaned_data['username']
@@ -39,8 +37,9 @@ class UserLoginForm(forms.ModelForm):
             user = authenticate(username=username, password=password)
             print 'username: %s' % username
             print 'password: %s' % password
+            print len(password)
             print 'user'
-            print user
+            print type(user)
             if not user:
                 raise forms.ValidationError('This user does not exist')
             if not user.check_password(password):
@@ -57,7 +56,7 @@ class UserRegistrationForm(forms.ModelForm):
     password2 = forms.CharField(widget=forms.PasswordInput)
 
     class Meta:
-        model = User
+        model = CustomUser
         fields = ['username', 'email', 'password', 'password2']
 
     # def clean_password(self):
@@ -66,3 +65,6 @@ class UserRegistrationForm(forms.ModelForm):
     #     if password != password2:
     #         raise forms.ValidationError("Passwords do not match")
     #     return password
+
+
+    
