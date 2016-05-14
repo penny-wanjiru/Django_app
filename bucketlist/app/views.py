@@ -5,9 +5,11 @@ from django.contrib.auth import(
     login,
     logout,
 ) 
-from django.views.generic import TemplateView, View
+from django.views.generic import View, TemplateView, CreateView, UpdateView, DeleteView
+from django.views import generic
 from django.shortcuts import render, redirect
 from .forms import UserRegistrationForm, UserLoginForm, SignUpForm
+from .models import BucketList
 
 
 class index_view(View):
@@ -73,9 +75,14 @@ class register_view(TemplateView):
         }
         return render(request, "new.html", context)
 
-class bucketlist_view(View):
+class bucketlist_view(generic.ListView):
+    template_name = "Bucketlists.html"
 
-    def bucketlist(self, request):
+    def get_queryset(self):
+        return BucketList.objects.all()
 
-        return render(request, "bucketlists.html", 
+class BucketlistCreate(CreateView):  
+    model = BucketList
+    fields = ['name']   
+
 
