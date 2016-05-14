@@ -67,4 +67,9 @@ class UserRegistrationForm(forms.ModelForm):
     #     return password
 
 
-    
+class bucketlists(object):
+        """docstring for bucketlists"""
+        def __init__(self, arg):
+            super(bucketlists, self).__init__()
+            self.arg = arg
+                

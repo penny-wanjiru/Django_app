@@ -5,23 +5,24 @@
     {% block navbar %}
       {% include "includes/navbar.html" %}
     {% endblock %}
+{% for bucketlist in object_list %} 
+
     <div id="main">
         <div class="row" ng-controller="mainCtrl">
             <div class="s10 offset-s1 col">
                 <h2 style="font-family: Ubuntu; font-size: 35px;">Bucketlists</h2>
                 <!-- <h4 style="font-family: Bakery; font-size: 20px;">Do something cool today</h4>  -->
-
             </div>
-
             <div class="s10 offset-s1 col">
                 <div class="row">
             <div class="col m4 animated fadeInUp"
-                style="-webkit-animation-duration:300ms" >
+                style="-webkit-animation-duration:
+                300ms" ng-repeat="field in form ">
                 <div class="card #ffecb3 blue lighten-">
                     <div class="card-content center-align">
                         <div class="card-title truncate"><!-- {{u.user.username}} --></div>
                         <!-- <img class="circle" src="{{u.user.picture.medium}}"> -->
-                        <p class="blue-text text-darken-4">This is some description or profile text here..</p>
+                        <p class="blue-text text-darken-4">{{ bucketlist.name }}</p>
                         <br>
                         <div class="row">
                             <div class="col m2 hide-on-small-only">&nbsp;</div>
@@ -49,27 +50,18 @@
                       </div>
                   
                 </div><!--/card-->
-
+            
 
                 <a class="btn-floating btn-large waves-effect waves-light #ec407a pink lighten-1 btn modal-trigger" data-target="modal1"><i class="material-icons">add</i></a>
                 <!-- Modal Structure -->
-                <div id="modal1" class="modal">
-                    <div class="modal-content">
-                      <h4>Add a bucketlist</h4>
-                      <div class="input-field col s12">
-                        <input placeholder="New bucketlist name" id="new_item_name" type="text" class="validate ng-valid ng-dirty ng-touched ng-empty" ng-model="new_item_name">
-                        <label for="new_item_name" class="active">Bucketlist Name</label>
-                      </div>
-                    </div>
-                    <div class="modal-footer">
-                      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">close</a> 
-                      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">create</a>
-                    </div>
-                </div>
-
+                <form class="form-horizontal"  action="" method="POST">
+                    {% csrf_token %}
+                    {% include "includes/BucketList_form.html"%}
+                </form>
             </div>
             </div>
             </div>
         </div>
     </div>
+{% endfor %}    
 {% endblock %} 

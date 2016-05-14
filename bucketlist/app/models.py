@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 
 from django.contrib.auth.models import AbstractUser
+from django.core.urlresolvers import reverse
 
 from django.db import models
 
@@ -24,6 +25,9 @@ class BucketList(models.Model):
     date_created = models.DateField(auto_now_add=True, editable=False)
     date_updated = models.DateField(auto_now=True)
     user = models.ForeignKey(CustomUser)
+
+    def get_absolute_url(self):
+        return reverse('index')
 
     def __unicode__(self):
         return u'%s' % self.name
