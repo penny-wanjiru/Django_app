@@ -4,64 +4,63 @@
 {% block content %}
     {% block navbar %}
       {% include "includes/navbar.html" %}
-    {% endblock %}
-{% for bucketlist in object_list %} 
+    {% endblock %} 
 
     <div id="main">
         <div class="row" ng-controller="mainCtrl">
             <div class="s10 offset-s1 col">
                 <h2 style="font-family: Ubuntu; font-size: 35px;">Bucketlists</h2>
                 <!-- <h4 style="font-family: Bakery; font-size: 20px;">Do something cool today</h4>  -->
-            </div>
-            <div class="s10 offset-s1 col">
-                <div class="row">
-            <div class="col m4 animated fadeInUp"
-                style="-webkit-animation-duration:
-                300ms" ng-repeat="field in form ">
-                <div class="card #ffecb3 blue lighten-">
-                    <div class="card-content center-align">
-                        <div class="card-title truncate"><!-- {{u.user.username}} --></div>
-                        <!-- <img class="circle" src="{{u.user.picture.medium}}"> -->
-                        <p class="blue-text text-darken-4">{{ bucketlist.name }}</p>
-                        <br>
-                        <div class="row">
-                            <div class="col m2 hide-on-small-only">&nbsp;</div>
-                            <div class="col m2 s6 center-align"><a href=""><i class="white-text small mdi-action-face-unlock"></i></a></div>
-                            <div class="col m2 s6 center-align"><a href=""><i class="white-text small mdi-action-highlight-remove"></i></a></div>
-                            <div class="col m2 s6 center-align"><a href=""><i class="white-text small mdi-action-alarm-on"></i></a></div>
-                            <div class="col m2 s6 center-align"><a href=""><i class="white-text small mdi-action-account-balance"></i></a></div>
-                            <div class="col m2 .hide-on-small-only">&nbsp;</div>
+
+            <div class="row">
+                {% for bucketlist in object_list %}
+                <div class="col m4 animated fadeInUp"
+                     style="-webkit-animation-duration:
+                     300ms">
+                    <div class="card #ffecb3 blue lighten-">
+                        <div class="card-content center-align">
+                            <div class="card-title truncate"><!-- {{u.user.username}} --></div>
+                            <!-- <img class="circle" src="{{u.user.picture.medium}}"> -->
+                            <p class="blue-text text-darken-4">{{ bucketlist.name }}</p>
+                            <br>
+                            <div class="row">
+                                <div class="col m2 hide-on-small-only">&nbsp;</div>
+                                <div class="col m2 s6 center-align"><a href=""><i class="white-text small mdi-action-face-unlock"></i></a></div>
+                                <div class="col m2 s6 center-align"><a href=""><i class="white-text small mdi-action-highlight-remove"></i></a></div>
+                                <div class="col m2 s6 center-align"><a href=""><i class="white-text small mdi-action-alarm-on"></i></a></div>
+                                <div class="col m2 s6 center-align"><a href=""><i class="white-text small mdi-action-account-balance"></i></a></div>
+                                <div class="col m2 .hide-on-small-only">&nbsp;</div>
+                            </div>
+                        </div>
+                        <div class="card-action center-align truncate">
+                            <a href="#" class="blue-text text-darken-4"><!-- {{u.user.location.city}}, {{u.user.location.state}} --></a>
+                        </div>
+                        <div class="fixed-action-btn horizontal click-to-toggle" style="bottom: 45px; right: 24px;">
+                            <a class="btn-floating btn-large #00e5ff cyan accent-3">
+                              <i class="material-icons">menu</i>
+                            </a>
+                            <ul>
+                              <li><a class="btn-floating blue"><i class="material-icons">mode_edit</i></a></li>
+                             
+                              <li><a class="btn-floating green"><i class="material-icons">visibility</i></a></li>
+                              <li><a class="btn-floating red"><i class="material-icons">delete</i></a></li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="card-action center-align truncate">
-                        <a href="#" class="blue-text text-darken-4"><!-- {{u.user.location.city}}, {{u.user.location.state}} --></a>
-                    </div>
-                    <div class="fixed-action-btn horizontal click-to-toggle" style="bottom: 45px; right: 24px;">
-                        <a class="btn-floating btn-large #00e5ff cyan accent-3">
-                          <i class="material-icons">menu</i>
-                        </a>
-                        <ul>
-                          <li><a class="btn-floating blue"><i class="material-icons">mode_edit</i></a></li>
-                         
-                          <li><a class="btn-floating green"><i class="material-icons">visibility</i></a></li>
-                          <li><a class="btn-floating red"><i class="material-icons">delete</i></a></li>
-                        </ul>
-                    </div>
-                      </div>
-                  
-                </div><!--/card-->
-            
-
-                <a class="btn-floating btn-large waves-effect waves-light #ec407a pink lighten-1 btn modal-trigger" data-target="modal1"><i class="material-icons">add</i></a>
+                      
+                    </div><!--/card-->
+                {% endfor %}
+                </div>
+            </div>
+            <a href="{% url 'bucket_add' %}">
+                    <a class="btn-floating btn-large waves-effect waves-light #ec407a pink lighten-1 btn modal-trigger" data-target="modal1"><i class="material-icons">add</i></a>
+                    </a>
                 <!-- Modal Structure -->
                 <form class="form-horizontal"  action="" method="POST">
                     {% csrf_token %}
-                    {% include "includes/BucketList_form.html"%}
+                    {% include "includes/bucketlist_add.html"%}
                 </form>
             </div>
-            </div>
-            </div>
         </div>
-    </div>
-{% endfor %}    
+    </div>    
 {% endblock %} 
