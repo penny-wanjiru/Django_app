@@ -8,7 +8,7 @@ from django.contrib.auth import(
 from django.views.generic import View, TemplateView, CreateView, UpdateView, DeleteView
 from django.views import generic
 from django.shortcuts import render, redirect
-from .forms import UserRegistrationForm, UserLoginForm, SignUpForm
+from .forms import UserLoginForm, SignUpForm, BucketListForm
 from .models import BucketList
 
 
@@ -23,7 +23,7 @@ class index_view(View):
         form = SignUpForm(request.POST or None)
         if form.is_valid():
             form.save()
-            return redirect("login/")
+            return redirect("/login/")
         context = {"form": form}
         return render(request, 'Signup.html', context)
 
@@ -44,45 +44,27 @@ class login_view(View):
             user = authenticate(username=username, password=password)
             print 'panda'
             login(request, user)
-            return redirect("/")
+            return redirect("/bucketlists")
         return render(request, "userform.html", {"form": form, "title": title})
 
 
 class logout_view(TemplateView):
 
-    def get(request):
+    def get(self, request):
         logout(request)
         return redirect("/")
 
 
-class register_view(TemplateView):
-    template_name = "new.html"
+class BucketlistView(generic.CreateView, generic.ListView):
+    template_name = 'Bucketlists.html'
+    success_url = '/bucketlists/'
+    model = BucketList
+    fields = ['name']
 
-    def post(self, request):
-        title = "Register"
-        form = UserRegistrationForm(request.POST or None)
-        if form.is_valid():
-            user = form.save(commit=False)
-            password = form.cleaned_data.get('password')
-            user.set_password(password)
-            user.save()
-            new_user = authenticate(username=user.username, password=password)
-            login(request, new_user)
-            return redirect("/")
-        context = {
-            "form": form,
-            "title": title
-        }
-        return render(request, "new.html", context)
-
-class bucketlist_view(generic.ListView):
-    template_name = "Bucketlists.html"
+    def form_valid(self, form):
+        bucketlist = form.save(commit=False)
+        bucketlist.user = self.request.user
+        return super(BucketlistView, self).form_valid(form)
 
     def get_queryset(self):
-        return BucketList.objects.all()
-
-class BucketlistCreate(CreateView):  
-    model = BucketList
-    fields = ['name']   
-
-
+        return BucketList.objects.filter(user=self.request.user.id)

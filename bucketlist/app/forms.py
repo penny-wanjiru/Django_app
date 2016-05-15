@@ -1,8 +1,6 @@
-from django.contrib.auth.models import User
 from django import forms
-from .models import CustomUser
+from .models import CustomUser, BucketList
 from django.contrib.auth import(
-    authenticate,
     get_user_model,
     login,
     logout,
@@ -24,6 +22,13 @@ class SignUpForm(forms.ModelForm):
             raise forms.ValidationError("Passwords do not match")
         return self.cleaned_data
 
+    def save(self, commit=True):
+        user = super(SignUpForm, self).save(commit=False)
+        user.set_password(self.cleaned_data["password"])
+        if commit:
+            user.save()
+        return user
+
 
 class UserLoginForm(forms.ModelForm):
     class Meta:
@@ -34,12 +39,7 @@ class UserLoginForm(forms.ModelForm):
         username = self.cleaned_data['username']
         password = self.cleaned_data['password']
         if username and password:
-            user = authenticate(username=username, password=password)
-            print 'username: %s' % username
-            print 'password: %s' % password
-            print len(password)
-            print 'user'
-            print type(user)
+            user = CustomUser.objects.get(username=username)
             if not user:
                 raise forms.ValidationError('This user does not exist')
             if not user.check_password(password):
@@ -52,12 +52,13 @@ class UserLoginForm(forms.ModelForm):
 class UserRegistrationForm(forms.ModelForm):
     username = forms.CharField()
     email = forms.EmailField()
+    email.help_text = ''
     password = forms.CharField(widget=forms.PasswordInput)
     password2 = forms.CharField(widget=forms.PasswordInput)
 
     class Meta:
         model = CustomUser
-        fields = ['username', 'email', 'password', 'password2']
+        fields = ['username', 'email', 'password', 'password_two']
 
     # def clean_password(self):
     #     password = self.cleaned_data.get('password')
@@ -67,9 +68,14 @@ class UserRegistrationForm(forms.ModelForm):
     #     return password
 
 
-class bucketlists(object):
-        """docstring for bucketlists"""
-        def __init__(self, arg):
-            super(bucketlists, self).__init__()
-            self.arg = arg
-                
+class BucketListForm(forms.ModelForm):
+    """Form for creation of a bucketlist.
+    Extends from bucketlistmodel.
+    """
+
+    class Meta:
+        model = BucketList
+        fields = ['name']
+        widgets = {
+            'name': forms.TextInput(attrs={'required': True}),
+        }

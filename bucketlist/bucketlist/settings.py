@@ -76,9 +76,9 @@ WSGI_APPLICATION = 'bucketlist.wsgi.application'
 AUTH_USER_MODEL = 'app.CustomUser'
 
 #Authentication backends
-AUTHENTICATION_BACKENDS = (
-        'django.contrib.auth.backends.ModelBackend',
-    )
+AUTHENTICATION_BACKENDS = [
+        'django.contrib.auth.backends.ModelBackend'
+    ]
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
