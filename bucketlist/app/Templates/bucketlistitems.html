@@ -7,7 +7,7 @@
   {% include "includes/navbar.html" %}
 {% endblock %}
 
-  <div class="row" id="signup" style="background-image: url('../img/sunrise.jpg');">
+  <div class="row" id="items">
 
     <div class="name col m6 offset-m3">
       <div class="item-card">
@@ -24,23 +24,29 @@
             <ul id="task-card" class="collection with-header">
               <li class="collection-header cyan">
                   <h4 class="task-card-title" style="font-family:bakery;, font-size:20px;">Lets do this thang!</h4>
-                  <p class="task-card-date" style="font-family:Ubuntu;">{{ bucketlist.name }}</p>
+                  <p class="task-card-date" style="font-family:Ubuntu;">{{ bucketlist.name|upper }}</p>
               </li>
               {% for item in items %}
               <li class="collection-item dismissable">
-
                 {% if item.done %}
                   <input type="checkbox" id="{{item.id}}" onclick="sendCheck({{item.id}}, '0')" checked/>
                 {% else %}
                   <input type="checkbox" id="{{item.id}}" onclick="sendCheck({{item.id}}, '1')"/>
                 {% endif %}
 
-                  <label for="{{item.id}}"><a href="#" class="secondary-content"><span class="ultra-small">{{ item.name }}</span></a>
-                  </label>
+                <label for="{{item.id}}"><a href="#" class="secondary-content"><span class="ultra-small">{{ item.name }}</span></a>
+                </label> 
+                <div class="col m11 offset-m11">
+                  <i class="material-icons " style="font-size: 1.5rem; color:#c62828;">delete</i>
+                  <i class="material-icons" style="font-size: 1.5rem; color:#0091ea;">edit</i>
+                </div>    
               </li>
+
               {% endfor %}
+
             </ul>
-            <!-- task-card -->        
+            <!-- task-card -->
+            
         </div> 
       </div>
     </div>

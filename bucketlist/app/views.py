@@ -107,6 +107,38 @@ class BucketlistView(generic.CreateView, generic.ListView):
         return BucketList.objects.filter(user=self.request.user.id)
 
 
+class BucketlistDeleteView(TemplateView):
+    """View to handle deletion of a bucketlist."""
+
+    def get(self, request, **kwargs):
+        """Retrieve bucketlist id from request body and delete it."""
+        bucketlist = BucketList.objects.filter(
+            id=kwargs['pk'], user=self.request.user).first()
+        bucketlist.delete()
+        messages.success(
+            request, 'Bucketlist has been deleted successfully!')
+        return redirect('/bucketlists/',
+                        context_instance=RequestContext(request))
+
+
+class BucketlistUpdateView(TemplateView):
+    """View to handle retrieval and edition of single bucketlists."""
+    template_name = 'Bucketlists.html'
+
+    def post(self, request, **kwargs):
+        """Retrieve new details from request body."""
+        bucketlist = BucketList.objects.filter(
+            id=kwargs['pk'], user=self.request.user).first()
+        bucketlist.name = request.POST.get('name')
+        bucketlist.save()
+        messages.success(
+            request, 'Bucketlist updated successfully!')
+        return redirect('/bucketlists/',
+                        context_instance=RequestContext(request))
+
+
+
+
 class BucketlistDetailView(DetailView):
     model = BucketListItem
 
@@ -114,6 +146,7 @@ class BucketlistDetailView(DetailView):
         context = super(BucketlistDetailView, self).get_context_data(**kwargs)
         return redirect('/bucketlists/', 
                         context_instance=RequestContext(request))
+
 
 class BucketlistItemStatus(generic.TemplateView):
     """View logic for marking item as done or not."""
