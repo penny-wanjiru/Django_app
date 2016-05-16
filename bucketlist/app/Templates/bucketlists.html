@@ -49,7 +49,7 @@
                             <li><a href="{% url 'bucket_items' pk=bucketlist.pk %}" class="btn-floating green"><i class="material-icons">visibility</i></a>
                             </li>
             
-                            <li><a href="{% url 'bucket_del' pk=bucketlist.pk %}" class="btn-floating red"><i class="material-icons">delete</i></a></li>
+                            <li><a href="" class="btn-floating red"><i class="material-icons">delete</i></a></li>
                             
                            
                             </ul>   
@@ -61,7 +61,7 @@
                 </div>
             </div>
             <a href="{% url 'bucket_add' %}">
-                    <a class="btn-floating btn-large waves-effect waves-light #ec407a pink lighten-1 btn modal-trigger" data-target="modal1"><i class="material-icons">add</i></a>
+                    <a class="btn-floating btn-large waves-effect waves-light #ec407a pink lighten-1 btn modal-trigger" style="margin-top:20px;" data-target="modal1"><i class="material-icons">add</i></a>
                     </a>
                 <!-- Modal Structure -->
                 <form class="form-horizontal"  action="" method="POST">

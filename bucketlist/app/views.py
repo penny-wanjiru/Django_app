@@ -9,10 +9,12 @@ from django.views.generic.edit import View, CreateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.views.generic import TemplateView
 from django.views import generic
+from django.contrib import messages
+from django.template import RequestContext
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse_lazy
 from django.http import Http404
-from .forms import UserLoginForm, SignUpForm, BucketListForm
+from .forms import UserLoginForm, SignUpForm, BucketListForm, BucketListItemForm
 from .models import BucketList, BucketListItem
 
 
@@ -67,6 +69,27 @@ class BucketlistItemsView(View):
         items = BucketListItem.objects.filter(bucketlist=bucketlist)
         return render(request, self.template_name, {'items': items, 'bucketlist': bucketlist})
 
+    def post(self, request, **kwargs):
+        form = BucketListItemForm(request.POST or None)
+        if form.is_valid():
+            item_name = request.POST.get('name')
+            new_bucketitem = BucketListItem(
+                name=item_name,
+                bucketlist=BucketList.objects.get(id=kwargs['pk']))
+            new_bucketitem.save()
+            messages.success(
+                request, 'New Bucketlistitem added successfully!')
+            return redirect(
+                '/bucketlists/' + kwargs['pk'] + '/items/',
+                context_instance=RequestContext(request)
+            )
+        else:
+            messages.error(
+                request, 'Error at creation!')
+            return redirect(
+                '/bucketlists/' + kwargs['pk'] + '/items/',
+                context_instance=RequestContext(request)
+            )
 
 
 class BucketlistView(generic.CreateView, generic.ListView):
@@ -91,23 +114,15 @@ class BucketlistDetailView(DetailView):
         context = super(BucketlistDetailView, self).get_context_data(**kwargs)
         return redirect('/bucketlists/', 
                         context_instance=RequestContext(request))
-    
 
-class BucketlistDeleteView(DeleteView):
+class BucketlistItemStatus(generic.TemplateView):
+    """View logic for marking item as done or not."""
 
-    def get_object(self, queryset=None):
-        """ Hook to ensure object is owned by request.user. """
-        obj = super(BucketlistDeleteView, self).get_object()
-        if not obj.owner == self.request.user:
-            raise Http404
-        return obj    
-
-
-class BucketlistDelete(DeleteView):
-    template_name = 'Bucketlists.html'
-    success_url = reverse_lazy("index")
-    model = BucketList
-    fields = ['name']
-
-
-
+    def get(self, request, **kwargs):
+        """Retrieve item id from url passed."""
+        bucketlistitem_id = kwargs['pk']
+        bucketlistitem = BucketListItem.objects.get(id=bucketlistitem_id)
+        bucketlistitem.done = False if bucketlistitem.done else True
+        bucketlistitem.save()
+        return redirect('/bucketlists/' + kwargs['bucketlist'] + '/items/',
+                        context_instance=RequestContext(request))

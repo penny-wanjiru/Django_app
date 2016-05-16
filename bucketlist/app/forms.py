@@ -76,6 +76,13 @@ class BucketListForm(forms.ModelForm):
     class Meta:
         model = BucketList
         fields = ['name']
-        widgets = {
-            'name': forms.TextInput(attrs={'required': True}),
-        }
+
+
+class BucketListItemForm(forms.ModelForm):
+    """Form for creation of a bucketlist.
+       Extends from bucketlistitem model.
+    """
+
+    class Meta:
+        model = BucketList
+        fields = ['name']            
