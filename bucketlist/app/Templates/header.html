@@ -1,3 +1,4 @@
+{% load staticfiles %}
  <!DOCTYPE html>
   <html>
     <head>
@@ -6,15 +7,15 @@
       <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <!--Import materialize.css-->
       
-      <link type="text/css" rel="stylesheet" href="../static/css/materialize.min.css"  media="screen,projection"/>
-      <link rel="stylesheet" href="../static/css/animate.css">
-      <link rel="stylesheet" type="text/css" href="../static/my-css/app.css">
-      <link rel="stylesheet" type="text/css" href="../static/my-css/bucketlist.css">
+      <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}"  media="screen,projection"/>
+      <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+      <link rel="stylesheet" type="text/css" href="{% static 'my-css/app.css' %}">
+      <link rel="stylesheet" type="text/css" href="{% static 'my-css/bucketlist.css' %}">
 
       <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu">
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    {% load static %}
+    
     <style type="text/css">
         body{
         background-image: url('../static/img/sunrise.jpg') ;
@@ -35,21 +36,13 @@
       <!--Import jQuery before materialize.js-->
       <div class="panel is-selected" style="position:absolute; left:0%;"></div>
       <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-      <script type="text/javascript" src="../static/js/materialize.min.js"></script>
+      <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
       <script type="text/javascript">
         $(document).ready(function(){
         // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
         $('.modal-trigger').leanModal();
         });
-        var bucketlistapp = angular.module('bucketlistapp', []);
-        bucketlistapp.controller('mainCtrl', function Main($scope, $http){
-          
-          $http.get('http://api.randomuser.me/?results=24').success(function(data) {
-            $scope.users = data.results;
-          }).error(function(data, status) {
-            alert('get data error!');
-          });
-        });
+        
       </script>
 
 

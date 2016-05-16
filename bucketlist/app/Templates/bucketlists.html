@@ -16,12 +16,13 @@
                 {% for bucketlist in object_list %}
                 <div class="col m4 animated fadeInUp"
                      style="-webkit-animation-duration:
-                     300ms">
+                     $index*300ms">
                     <div class="card #ffecb3 blue lighten-">
                         <div class="card-content center-align">
                             <div class="card-title truncate"><!-- {{u.user.username}} --></div>
                             <!-- <img class="circle" src="{{u.user.picture.medium}}"> -->
                             <p class="blue-text text-darken-4">{{ bucketlist.name }}</p>
+
                             <br>
                             <div class="row">
                                 <div class="col m2 hide-on-small-only">&nbsp;</div>
@@ -40,11 +41,18 @@
                               <i class="material-icons">menu</i>
                             </a>
                             <ul>
-                              <li><a class="btn-floating blue"><i class="material-icons">mode_edit</i></a></li>
-                             
-                              <li><a class="btn-floating green"><i class="material-icons">visibility</i></a></li>
-                              <li><a class="btn-floating red"><i class="material-icons">delete</i></a></li>
-                            </ul>
+                            
+                            <li><a class="btn-floating blue"><i class="material-icons">mode_edit</i></a>
+                            </li>
+                            
+                            
+                            <li><a href="{% url 'bucket_items' pk=bucketlist.pk %}" class="btn-floating green"><i class="material-icons">visibility</i></a>
+                            </li>
+            
+                            <li><a href="{% url 'bucket_del' pk=bucketlist.pk %}" class="btn-floating red"><i class="material-icons">delete</i></a></li>
+                            
+                           
+                            </ul>   
                         </div>
                     </div>
                       
