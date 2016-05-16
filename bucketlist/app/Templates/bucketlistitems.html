@@ -6,10 +6,20 @@
 {% block navbar %}
   {% include "includes/navbar.html" %}
 {% endblock %}
+
   <div class="row" id="signup" style="background-image: url('../img/sunrise.jpg');">
+
     <div class="name col m6 offset-m3">
       <div class="item-card">
         <div class="card-content">
+            <a href="">
+                <a class="btn-floating btn-large waves-effect waves-light #ec407a pink lighten-1 btn modal-trigger" data-target="modal2"><i class="material-icons">add</i></a>
+            </a>
+            <!-- Modal Structure -->
+            <form class="form-horizontal"  action="" method="POST">
+                {% csrf_token %}
+                {% include "includes/item_add.html"%}
+            </form>
             <!-- task-card -->
             <ul id="task-card" class="collection with-header">
               <li class="collection-header cyan">
@@ -20,9 +30,9 @@
               <li class="collection-item dismissable">
 
                 {% if item.done %}
-                  <input type="checkbox" id="{{item.id}}" checked/>
+                  <input type="checkbox" id="{{item.id}}" onclick="sendCheck({{item.id}}, '0')" checked/>
                 {% else %}
-                  <input type="checkbox" id="{{item.id}}"/>
+                  <input type="checkbox" id="{{item.id}}" onclick="sendCheck({{item.id}}, '1')"/>
                 {% endif %}
 
                   <label for="{{item.id}}"><a href="#" class="secondary-content"><span class="ultra-small">{{ item.name }}</span></a>
@@ -30,12 +40,18 @@
               </li>
               {% endfor %}
             </ul>
-            <!-- task-card -->
-             
+            <!-- task-card -->        
         </div> 
       </div>
     </div>
-  </div> 
+  </div>
+
+  <script type="text/javascript">
+  // 1 means send done, 0 means send not done.
+  function sendCheck (itemId, status) {
+    window.location.href += itemId + '/status';
+  }
+  </script>
 
  </div>              
 {% endblock %}           
