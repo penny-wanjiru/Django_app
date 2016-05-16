@@ -17,11 +17,12 @@
                 <div class="col m4 animated fadeInUp"
                      style="-webkit-animation-duration:
                      $index*300ms">
-                    <div class="card #ffecb3 blue lighten-">
+                    <div class="card #ffecb3 blue lighten-1 ">
                         <div class="card-content center-align">
                             <div class="card-title truncate"><!-- {{u.user.username}} --></div>
                             <!-- <img class="circle" src="{{u.user.picture.medium}}"> -->
-                            <p class="blue-text text-darken-4">{{ bucketlist.name }}</p>
+                            <p class="blue-text text-darken-4 font-family:Ubuntu;"style="font-size:25px; font-family:Ubuntu;">{{ bucketlist.name|upper }}</p>
+                            <em><p class="blue-text text-darken-4 " style="font-size:12px;"> Last updated:{{ bucketlist.date_updated}}</p></em>
 
                             <br>
                             <div class="row">
@@ -42,14 +43,16 @@
                             </a>
                             <ul>
                             
-                            <li><a class="btn-floating blue"><i class="material-icons">mode_edit</i></a>
+                            <li><a href="{% url 'bucketlist_edit' pk=bucketlist.pk %}">
+                            <a class="btn-floating blue modal-trigger" data-target="modal3"><i class="material-icons">mode_edit</i></a>
                             </li>
+                            
                             
                             
                             <li><a href="{% url 'bucket_items' pk=bucketlist.pk %}" class="btn-floating green"><i class="material-icons">visibility</i></a>
                             </li>
             
-                            <li><a href="" class="btn-floating red"><i class="material-icons">delete</i></a></li>
+                            <li><a href="{% url 'bucketlist_delete' pk=bucketlist.pk %}" class="btn-floating red"><i class="material-icons">delete</i></a></li>
                             
                            
                             </ul>   
@@ -57,7 +60,10 @@
                     </div>
                       
                     </div><!--/card-->
+
                 {% endfor %}
+
+
                 </div>
             </div>
             <a href="{% url 'bucket_add' %}">
@@ -68,6 +74,11 @@
                     {% csrf_token %}
                     {% include "includes/bucketlist_add.html"%}
                 </form>
+                <form class="form-horizonta"  action="" method="POST">
+                    {% csrf_token %}
+                    {% include "includes/edit_bucketlist.html"%}
+                </form>
+                
             </div>
         </div>
     </div>    
