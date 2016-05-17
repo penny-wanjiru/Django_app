@@ -1,7 +1,7 @@
 venv
 
 # staticfiles
-bucketlist/app/static/
+staticfiles/
 
 debug_toolbar
 *.diff
