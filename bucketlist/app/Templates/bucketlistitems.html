@@ -20,6 +20,7 @@
                 {% csrf_token %}
                 {% include "includes/item_add.html"%}
             </form>
+            {% include "includes/flash-messages.html" %}
             <!-- task-card -->
             <ul id="task-card" class="collection with-header">
               <li class="collection-header cyan">
@@ -36,10 +37,9 @@
 
                 <label for="{{item.id}}"><a href="#" class="secondary-content"><span class="ultra-small">{{ item.name }}</span></a>
                 </label> 
-                <div class="col m11 offset-m11">
                   <i class="material-icons " style="font-size: 1.5rem; color:#c62828;">delete</i>
                   <i class="material-icons" style="font-size: 1.5rem; color:#0091ea;">edit</i>
-                </div>    
+                  
               </li>
 
               {% endfor %}

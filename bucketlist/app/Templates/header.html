@@ -29,12 +29,16 @@
       <!--Import jQuery before materialize.js-->
       <div class="panel is-selected" style="position:absolute; left:0%;"></div>
       <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+      <script type="text/javascript" src="{% static 'js/my_js.js' %}"></script>
       <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
+
       <script type="text/javascript">
         $(document).ready(function(){
         // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
         $('.modal-trigger').leanModal();
         });
+
+
         
       </script>
 

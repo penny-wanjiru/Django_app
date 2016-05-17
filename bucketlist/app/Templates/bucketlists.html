@@ -43,12 +43,8 @@
                             </a>
                             <ul>
                             
-                            <li><a href="{% url 'bucketlist_edit' pk=bucketlist.pk %}">
-                            <a class="btn-floating blue modal-trigger" data-target="modal3"><i class="material-icons">mode_edit</i></a>
-                            </li>
-                            
-                            
-                            
+                            <li><a class="btn-edit btn-floating blue modal-trigger" data-url="{% url 'bucketlist_edit' pk=bucketlist.pk %}" data-target="modal3"><i class="material-icons linker">mode_edit</i></a>
+                            </li>   
                             <li><a href="{% url 'bucket_items' pk=bucketlist.pk %}" class="btn-floating green"><i class="material-icons">visibility</i></a>
                             </li>
             
@@ -60,7 +56,8 @@
                     </div>
                       
                     </div><!--/card-->
-
+                    
+                        
                 {% endfor %}
 
 
@@ -74,10 +71,11 @@
                     {% csrf_token %}
                     {% include "includes/bucketlist_add.html"%}
                 </form>
-                <form class="form-horizonta"  action="" method="POST">
+                <form id="updateBucketList" class="form-horizontal"  action="" method="POST">
                     {% csrf_token %}
                     {% include "includes/edit_bucketlist.html"%}
                 </form>
+                
                 
             </div>
         </div>

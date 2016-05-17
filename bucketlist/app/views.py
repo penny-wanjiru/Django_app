@@ -1,3 +1,5 @@
+import json
+
 from django.contrib import auth
 from django.contrib.auth import(
     authenticate,
@@ -5,11 +7,14 @@ from django.contrib.auth import(
     login,
     logout,
 ) 
+
 from django.views.generic.edit import View, CreateView, DeleteView
+from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.detail import DetailView
 from django.views.generic import TemplateView
 from django.views import generic
 from django.contrib import messages
+from django.http import HttpResponseRedirect
 from django.template import RequestContext
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse_lazy
@@ -108,12 +113,12 @@ class BucketlistView(generic.CreateView, generic.ListView):
 
 
 class BucketlistDeleteView(TemplateView):
-    """View to handle deletion of a bucketlist."""
 
     def get(self, request, **kwargs):
         """Retrieve bucketlist id from request body and delete it."""
         bucketlist = BucketList.objects.filter(
             id=kwargs['pk'], user=self.request.user).first()
+        messages.warning(request, "Are you sure?", fail_silently=False)
         bucketlist.delete()
         messages.success(
             request, 'Bucketlist has been deleted successfully!')
@@ -122,30 +127,20 @@ class BucketlistDeleteView(TemplateView):
 
 
 class BucketlistUpdateView(TemplateView):
-    """View to handle retrieval and edition of single bucketlists."""
     template_name = 'Bucketlists.html'
 
+    @csrf_exempt
     def post(self, request, **kwargs):
-        """Retrieve new details from request body."""
         bucketlist = BucketList.objects.filter(
             id=kwargs['pk'], user=self.request.user).first()
+        
+        # bucketlist.name = json.loads(request.body)['name']
         bucketlist.name = request.POST.get('name')
         bucketlist.save()
         messages.success(
-            request, 'Bucketlist updated successfully!')
-        return redirect('/bucketlists/',
-                        context_instance=RequestContext(request))
+            request, 'You updated successfully!')
+        return HttpResponseRedirect('/bucketlists/')
 
-
-
-
-class BucketlistDetailView(DetailView):
-    model = BucketListItem
-
-    def get_context_data(self, **kwargs):
-        context = super(BucketlistDetailView, self).get_context_data(**kwargs)
-        return redirect('/bucketlists/', 
-                        context_instance=RequestContext(request))
 
 
 class BucketlistItemStatus(generic.TemplateView):
