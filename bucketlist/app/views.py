@@ -66,6 +66,52 @@ class logout_view(TemplateView):
         return redirect("/")
 
 
+
+
+
+class BucketlistView(generic.CreateView, generic.ListView):
+    template_name = 'Bucketlists.html'
+    success_url = '/bucketlists/'
+    model = BucketList
+    fields = ['name']
+
+    def form_valid(self, form):
+        bucketlist = form.save(commit=False)
+        bucketlist.user = self.request.user
+        return super(BucketlistView, self).form_valid(form)
+
+    def get_queryset(self):
+        return BucketList.objects.filter(user=self.request.user.id)
+
+
+class BucketlistDeleteView(TemplateView):
+
+    def get(self, request, **kwargs):
+        """Retrieve bucketlist id from request body and delete it."""
+        bucketlist = BucketList.objects.filter(
+            id=kwargs['pk'], user=self.request.user).first()
+        bucketlist.delete()
+        messages.success(
+            request, 'Bucketlist has been deleted successfully!')
+        return redirect('/bucketlists/',
+                        context_instance=RequestContext(request))
+
+
+class BucketlistUpdateView(TemplateView):
+    template_name = 'Bucketlists.html'
+
+    @csrf_exempt
+    def post(self, request, **kwargs):
+        bucketlist = BucketList.objects.filter(
+            id=kwargs['pk'], user=self.request.user).first()
+        # bucketlist.name = json.loads(request.body)['name']
+        bucketlist.name = request.POST.get('name')
+        bucketlist.save()
+        messages.success(
+            request, 'You updated successfully!')
+        return HttpResponseRedirect('/bucketlists/')
+
+
 class BucketlistItemsView(View):
     template_name = 'bucketlistitems.html'
 
@@ -96,53 +142,6 @@ class BucketlistItemsView(View):
                 context_instance=RequestContext(request)
             )
 
-
-class BucketlistView(generic.CreateView, generic.ListView):
-    template_name = 'Bucketlists.html'
-    success_url = '/bucketlists/'
-    model = BucketList
-    fields = ['name']
-
-    def form_valid(self, form):
-        bucketlist = form.save(commit=False)
-        bucketlist.user = self.request.user
-        return super(BucketlistView, self).form_valid(form)
-
-    def get_queryset(self):
-        return BucketList.objects.filter(user=self.request.user.id)
-
-
-class BucketlistDeleteView(TemplateView):
-
-    def get(self, request, **kwargs):
-        """Retrieve bucketlist id from request body and delete it."""
-        bucketlist = BucketList.objects.filter(
-            id=kwargs['pk'], user=self.request.user).first()
-        messages.warning(request, "Are you sure?", fail_silently=False)
-        bucketlist.delete()
-        messages.success(
-            request, 'Bucketlist has been deleted successfully!')
-        return redirect('/bucketlists/',
-                        context_instance=RequestContext(request))
-
-
-class BucketlistUpdateView(TemplateView):
-    template_name = 'Bucketlists.html'
-
-    @csrf_exempt
-    def post(self, request, **kwargs):
-        bucketlist = BucketList.objects.filter(
-            id=kwargs['pk'], user=self.request.user).first()
-        
-        # bucketlist.name = json.loads(request.body)['name']
-        bucketlist.name = request.POST.get('name')
-        bucketlist.save()
-        messages.success(
-            request, 'You updated successfully!')
-        return HttpResponseRedirect('/bucketlists/')
-
-
-
 class BucketlistItemStatus(generic.TemplateView):
     """View logic for marking item as done or not."""
 
@@ -154,3 +153,30 @@ class BucketlistItemStatus(generic.TemplateView):
         bucketlistitem.save()
         return redirect('/bucketlists/' + kwargs['bucketlist'] + '/items/',
                         context_instance=RequestContext(request))
+
+
+class BucketlistItemDelete(TemplateView):
+
+   def get(self, request, **kwargs):
+        """Retrieve bucketlist id from request body and delete it."""
+        bucketlist = kwargs['bucketlist']
+        bucketlistitem = BucketListItem.objects.filter(
+            id=kwargs['pk'], bucketlist_id=bucketlist).first()
+        bucketlistitem.delete()
+        messages.success(
+            request, 'You have just deleted your item!')
+        return redirect('/bucketlists/' + kwargs['bucketlist'] + '/items/',
+                        context_instance=RequestContext(request))
+
+class BucketlistItemUpdate(TemplateView):
+
+    @csrf_exempt
+    def post(self, request, **kwargs):
+        bucketlist = kwargs['bucketlist']
+        bucketlistitem = BucketListItem.objects.filter(
+            id=kwargs['pk'], bucketlist_id=bucketlist).first()
+        bucketlistitem.name = request.POST.get('name')
+        bucketlistitem.save()
+        messages.success(
+            request, 'You have updated successfully!')
+        return redirect('/bucketlists/')       
