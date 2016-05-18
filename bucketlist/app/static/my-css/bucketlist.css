@@ -1,5 +1,5 @@
 #main{
   background-image: url('../img/the_image.png');
-  height:750px;
+  height:100%;
   background-size: repeat-x repeat-y;
 }
