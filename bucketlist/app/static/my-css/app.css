@@ -6,16 +6,16 @@
 
   /* label color */
    .input-field label {
-     color: #255 ;
+     color: #20B5D8 ;
    }
    /* label focus color */
    .input-field input[type=text]:focus + label {
-     color: #29b6f6 ;
+     color: #20B5D8 ;
    }
    /* label underline focus color */
    .input-field input[type=text]:focus {
-     border-bottom: 1px solid #29b6f6;
-     box-shadow: 0 1px 0 0 #29b6f6 ;
+     border-bottom: 1px solid #20B5D8;
+     box-shadow: 0 1px 0 0 #20B5D8 ;
    }
    /* valid color */
    .input-field input[type=text].valid {
@@ -29,17 +29,18 @@
    }
    /* icon prefix focus color */
    .input-field .prefix.active {
-     color: #000 ;
+     color: #20B5D8 ;
    }
 
 .name{
   margin-top: 100px;
   opacity: 10.6;
+
 }   
 .card{
 
-  background: rgb(255, 255, 255); 
-  background: rgba(255, 255, 255, .5); 
+  /*background: rgb(255, 255, 255); */
+  background: rgba(255, 255, 255, .6); 
 }
 .item-card{
   
@@ -69,6 +70,7 @@
   margin-left: 20px;
   margin-top: 15px;
 }
-
-  
+.button1{
+background-color: rgba(32, 181, 216);
+} 
 

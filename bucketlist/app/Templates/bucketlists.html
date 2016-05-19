@@ -6,7 +6,7 @@
       {% include "includes/navbar.html" %}
     {% endblock %} 
 
-    <div id="main" style="height:100%;">
+    <div id="main">
         <div class="row" ng-controller="mainCtrl">
             <div class="s10 offset-s1 col">
                 <h2 style="font-family: Ubuntu; font-size: 35px;">Bucketlists</h2>
@@ -17,7 +17,7 @@
                 <div class="col m4 animated fadeInUp"
                      style="-webkit-animation-duration:
                      $index*300ms">
-                    <div class="card #ffecb3 blue lighten-1 ">
+                    <div class="card" id="yaya" >
                         <div class="card-content center-align">
                             <div class="card-title truncate"><!-- {{u.user.username}} --></div>
                             <!-- <img class="circle" src="{{u.user.picture.medium}}"> -->

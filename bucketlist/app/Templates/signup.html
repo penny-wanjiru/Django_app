@@ -1,19 +1,29 @@
 {% extends "header.html" %}
 {% load static %}
 {% block content %}
-<style type="text/css">
-    body{
+<!--<style type="text/css">
+    body{  
     background-image: url('/static/img/sunrise.jpg') ;
     background-size: cover;
+    background: white-transluscent-background;
   }
-</style>
-<div class="row" id="signup">
+</style>-->
 
-        <div class="name col m4 offset-m7">
+
+<div class="row" id="signup">
+        <div class="col m4" style="diplay:inline; margin-top:240px; margin-left:200px;">
+          <img src="/static/img/adventure.png" style="width:350px;height:220px;">
+        </div>
+        
+        <div class="name col m4 offset-m1 " style="diplay:inline-block;">
+
           <div class="card">
             <div class="card-content">
-                    <div class="col s12" style="font-family: Ubuntu; ">
-                      <h3>Sign up</h3>
+                    <div class="col s6" style="font-family: Ubuntu; ">
+                      <h3 style="font-size:20px; color:#016F97; margin-left:20px; margin-bottom:50px;font-family: .Helvetica Neue DeskInterface;;">SIGN UP</h3>
+                    </div>
+                    <div class="col s6" style="font-family: Ubuntu; ">
+                      <h3 style="font-size:20px; color:#016F97; margin-left:20px; margin-bottom:50px;font-family: .Helvetica Neue DeskInterface;;">SIGN IN</h3>
                     </div>
                     <div class="col-sm-12">
                       
@@ -21,58 +31,31 @@
                     <div class="row " >
                         <form class="col s12" method='POST' action="/">
                           {% csrf_token %}
-                          {{ form }}
-                          <!-- <div class="row">
-                            <div class="input-field col s10">
-                              <input id="first_name" type="text" class="validate" name="firstname" required>
-                              <label for="first_name" style="font-family: Ubuntu; ">First Name</label>
-                              
-                            </div>
+                          <div class="fieldWrapper">
+                              {{ form.subject.errors }}
+                              <label for="id_subject" style="color:black;">USERNAME:</label>
+                              {{ form.username }}
+                              <label for="id_subject" style="color:black;">EMAIL:</label>
+                              {{ form.email }}
+                              <label for="id_subject" style="color:black;">PASSWORD:</label>
+                              {{ form.password }}
+                              <label for="id_subject" style="color:black;">CONFIRM PASSWORD:</label>
+                              {{ form.password_two }}
                           </div>
-                          <div class="row">
-                            <div class="input-field col s10">
-                              <input type="text" class="validate" name="lastname" required>
-                              <label for="lastname" style="font-family: Ubuntu; ">Lastname</label>
-                              
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="input-field col s10">
-                              <input  id="email" type="email" class="validate" name="email" required>
-                              <label for="Email" style="font-family: Ubuntu; ">Email</label>
-                              
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="input-field col s10">
-                              <input  id="password" type="text" class="validate" name="password">
-                              <label for="Password" style="font-family: Ubuntu; ">Password</label>
-                              
-                            </div> -->
-                        <!--   </div>
-                          {% if form.errors %}
-                              {% for field in form %}
-                                  {% for error in field.errors %}
-                                      <div class="alert alert-error">
-                                          <strong>{{ error|escape }}</strong>
-                                      </div>
-                                  {% endfor %}
-                              {% endfor %}
-                          {% endif %} -->
-                          <input type="submit" value="signup"class="button">
-                          <!-- <div class="btns col m6">
-                            <button class="btn 
-                            btn-large #29b6f6 light-blue lighten-1 waves-effect waves-dark " style="font-family: Ubuntu; " type="submit" name="signup">SIGN UP</button>
-                          </div>
-                          <div class="btns col m6">
-                            <button class="btn 
-                            btn-large #29b6f6 light-blue lighten-1 waves-effect waves-dark " style="font-family: Ubuntu; "type="button" name="signup" onclick="toggleAuths('in')">SIGN IN</button>
-                          </div> -->
-                
+                          <input style="height:50px;width:200px; margin-left:100px; background-color: #20B5D8; border: 0pt" type="submit" value="SIGN UP" class="button1">
                         </form>
                     </div>  
             </div> 
           </div>
         </div>
     </div> 
+    <div class="row page-footer">
+      <div class="col m1"   
+        <p style="margin-left:20px; color:white;"> Crafted with </p>
+      </div>
+      <div class="col m2">
+      <i class="material-icons" style="color:red">favorite_border</i></a>
+      </div>
+
+    </div>
 {% endblock %}           
