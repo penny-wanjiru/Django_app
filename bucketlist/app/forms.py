@@ -8,9 +8,19 @@ from django.contrib.auth import(
 
 
 class SignUpForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(SignUpForm, self).__init__(*args, **kwargs)
+
+        for fieldname in ['username', 'email', 'password', 'password_two']:
+            self.fields[fieldname].help_text = None
+    
     class Meta:
         model = CustomUser
         fields = ['username', 'email', 'password', 'password_two']
+
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'myfieldclass'}),
+        }
 
     def clean(self):
         print 'cleaned data:'

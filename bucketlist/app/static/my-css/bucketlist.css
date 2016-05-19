@@ -3,3 +3,20 @@
   height:100%;
   background-size: repeat-x repeat-y;
 }
+
+body{  
+
+    background-image: url('/static/img/watercoaster.jpg'), linear-gradient(#3d72b4, #525252);
+    background-color: rgba(0, 0, 0, 0.60);
+    background-blend-mode: overlay;
+    background-size: cover;
+  }
+  
+#yaya{
+
+ background: red; /* For browsers that do not support gradients */    
+    background: -webkit-linear-gradient(left top,#1CD8D2, #93EDC7 ); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(bottom right, #1CD8D2, #93EDC7); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(bottom right, #1CD8D2, #93EDC7); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to bottom right, #1CD8D2, #93EDC7); /* Standard syntax (must be last) */
+}    
