@@ -63,12 +63,15 @@ class UserRegistrationForm(forms.ModelForm):
     username = forms.CharField()
     email = forms.EmailField()
     email.help_text = ''
-    password = forms.CharField(widget=forms.PasswordInput)
-    password2 = forms.CharField(widget=forms.PasswordInput)
+    password = forms.CharField(widget=forms.PasswordInput())
+    password2 = forms.CharField(widget=forms.PasswordInput())
 
     class Meta:
         model = CustomUser
         fields = ['username', 'email', 'password', 'password_two']
+        widgets = {
+            'password': forms.PasswordInput(),
+        }
 
     # def clean_password(self):
     #     password = self.cleaned_data.get('password')

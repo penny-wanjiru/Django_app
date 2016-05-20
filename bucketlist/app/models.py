@@ -6,7 +6,7 @@ from django.db import models
 
 
 class CustomUser(AbstractUser):
-    password_two = models.CharField(max_length=255, default='password')
+    password_two = models.CharField(max_length=255)
 
 # class SignUp(models.Model):
 #     username = models.CharField(max_length=255)

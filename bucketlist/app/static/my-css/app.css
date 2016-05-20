@@ -6,16 +6,22 @@
 
   /* label color */
    .input-field label {
-     color: #20B5D8 ;
+    left:0px;
+    color: #585656;
    }
    /* label focus color */
    .input-field input[type=text]:focus + label {
      color: #20B5D8 ;
    }
+   /* label underline focus color  for email*/
+    .input-field input[type=email]:focus {
+     border-bottom: 1px solid #000000;
+     box-shadow: 0 0px 0 0 #255;
+   }
    /* label underline focus color */
    .input-field input[type=text]:focus {
-     border-bottom: 1px solid #20B5D8;
-     box-shadow: 0 1px 0 0 #20B5D8 ;
+     border-bottom: 1px solid #000000;
+     box-shadow: 0 0px 0 0 #255;
    }
    /* valid color */
    .input-field input[type=text].valid {
@@ -33,15 +39,46 @@
    }
 
 .name{
-  margin-top: 100px;
+  margin-top: 0px;
   opacity: 10.6;
 
-}   
-.card{
+}
 
+
+#signin_div {
+  padding: 0px;
+}
+
+#signup_div {
+  padding: 0px;
+}
+.tabs{
+  opacity: 0.7; 
+}
+.tabs .indicator{
+  background-color: #20B5D8;
+}
+.tabs .tab a{
+ color: #20B5D8;
+}
+.tabs .tab a:hover {
+    color: #20B5D8;
+}
+
+.card{
+  margin: 0px;
   /*background: rgb(255, 255, 255); */
   background: rgba(255, 255, 255, .6); 
 }
+#signup{
+  padding: 0px;
+  /*background: rgb(255, 255, 255); */
+}
+#signin{
+  padding: 0px;
+  /*background: rgb(255, 255, 255); */
+}
+
 .item-card{
   
   background: rgb(255, 255, 255); 
