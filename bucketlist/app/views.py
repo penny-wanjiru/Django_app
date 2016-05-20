@@ -26,7 +26,8 @@ from .models import BucketList, BucketListItem
 class index_view(View):
     def get(self, request):
         form = SignUpForm(None)
-        context = {"form": form}
+        signin = UserLoginForm(None)
+        context = {"form": form, "signin": signin}
         return render(request, 'Signup.html', context)
 
     def post(self, request):
