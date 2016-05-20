@@ -2,23 +2,30 @@
   background-image: url('../img/the_image.png');
   height:100%;
   background-size: repeat-x repeat-y;
+  min-height:100vh;
 }
 
+#itms{
+  min-height:100vh;
+  background-color: white;
+  margin-bottom: -20px;
+}
+
+#items{
+margin-bottom: 0px;
+}
 body{  
 
     background-image: url('/static/img/watercoaster.jpg'), linear-gradient(#3d72b4, #525252);
     background-color: rgba(0, 0, 0, 0.60);
     background-blend-mode: overlay;
     background-size: cover;
-    /*height:100%;
-    overflow:hidden;*/
+    height:100%;
+
+    /*overflow:hidden;*/
   }
   
 #yaya{
-
- background: red; /* For browsers that do not support gradients */    
-    background: -webkit-linear-gradient(left top#00c6ff, #0072ff ); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(bottom right, #00c6ff, #0072ff); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(bottom right, #00c6ff, #0072ff); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(to bottom right, #00c6ff, #0072ff); /* Standard syntax (must be last) */
+ 
+ background: #0091ea;
 }    
