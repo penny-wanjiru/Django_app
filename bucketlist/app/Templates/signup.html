@@ -9,9 +9,9 @@
   }
 </style>-->
 
-<div class="row">
+<div class="row" id="main_row">
     <div class="col m4" style="diplay:inline; margin-top:240px; margin-left:200px;">
-      <img src="/static/img/adventure.png" style="width:350px;height:220px;">
+      <img src="/static/img/adventure.png" style="width:370px;height:220px;">
     </div>
     <div class="col m4 offset-m1">
        <div style="margin-top:120px;" >
@@ -23,17 +23,17 @@
         </div>
       <!-- signup form -->
       <div id="signup" class="col s12">
-        <div id="signin_div" class="name col m12">
+        <div id="signup_div" class="name col m12">
           <div class="card">
             <div class="card-content">
                
                     <div class="col-sm-12">
-                      
+            
                     </div>
                     <div class="row " >
                        <form class="col s12" method='POST' action="/">
                           {% csrf_token %}
-                          {{ form.subject.errors }}
+                          {{ form.non_field_errors }}
                           <div class="input-field">
                               <label for="id_subject">Username</label>
                               {{ form.username }}
@@ -50,7 +50,7 @@
                               <label for="id_subject">Confirm password</label>
                               {{ form.password_two }}
                           </div>
-                              <input style="height:50px;width:200px; margin-left:100px; background-color: #20B5D8; border: 0pt" type="submit" value="SIGN UP" class="button1">
+                              <input style="height:50px;width:200px; margin-left:100px; background-color: #20B5D8; border: 0pt" type="submit" value="SIGN UP" id="signup_btn" class="button1">
                         </form>
                     </div>  
             </div> 
@@ -60,19 +60,17 @@
 
       <!-- sign in -->
       <div id="signin" class="col s12">
-         <div id="signup" class="col s12">
-        <div id="signup_div" class="name col m12">
+         <!-- <div id="signup" class="col s12"> -->
+        <div id="signin_div" class="name col m12">
           <div class="card">
-            <div class="card-content">
-      
+            <div class="card-content">   
                     <div class="col-sm-12">
                       
                     </div>
-                    <div class="row " >
+                    <div class="row">
                         <form class="col s12" method='POST' action="/login/">{% csrf_token %}
-                          {{ signin.subject.errors }}
+                          {{ signin.non_field_errors }}
                           <div class="input-field">
-                            
                             <label for="id_subject">Username</label>
                             {{ signin.username }}
                           </div>
@@ -81,7 +79,7 @@
                             {{ signin.password }}
                           </div>  
                          
-                          <input style="height:50px;width:200px; margin-left:100px; margin-top:25px; background-color: #20B5D8; border: 0pt" type="submit" value="SIGN IN" class="button1">
+                          <input style="height:50px;width:200px; margin-left:100px; margin-top:px; background-color: #20B5D8; border: 0pt" type="submit" value="SIGN IN" class="button1">
                         </form>
                     </div>  
             </div> 
@@ -95,15 +93,15 @@
 </div>
         
      
-<!-- <footer class="page-footer">
+<div class="row page-footer">
   <div class="col m1">  
-    <p style=" text-align: right; margin-left:20px; color:white;"> Crafted with </p>
+    <p style="display:inline-block; color:white; margin-left:12px; ">Crafted with</p>
   </div>
   <div class="col m">
-    <i class="material-icons" style="color:red; text-align: right; margin-left:3px;">favorite_border</i></a>
+    <i class="material-icons" style="color:red; margin-top:15px;">favorite_border</i></a>
   </div>
   <div class="col m3"   
-    <p style=" text-align: left; margin-left:0px; color:white;">by Penny Wanjiru</p>
+    <p style=" text-align: left; margin-left:0px;display:inline-block; color:white; margin-top:15px;">by Penny Wanjiru</p>
   </div>
-</footer> -->
+</div>
 {% endblock %}           

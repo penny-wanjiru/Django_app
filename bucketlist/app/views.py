@@ -35,7 +35,7 @@ class index_view(View):
         form = SignUpForm(request.POST or None)
         if form.is_valid():
             form.save()
-            return redirect("/login/")
+            return redirect("/bucketlists")
         context = {"form": form}
         return render(request, 'Signup.html', context)
 
