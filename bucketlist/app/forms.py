@@ -13,7 +13,7 @@ class SignUpForm(forms.ModelForm):
 
         for fieldname in ['username', 'email', 'password', 'password_two']:
             self.fields[fieldname].help_text = None
-    
+
     class Meta:
         model = CustomUser
         fields = ['username', 'email', 'password', 'password_two']
@@ -60,11 +60,7 @@ class UserLoginForm(forms.ModelForm):
 
 
 class UserRegistrationForm(forms.ModelForm):
-    username = forms.CharField()
-    email = forms.EmailField()
-    email.help_text = ''
-    password = forms.CharField(widget=forms.PasswordInput())
-    password2 = forms.CharField(widget=forms.PasswordInput())
+    
 
     class Meta:
         model = CustomUser

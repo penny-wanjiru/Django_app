@@ -72,10 +72,12 @@
 }
 #signup{
   padding: 0px;
+  min-height: 450px;
   /*background: rgb(255, 255, 255); */
 }
 #signin{
   padding: 0px;
+  min-height: 450px;
   /*background: rgb(255, 255, 255); */
 }
 
@@ -110,4 +112,7 @@
 .button1{
 background-color: rgba(32, 181, 216);
 } 
+#main_row{
+  max-height: 3000px;
+}
 
