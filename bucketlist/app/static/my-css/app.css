@@ -49,6 +49,9 @@
   padding: 0px;
 }
 
+.crd {
+  margin: 0px;
+}
 #signup_div {
   padding: 0px;
 }
@@ -66,18 +69,19 @@
 }
 
 .card{
-  margin: 0px;
+  
   /*background: rgb(255, 255, 255); */
   background: rgba(255, 255, 255, .6); 
 }
 #signup{
+
   padding: 0px;
-  min-height: 450px;
+  min-height: 470px;
   /*background: rgb(255, 255, 255); */
 }
 #signin{
   padding: 0px;
-  min-height: 450px;
+  min-height: 470px;
   /*background: rgb(255, 255, 255); */
 }
 

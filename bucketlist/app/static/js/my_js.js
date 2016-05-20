@@ -19,9 +19,9 @@ $(".delete-item").on("click", function(event) {
             text: "You will not be able to recover this imaginary file!",   
             type: "warning",   
             showCancelButton: true,   
-            confirmButtonColor: "#DD6B55",   
+            confirmButtonColor: "#c62828",   
             confirmButtonText: "Yes, delete it!",   
-            cancelButtonText: "No, cancel plx!",   
+            cancelButtonText: "No, cancel!",   
             closeOnConfirm: false,   
             closeOnCancel: false 
         }, 
