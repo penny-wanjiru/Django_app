@@ -34,11 +34,11 @@ class index_view(View):
         print request.POST
         form = SignUpForm(request.POST or None)
         if form.is_valid():
-            new_user = form.save()
-            new_user = authenticate(
+            user = form.save()
+            user = authenticate(
                 username=request.POST['username'],
                 password=request.POST['password'])
-            login(request, new_user)
+            login(request, user)
             return redirect("/bucketlists")
         context = {"form": form}
         return render(request, 'Signup.html', context)

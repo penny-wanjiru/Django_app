@@ -30,10 +30,10 @@ $(".delete-item").on("click", function(event) {
                 $.get( a, function( data ) {
                   
                 }); 
-                swal("Deleted!", "Your imaginary file has been deleted.", "success");   
+                swal("Deleted!", "Your file has been deleted.", "success");   
             } 
             else {     
-                swal("Cancelled", "Your imaginary file is safe :)", "error");  
+                swal("Cancelled", "Your file is still safe", "error");  
              } 
             location.reload();
         });
