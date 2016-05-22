@@ -71,9 +71,6 @@ class logout_view(TemplateView):
         return redirect("/")
 
 
-
-
-
 class BucketlistView(generic.CreateView, generic.ListView):
     template_name = 'Bucketlists.html'
     success_url = '/bucketlists/'
@@ -147,6 +144,7 @@ class BucketlistItemsView(View):
                 context_instance=RequestContext(request)
             )
 
+
 class BucketlistItemStatus(generic.TemplateView):
     """View logic for marking item as done or not."""
 
@@ -162,7 +160,7 @@ class BucketlistItemStatus(generic.TemplateView):
 
 class BucketlistItemDelete(TemplateView):
 
-   def get(self, request, **kwargs):
+    def get(self, request, **kwargs):
         """Retrieve bucketlist id from request body and delete it."""
         bucketlist = kwargs['bucketlist']
         bucketlistitem = BucketListItem.objects.filter(
@@ -172,6 +170,7 @@ class BucketlistItemDelete(TemplateView):
             request, 'You have just deleted your item!')
         return redirect('/bucketlists/' + kwargs['bucketlist'] + '/items/',
                         context_instance=RequestContext(request))
+
 
 class BucketlistItemUpdate(TemplateView):
 
@@ -184,4 +183,4 @@ class BucketlistItemUpdate(TemplateView):
         bucketlistitem.save()
         messages.success(
             request, 'You have updated successfully!')
-        return redirect('/bucketlists/')       
+        return redirect('/bucketlists/')
