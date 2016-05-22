@@ -13,6 +13,11 @@
                 <!-- <h4 style="font-family: Bakery; font-size: 20px;">Do something cool today</h4>  -->
 
             <div class="row">
+                {% if not object_list %}
+                  <div class="well panel-default" id="bucketlist">
+                    <h3 style="font-size:25px;"> You don't have any bucketlists yet! &#128513;</h3>
+                  </div>
+                {% endif %}
                 {% for bucketlist in object_list %}
                 <div class="col m4 animated fadeInUp"
                      style="-webkit-animation-duration:
