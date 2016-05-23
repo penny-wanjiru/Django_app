@@ -71,7 +71,7 @@ class logout_view(TemplateView):
 
 
 class BucketlistView(generic.CreateView, generic.ListView):
-    template_name = 'Bucketlists.html'
+    template_name = 'bucketlists.html'
     success_url = '/bucketlists/'
     model = BucketList
     fields = ['name']
@@ -99,7 +99,7 @@ class BucketlistDeleteView(TemplateView):
 
 
 class BucketlistUpdateView(TemplateView):
-    template_name = 'Bucketlists.html'
+    template_name = 'bucketlists.html'
 
     @csrf_exempt
     def post(self, request, **kwargs):
