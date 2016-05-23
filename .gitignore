@@ -1,9 +1,8 @@
 venv/*
 pytest
 
-
-# staticfiles
 staticfiles/
+.coverage
 
 debug_toolbar
 *.diff
