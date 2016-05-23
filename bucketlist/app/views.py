@@ -31,7 +31,6 @@ class index_view(View):
         return render(request, 'Signup.html', context)
 
     def post(self, request):
-        print request.POST
         form = SignUpForm(request.POST or None)
         if form.is_valid():
             user = form.save()
@@ -83,7 +82,7 @@ class BucketlistView(generic.CreateView, generic.ListView):
         return super(BucketlistView, self).form_valid(form)
 
     def get_queryset(self):
-        return BucketList.objects.filter(user=self.request.user.id)
+        return BucketList.objects.filter(user=self.request.user.id).order_by('-date_updated')
 
 
 class BucketlistDeleteView(TemplateView):

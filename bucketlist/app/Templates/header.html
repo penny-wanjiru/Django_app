@@ -22,7 +22,7 @@
     <body>
     
       <div class="row">
-        {% include "includes/flash-messages.html" %}
+        
 
         {% block content %}
         
@@ -41,7 +41,7 @@
         // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
         $('.modal-trigger').leanModal();
         $('ul.tabs').tabs();
-
+        $(".flash-message").fadeOut(4000);
         });
 
 

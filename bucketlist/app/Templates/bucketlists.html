@@ -11,7 +11,7 @@
             <div class="s10 offset-s1 col">
                 <h2 style="font-family: Ubuntu; font-size: 35px;">Bucketlists</h2>
                 <!-- <h4 style="font-family: Bakery; font-size: 20px;">Do something cool today</h4>  -->
-
+            {% include "includes/flash-messages.html" %}
             <div class="row">
                 {% if not object_list %}
                   <div class="well panel-default" id="bucketlist">
@@ -53,7 +53,7 @@
                             <li><a href="{% url 'bucket_items' pk=bucketlist.pk %}" class="btn-floating cyan"><i class="material-icons">visibility</i></a>
                             </li>
             
-                            <li><a href="{% url 'bucketlist_delete' pk=bucketlist.pk %}" class="btn-floating red"><i class="material-icons">delete</i></a></li>
+                            <li><a href="{% url 'bucketlist_delete' pk=bucketlist.pk %}" class="btn-floating red"><i class="material-icons delete-bucket" links="{% url 'bucketlist_delete' pk=bucketlist.pk %}">delete</i></a></li>
                             
                            
                             </ul>   
