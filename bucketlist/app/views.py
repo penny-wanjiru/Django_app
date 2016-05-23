@@ -28,7 +28,7 @@ class index_view(View):
         form = SignUpForm(None)
         signin = UserLoginForm(None)
         context = {"form": form, "signin": signin}
-        return render(request, 'signup.html', context)
+        return render(request, 'Signup.html', context)
 
     def post(self, request):
         form = SignUpForm(request.POST or None)

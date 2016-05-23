@@ -94,7 +94,6 @@ DATABASES = {
 }
 
 if 'ON_HEROKU' in os.environ:
-    print 'Detected on Heroku.'
     db_from_env = dj_database_url.config()
     DATABASES['default'].update(db_from_env)
 
