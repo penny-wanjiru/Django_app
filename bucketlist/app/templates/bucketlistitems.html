@@ -8,14 +8,15 @@
   {% endblock %}
  
 <div id="itms">
+  <div class="row" style="width:61%; padding-top:1%;">
+    <div class="right-align" style="margin-top:10px;">
+        <a class="btn-floating btn-large waves-effect waves-light #ec407a pink lighten-1 btn modal-trigger" data-target="modal2"><i class="material-icons">add</i></a>
+    </div>
+  </div>
   <div class="row" id="items">
     <div class="name col m6 offset-m3" style="margin-top:0px;">
       <div class="item-card">
         <div class="card-content">
-
-            <div class="right-align" style="margin-top:10px;">
-                <a class="btn-floating btn-large waves-effect waves-light #ec407a pink lighten-1 btn modal-trigger" data-target="modal2"><i class="material-icons">add</i></a>
-            </div>
             <!-- Modal Structure -->
             <form class="form-horizontal"  action="" method="POST">
                 {% csrf_token %}
@@ -25,7 +26,7 @@
             <!-- task-card -->
             <ul id="task-card" class="collection with-header">
               <li class="collection-header cyan">
-                  <h4 class="task-card-title" style="font-family:bakery;, font-size:20px;">Lets do this thang!</h4>
+                  <h4 class="task-card-title" style="font-family:bakery; font-size:30px;">Lets do this thang!</h4>
                   <p class="task-card-date" style="font-family:Ubuntu;">{{ bucketlist.name|upper }}</p>
               </li>
               {% for item in items %}
@@ -40,10 +41,10 @@
                 </label> 
                 <div class="right" style="display:inline;">
                   <a id="anchor" data-url="/bucketlists/{{bucketlist.pk}}/items/{{item.pk}}/delete/" >
-                    <i class="material-icons delete-item"style="font-size: 1.5rem; color:#c62828;" link="/bucketlists/{{bucketlist.pk}}/items/{{item.pk}}/delete/">delete</i>
+                    <i class="material-icons delete-item"style="font-size: 1.5rem; color:#c62828; cursor:pointer;" link="/bucketlists/{{bucketlist.pk}}/items/{{item.pk}}/delete/">delete</i>
                   </a>
                   
-                  <a class="btn-item modal-trigger" data-url="/bucketlists/{{bucketlist.id}}/items/{{item.id}}/edit/" data-target="modal4"><i class=" btn-item material-icons" style="font-size: 1.5rem; color:#0091ea;">edit</i></a>
+                  <a class="btn-item modal-trigger" data-url="/bucketlists/{{bucketlist.id}}/items/{{item.id}}/edit/" data-target="modal4"><i class=" btn-item material-icons" style="font-size: 1.5rem; color:#0091ea; cursor:pointer;">edit</i></a>
                  </div> 
               </li>
 

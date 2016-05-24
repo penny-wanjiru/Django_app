@@ -23,10 +23,13 @@ class SignUpForm(forms.ModelForm):
         }
 
     def clean(self):
-        print 'cleaned data:'
-        print self.cleaned_data
-        password = self.cleaned_data['password']
-        password_two = self.cleaned_data['password_two']
+        username = self.cleaned_data.get('username')
+        email = self.cleaned_data.get('email')
+        password = self.cleaned_data.get('password')
+        password_two = self.cleaned_data.get('password_two')
+
+        if (not password) or (not username) or (not email) or (not password_two):
+            raise forms.ValidationError("All fields are required!")
 
         if not (password == password_two):
             raise forms.ValidationError("Passwords do not match")
