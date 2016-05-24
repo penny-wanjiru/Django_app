@@ -57,7 +57,6 @@ class login_view(View):
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password")
             user = authenticate(username=username, password=password)
-            print 'panda'
             login(request, user)
             return redirect("/bucketlists")
         return render(request, "userform.html", {"form": form, "title": title})
@@ -182,4 +181,4 @@ class BucketlistItemUpdate(TemplateView):
         bucketlistitem.save()
         messages.success(
             request, 'You have updated successfully!')
-        return redirect('/bucketlists/')
+        return redirect('/bucketlists/'+kwargs['bucketlist']+'/items/')
