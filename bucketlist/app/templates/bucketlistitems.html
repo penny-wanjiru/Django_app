@@ -25,19 +25,18 @@
             {% include "includes/flash-messages.html" %}
             <!-- task-card -->
             <ul id="task-card" class="collection with-header">
-              <li class="collection-header cyan">
-                  <h4 class="task-card-title" style="font-family:bakery; font-size:30px;">Lets do this thang!</h4>
-                  <p class="task-card-date" style="font-family:Ubuntu;">{{ bucketlist.name|upper }}</p>
+              <li class="collection-header #01D1FD blue">
+                  <p class="task-card-date" style="font-family:Ubuntu; font-size:20px;">{{ bucketlist.name|upper }}</p>
               </li>
               {% for item in items %}
               <li class="collection-item dismissable">
                 {% if item.done %}
-                  <input type="checkbox" id="{{item.id}}" onclick="sendCheck({{item.id}}, '0')" checked/>
+                  <input type="checkbox" style="color: blue;" id="{{item.id}}" onclick="sendCheck({{item.id}}, '0')" checked/>
                 {% else %}
                   <input type="checkbox" id="{{item.id}}" onclick="sendCheck({{item.id}}, '1')"/>
                 {% endif %}
 
-                <label for="{{item.id}}"><a href="#" class="secondary-content"><span class="ultra-small">{{ item.name }}</span></a>
+                <label for="{{item.id}}"><a href="#" class="secondary-content"><span class="ultra-small" style="color:#000000;">{{ item.name }}</span></a>
                 </label> 
                 <div class="right" style="display:inline;">
                   <a id="anchor" data-url="/bucketlists/{{bucketlist.pk}}/items/{{item.pk}}/delete/" >

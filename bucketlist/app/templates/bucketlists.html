@@ -26,7 +26,7 @@
                         <div class="card-content center-align">
                             <div class="card-title truncate"><!-- {{u.user.username}} --></div>
                             <!-- <img class="circle" src="{{u.user.picture.medium}}"> -->
-                            <p class="blue-text text-darken-4 font-family:Ubuntu;"style="font-size:25px; font-family:Ubuntu;">{{ bucketlist.name|upper }}</p>
+                            <a href="{% url 'bucket_items' pk=bucketlist.pk %}"<i class="blue-text text-darken-4 font-family:Ubuntu;"style="font-size:25px; font-family:Ubuntu;">{{ bucketlist.name|upper }}</i></a>
                             <em><p class="blue-text text-darken-4 " style="font-size:12px;"> Last updated:{{ bucketlist.date_updated}}</p></em>
 
                             <br>
@@ -43,7 +43,7 @@
                             <a href="#" class="blue-text text-darken-4"><!-- {{u.user.location.city}}, {{u.user.location.state}} --></a>
                         </div>
                         <div class="fixed-action-btn horizontal click-to-toggle" style="bottom: 45px; right: 24px;">
-                            <a class="btn-floating btn-large #00e5ff cyan accent-3">
+                            <a class="menu btn-floating btn-large">
                               <i class="material-icons">menu</i>
                             </a>
                             <ul>
@@ -69,7 +69,7 @@
                 </div>
             </div>
             <a href="{% url 'bucket_add' %}">
-                    <a class="btn-floating btn-large waves-effect waves-light #ec407a pink lighten-1 btn modal-trigger" style="margin-top:20px;" data-target="modal1"><i class="material-icons">add</i></a>
+                    <a class="btn-floating btn-large waves-effect waves-light #f06292 pink lighten-2 btn modal-trigger" style="margin-top:20px;" data-target="modal1"><i class="material-icons">add</i></a>
                     </a>
                 <!-- Modal Structure -->
                 <form class="form-horizontal"  action="" method="POST">

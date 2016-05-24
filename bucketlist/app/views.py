@@ -7,7 +7,8 @@ from django.contrib.auth import(
     login,
     logout,
 ) 
-
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import View, CreateView, DeleteView
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.detail import DetailView
@@ -21,6 +22,8 @@ from django.core.urlresolvers import reverse_lazy
 from django.http import Http404
 from .forms import UserLoginForm, SignUpForm, BucketListForm, BucketListItemForm
 from .models import BucketList, BucketListItem
+
+
 
 
 class index_view(View):
@@ -69,7 +72,9 @@ class logout_view(TemplateView):
         return redirect("/")
 
 
-class BucketlistView(generic.CreateView, generic.ListView):
+class BucketlistView(LoginRequiredMixin, generic.CreateView, generic.ListView):
+    login_url = '/'
+    redirect_field_name = 'login'
     template_name = 'bucketlists.html'
     success_url = '/bucketlists/'
     model = BucketList
@@ -112,7 +117,9 @@ class BucketlistUpdateView(TemplateView):
         return HttpResponseRedirect('/bucketlists/')
 
 
-class BucketlistItemsView(View):
+class BucketlistItemsView(LoginRequiredMixin, View):
+    login_url = '/'
+    redirect_field_name = 'login'
     template_name = 'bucketlistitems.html'
 
     def get(self, request, *args, **kwargs):

@@ -113,10 +113,19 @@
   margin-left: 20px;
   margin-top: 15px;
 }
+
 .button1{
 background-color: rgba(32, 181, 216);
 } 
+
 #main_row{
   max-height: 3000px;
 }
 
+.btn-floating{
+background: rgba(0, 211, 255, 1);
+}
+[type="checkbox"]:checked+label:before{
+  border-right: 2px solid  #000000; 
+  border-bottom: 2px solid #000000; 
+}
