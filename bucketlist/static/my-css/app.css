@@ -123,7 +123,7 @@ background-color: rgba(32, 181, 216);
 }
 
 .btn-floating{
-background: rgba(0, 211, 255, 1);
+background-color: rgba(0, 211, 255, 1);
 }
 [type="checkbox"]:checked+label:before{
   border-right: 2px solid  #000000; 
