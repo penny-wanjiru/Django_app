@@ -20,7 +20,8 @@ class SignUpForm(forms.ModelForm):
 
         widgets = {
             'username': forms.TextInput(attrs={'class': 'myfieldclass'}),
-            'password': forms.PasswordInput()
+            'password': forms.PasswordInput(),
+            'password_two': forms.PasswordInput()
         }
 
     def clean(self):
