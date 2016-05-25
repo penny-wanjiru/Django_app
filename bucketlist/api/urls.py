@@ -2,6 +2,8 @@ from django.conf.urls import url
 from django.contrib import admin
 
 from .views import (
+    UserCreateAPIview,
+    UserLoginAPIview,
     BucketListAPIview,
     BucketListDetailAPIview,
     BucketListUpdateAPIview,
@@ -14,6 +16,8 @@ from .views import (
 )
 
 urlpatterns = [
+    url(r'^register/$', UserCreateAPIview.as_view()),
+    url(r'^login/$', UserLoginAPIview.as_view()),
     url(r'^bucketlist/$', BucketListAPIview.as_view()),
     url(r'^bucketlist/create/$', BucketListCreateAPIview.as_view()),
     url(r'^bucketlist/(?P<pk>\d+)/$', BucketListDetailAPIview.as_view()),
