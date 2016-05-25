@@ -9,7 +9,8 @@
     <div class="col m4 offset-m1">
        <div style="margin-top:120px;" >
           <ul class="tabs">
-            <li class="tab col s3"><a class="active"  href="#signup">Sign up</a></li>
+          
+            <li class="tab col s3"><a class="active" href="#signup">Sign up</a></li>
             <li class="tab col s3"><a href="#signin">Login in</a></li>
             
           </ul>
@@ -61,7 +62,7 @@
                       
                     </div>
                     <div class="row">
-                        <form class="col s12" method='POST' action="/login/">{% csrf_token %}
+                        <form class="col s12" method='POST' action="login/">{% csrf_token %}
                           {{ signin.non_field_errors }}
                           <div class="input-field">
                             <label for="id_subject">Username</label>
@@ -70,8 +71,7 @@
                           <div class="input-field">  
                             <label for="id_subject">Password</label>
                             {{ signin.password }}
-                          </div>  
-                         
+                          </div> 
                           <input style="height:50px; width:200px; margin-left:70px; margin-top:5px; background-color: #20B5D8; border: 0pt" type="submit" value="SIGN IN" class="button1">
                         </form>
                     </div>  

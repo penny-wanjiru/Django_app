@@ -6,9 +6,11 @@ from app.models import CustomUser, BucketList, BucketListItem
 class BucketlistViewTests(TestCase):
 
     def setUp(self):
-        self.user = CustomUser.objects.create(
+        self.user = CustomUser.objects.create_user(
             username='anotheruser',
             password='anotherpassword')
+        self.login = self.client.login(
+            username='anotheruser', password='anotherpassword')
         self.bucketlist = BucketList.objects.create(
             name='bucketlist_two', user=self.user)
         self.bucketlistitem = BucketListItem.objects.create(
@@ -19,18 +21,52 @@ class BucketlistViewTests(TestCase):
         BucketListItem.objects.all().delete()
 
     def test_index_view(self):
-        resp = self.client.post(reverse('index'), { 'username' :'anotheruser1',
-            'email':'another1@gmail.com',
-            'password':'anotherpassword1',
+        resp = self.client.post(reverse('index'), {'username': 'anotheruser1',
+            'email': 'another1@gmail.com',
+            'password': 'anotherpassword1',
             'password_two':'anotherpassword1'})
         self.assertEqual(resp.status_code, 302)
 
+    def test_index_validation(self):
+        resp = self.client.post(reverse('index'), {'username': 'anotheruser1',
+            'email': 'another1@gmail.com',
+            'password': 'anotherpassword1',
+            'password_two':'anotherpassword2'})
+        self.assertContains(resp, "Passwords do not match", status_code=200)
+
+    def test_login_view(self):
+        resp = self.client.post(reverse('login'), {
+            'username': 'anotheruser',
+            'password': 'anotherpassword'})
+        self.assertEqual(resp.status_code, 302)
+
+        # response = self.client.get('login')
+        # self.assertRedirects(response, 'bucket_add', status_code=301, target_status_code=200)
+        # self.assertRedirects(resp, expected_url=reverse('bucket_add'))
+
+    def test_auth_login_view(self):
+        resp = self.client.post(reverse('login'), {
+            'username': '',
+            'password': ''})
+        self.assertContains(resp, "All fields are required!", status_code=200)
+
+    def test_user_logout(self):
+        resp = self.client.post(reverse('logout'))
+        self.assertEqual(resp.status_code, 405)
 
     def test_bucketlist_view(self):
         resp = self.client.get(reverse('bucket_add'))
         self.assertEqual(resp.status_code, 200)
-        self.assertIn(self.bucketlist, resp.context['bucketlist'])
+        # self.assertIn(self.bucketlist, resp.context['bucketlist'])
 
     def test_bucketlist_delete(self):
-        pass
-    #   resp = self.client.post(reverse('bucketlist_delete'))   
+        resp = self.client.get(reverse('bucketlist_delete',
+                                       kwargs={'pk': self.bucketlist.id}))
+        self.assertEqual(resp.status_code, 302)
+
+    def test_bucketlist_update(self):
+        resp = self.client.post(
+            reverse('bucketlist_edit',
+                    kwargs={'pk': self.bucketlist.id}),
+            {'name': 'Skydiving'})
+        self.assertEqual(resp.status_code, 302)

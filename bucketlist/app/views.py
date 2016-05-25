@@ -1,12 +1,11 @@
 import json
-
 from django.contrib import auth
 from django.contrib.auth import(
     authenticate,
     get_user_model,
     login,
     logout,
-) 
+)
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import View, CreateView, DeleteView
@@ -24,8 +23,6 @@ from .forms import UserLoginForm, SignUpForm, BucketListForm, BucketListItemForm
 from .models import BucketList, BucketListItem
 
 
-
-
 class index_view(View):
     def get(self, request):
         form = SignUpForm(None)
@@ -36,7 +33,7 @@ class index_view(View):
     def post(self, request):
         form = SignUpForm(request.POST or None)
         if form.is_valid():
-            user = form.save()
+            form.save()
             user = authenticate(
                 username=request.POST['username'],
                 password=request.POST['password'])
@@ -48,21 +45,16 @@ class index_view(View):
 
 class login_view(View):
 
-    def get(self, request):
-        form = UserLoginForm(None)
-        context = {"form": form}
-        return render(request, 'userform.html', context)
-
     def post(self, request):
-        title = "login"
-        form = UserLoginForm(request.POST or None)
-        if form.is_valid():
-            username = form.cleaned_data.get("username")
-            password = form.cleaned_data.get("password")
+        signin = UserLoginForm(request.POST or None)
+        signup_form = SignUpForm(None)
+        if signin.is_valid():
+            username = request.POST['username']
+            password = request.POST['password']
             user = authenticate(username=username, password=password)
             login(request, user)
             return redirect("/bucketlists")
-        return render(request, "userform.html", {"form": form, "title": title})
+        return render(request, "Signup.html", {"signin": signin, "form": signup_form})
 
 
 class logout_view(TemplateView):
@@ -97,7 +89,7 @@ class BucketlistDeleteView(TemplateView):
             id=kwargs['pk'], user=self.request.user).first()
         bucketlist.delete()
         messages.success(
-            request, 'Bucketlist has been deleted successfully!')
+            request, 'Your bucketlist has been deleted!')
         return redirect('/bucketlists/',
                         context_instance=RequestContext(request))
 
@@ -113,7 +105,7 @@ class BucketlistUpdateView(TemplateView):
         bucketlist.name = request.POST.get('name')
         bucketlist.save()
         messages.success(
-            request, 'You updated successfully!')
+            request, 'Bucketlist updated successfully!')
         return HttpResponseRedirect('/bucketlists/')
 
 
@@ -189,3 +181,4 @@ class BucketlistItemUpdate(TemplateView):
         messages.success(
             request, 'You have updated successfully!')
         return redirect('/bucketlists/'+kwargs['bucketlist']+'/items/')
+
