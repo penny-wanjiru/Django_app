@@ -40,10 +40,6 @@ class BucketlistViewTests(TestCase):
             'password': 'anotherpassword'})
         self.assertEqual(resp.status_code, 302)
 
-        # response = self.client.get('login')
-        # self.assertRedirects(response, 'bucket_add', status_code=301, target_status_code=200)
-        # self.assertRedirects(resp, expected_url=reverse('bucket_add'))
-
     def test_auth_login_view(self):
         resp = self.client.post(reverse('login'), {
             'username': '',
@@ -57,6 +53,7 @@ class BucketlistViewTests(TestCase):
     def test_bucketlist_view(self):
         resp = self.client.get(reverse('bucket_add'))
         self.assertEqual(resp.status_code, 200)
+        self.assertEqual(BucketList.objects.count(), 1)
         # self.assertIn(self.bucketlist, resp.context['bucketlist'])
 
     def test_bucketlist_delete(self):
@@ -69,4 +66,29 @@ class BucketlistViewTests(TestCase):
             reverse('bucketlist_edit',
                     kwargs={'pk': self.bucketlist.id}),
             {'name': 'Skydiving'})
+        self.assertEqual(resp.status_code, 302)
+
+    def test_bucketlist_item_view(self):
+        """Test creation of a bucketlist item."""
+        resp = self.client.post(
+            reverse('bucket_items', kwargs={'pk': self.bucketlist.id}),
+            {'name': 'chill'})
+        self.assertEqual(resp.status_code, 302)
+
+    def test_item_update(self):
+        """Test updating of a bucketlist item."""
+        resp = self.client.post(
+            reverse('items_edit', kwargs={'pk': self.bucketlistitem.id,
+                                          'bucketlist': self.bucketlist.id}),
+            {'name': 'gliding'})
+        self.assertEqual(resp.status_code, 302)
+        self.assertEqual(BucketListItem.objects.get(id=self.bucketlistitem.id).name,
+            'gliding')
+
+    def test_item_delete(self):
+        """Test that a user can delete a bucektlist item."""
+        resp = self.client.get(
+            reverse('bucketlistitems_delete',
+                    kwargs={'pk': self.bucketlistitem.id,
+                            'bucketlist': self.bucketlist.id}))
         self.assertEqual(resp.status_code, 302)

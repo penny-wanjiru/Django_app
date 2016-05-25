@@ -1,5 +1,7 @@
 from .serializers import (
-    BucketlistSerializer,  
+    UserCreateSerializer,
+    UserLoginSerializer,
+    BucketlistSerializer,
     BucketlistItemSerializer,
      )
 
@@ -10,7 +12,7 @@ from rest_framework.generics import (
     DestroyAPIView,
     CreateAPIView
 )
-
+from rest_framework.views import APIView
 from rest_framework.permissions import (
     AllowAny,
     IsAuthenticated,
@@ -22,6 +24,29 @@ from rest_framework.pagination import (LimitOffsetPagination, PageNumberPaginati
 from .permissions import IsOwnerOrReadOnly
 from app.models import BucketList, BucketListItem
 from .pagination import BucketlistLimitOffsetPagination, BucketlistPageNumberPagination
+
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
+
+
+class UserCreateAPIview(CreateAPIView):
+    serializer_class = UserCreateSerializer
+    queryset = User.objects.all()
+
+
+class UserLoginAPIview(APIView):
+    permissions_classes = [AllowAny]
+    serializer_class = UserLoginSerializer
+
+    def post(self, request, *args, **kwargs):
+        data = request.data
+        serializer = UserLoginSerializer(data=data)
+        if serializer.is_valid(raise_exception=True):
+            new_data = serializer.data
+            return Response(new_data, status=HTTP_200_OK)
+        return Response(serializer.error, status=HTTP_400_BAD_REQUEST)
+
 
 
 class BucketListCreateAPIview(CreateAPIView):
