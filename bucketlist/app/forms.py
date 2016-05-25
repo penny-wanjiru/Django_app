@@ -20,6 +20,7 @@ class SignUpForm(forms.ModelForm):
 
         widgets = {
             'username': forms.TextInput(attrs={'class': 'myfieldclass'}),
+            'password': forms.PasswordInput()
         }
 
     def clean(self):
@@ -44,40 +45,17 @@ class SignUpForm(forms.ModelForm):
 
 
 class UserLoginForm(forms.ModelForm):
+
     class Meta:
         model = CustomUser
         fields = ['username', 'password']
 
     def clean(self):
-        username = self.cleaned_data['username']
-        password = self.cleaned_data['password']
-        if username and password:
-            user = CustomUser.objects.get(username=username)
-            if not user:
-                raise forms.ValidationError('This user does not exist')
-            if not user.check_password(password):
-                raise forms.ValidationError('Incorrect password')
-            if not user.is_active:
-                raise forms.ValidationError('This user is no longer active')
+        username = self.cleaned_data.get('username')
+        password = self.cleaned_data.get('password')
+        if (not password) or (not username):
+            raise forms.ValidationError("All fields are required!")
         return self.cleaned_data
-
-
-class UserRegistrationForm(forms.ModelForm):
-    
-
-    class Meta:
-        model = CustomUser
-        fields = ['username', 'email', 'password', 'password_two']
-        widgets = {
-            'password': forms.PasswordInput(),
-        }
-
-    # def clean_password(self):
-    #     password = self.cleaned_data.get('password')
-    #     password2 = self.cleaned_data.get('password2')
-    #     if password != password2:
-    #         raise forms.ValidationError("Passwords do not match")
-    #     return password
 
 
 class BucketListForm(forms.ModelForm):
