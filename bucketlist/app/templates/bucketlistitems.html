@@ -8,13 +8,13 @@
   {% endblock %}
  
 <div id="itms">
-  <div class="row" style="width:61%; padding-top:1%;">
-    <div class="right-align" style="margin-top:10px;">
+  <div class="row" id="main-div">
+    <div class="right-align">
         <a class="btn-floating btn-large waves-effect waves-light #ec407a pink lighten-1 btn modal-trigger" data-target="modal2"><i class="material-icons">add</i></a>
     </div>
   </div>
   <div class="row" id="items">
-    <div class="name col m6 offset-m3" style="margin-top:0px;">
+    <div class="name col m6 offset-m3">
       <div class="item-card">
         <div class="card-content">
             <!-- Modal Structure -->
@@ -26,8 +26,13 @@
             <!-- task-card -->
             <ul id="task-card" class="collection with-header">
               <li class="collection-header #01D1FD blue">
-                  <p class="task-card-date" style="font-family:Ubuntu; font-size:20px;">{{ bucketlist.name|upper }}</p>
+                  <p class="task-card-date">{{ bucketlist.name|upper }}</p>
               </li>
+              {% if not items %}
+                  <div class="well panel-default" id="bucketlistitem">
+                    <h3 id="item-msg"> You don't have any items yet! &#128513;</h3>
+                  </div>
+              {% endif %}
               {% for item in items %}
               <li class="collection-item dismissable">
                 {% if item.done %}
@@ -36,14 +41,14 @@
                   <input type="checkbox" id="{{item.id}}" onclick="sendCheck({{item.id}}, '1')"/>
                 {% endif %}
 
-                <label for="{{item.id}}"><a href="#" class="secondary-content"><span class="ultra-small" style="color:#000000;">{{ item.name }}</span></a>
+                <label for="{{item.id}}"><a href="#" class="secondary-content"><span class="ultra-small" id="itm-nm">{{ item.name }}</span></a>
                 </label> 
-                <div class="right" style="display:inline;">
+                <div class="right">
                   <a id="anchor" data-url="/bucketlists/{{bucketlist.pk}}/items/{{item.pk}}/delete/" >
-                    <i class="material-icons delete-item"style="font-size: 1.5rem; color:#c62828; cursor:pointer;" link="/bucketlists/{{bucketlist.pk}}/items/{{item.pk}}/delete/">delete</i>
+                    <i class="material-icons delete-item" link="/bucketlists/{{bucketlist.pk}}/items/{{item.pk}}/delete/">delete</i>
                   </a>
                   
-                  <a class="btn-item modal-trigger" data-url="/bucketlists/{{bucketlist.id}}/items/{{item.id}}/edit/" data-target="modal4"><i class=" btn-item material-icons" style="font-size: 1.5rem; color:#0091ea; cursor:pointer;">edit</i></a>
+                  <a class="btn-item modal-trigger" data-url="/bucketlists/{{bucketlist.id}}/items/{{item.id}}/edit/" data-target="modal4"><i class=" btn-item material-icons">edit</i></a>
                  </div> 
               </li>
 
