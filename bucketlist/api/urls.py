@@ -5,7 +5,6 @@ from rest_framework_jwt.views import obtain_jwt_token
 
 from .views import (
     UserCreateAPIview,
-    # UserLoginAPIview,
     BucketListAPIview,
     BucketListDetailAPIview,
     BucketListUpdateAPIview,
@@ -19,7 +18,6 @@ from .views import (
 
 urlpatterns = [
     url(r'^register/$', UserCreateAPIview.as_view(), name='reg'),
-    # url(r'^login/$', UserLoginAPIview.as_view(), name='login'),
     url(r'^bucketlist/$', BucketListAPIview.as_view(), name='bucket_view'),
     url(r'^bucketlist/create/$', BucketListCreateAPIview.as_view(), name='bucket_create'),
     url(r'^bucketlist/(?P<pk>\d+)/$', BucketListDetailAPIview.as_view(), name='bucket_detail'),

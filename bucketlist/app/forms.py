@@ -1,5 +1,5 @@
 from django import forms
-from .models import CustomUser, BucketList
+from .models import CustomUser, BucketList, BucketListItem
 from django.contrib.auth import(
     get_user_model,
     login,
@@ -8,6 +8,7 @@ from django.contrib.auth import(
 
 
 class SignUpForm(forms.ModelForm):
+    """Registration form validation for signing up a user"""
     def __init__(self, *args, **kwargs):
         super(SignUpForm, self).__init__(*args, **kwargs)
 
@@ -46,6 +47,7 @@ class SignUpForm(forms.ModelForm):
 
 
 class UserLoginForm(forms.ModelForm):
+    """Registration form validation for user login"""
 
     class Meta:
         model = CustomUser
@@ -60,9 +62,7 @@ class UserLoginForm(forms.ModelForm):
 
 
 class BucketListForm(forms.ModelForm):
-    """Form for creation of a bucketlist.
-    Extends from bucketlistmodel.
-    """
+    """Form for creation of a bucketlist"""
 
     class Meta:
         model = BucketList
@@ -70,10 +70,8 @@ class BucketListForm(forms.ModelForm):
 
 
 class BucketListItemForm(forms.ModelForm):
-    """Form for creation of a bucketlist.
-       Extends from bucketlistitem model.
-    """
+    """Form for creation of a bucketlist item."""
 
     class Meta:
-        model = BucketList
+        model = BucketListItem
         fields = ['name']            
