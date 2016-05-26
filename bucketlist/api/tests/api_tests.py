@@ -6,9 +6,7 @@ from django.test import Client
 
 
 class UserAPITestCase(APITestCase):
-    """Tests for API authorizaion."""
-
-    # fixtures = ['initial_data.json']
+    """Tests for user api authorizaion."""
 
     def setUp(self):
         self.client = Client()
@@ -29,25 +27,23 @@ class UserAPITestCase(APITestCase):
 class BucketlistAPITestCase(APITestCase):
     """Test buckelist methods"""
 
-    # fixtures = ['initial_data.json']
-
     def setUp(self):
         token_url = reverse('login')
         data = {
-            'username': 'joan', 'password': 'ASHLEY19'}
+            'username': 'penny', 'password': 'password'}
         self.response = self.client.post(token_url, data)
         self.token = self.response.data.get('token')
 
     def test_bucketlist_creation(self):
+        """Tests that user can create bucketlists"""
         # Issue a POST request.
         resp = self.client.post('/api/bucketlist/create', {'name':'bucketlist'})
         self.assertEqual(resp.status_code, 301)
 
     def test_bucketlist_details(self):
+        """Test that it return bucketlists"""
         # Issue a GET request.
         response = self.client.get('/api/bucketlist/')
-
-        # Check that the response is 200 OK.
         self.assertEqual(response.status_code, 401)
 
     def test_bucketlist_edit(self):
@@ -73,7 +69,7 @@ class BucketlistItemAPITestCase(APITestCase):
     def setUp(self):
         token_url = reverse('login')
         data = {
-            'username': 'joan', 'password': 'ASHLEY19'}
+            'username': 'penny', 'password': 'password'}
         self.response = self.client.post(token_url, data)
         self.token = self.response.data.get('token')
 
@@ -91,6 +87,7 @@ class BucketlistItemAPITestCase(APITestCase):
         self.assertEqual(response.status_code, 401)
 
     def test_deleting_bucketlist_item(self):
+        """Test that item can be deleted"""
         delete_resp = self.client.delete('/api/bucketlist/1/items/1')
 
         self.assertEqual(delete_resp.status_code, 401)

@@ -19,16 +19,19 @@ class BucketlistModelTests(TestCase):
         BucketListItem.objects.all().delete()
 
     def test_user_registration(self):
+        """Tests that a user can create an account"""
         self.assertEqual(self.user.get_username(), 'pennyuser')
         self.assertIsInstance(self.user, CustomUser)
 
     def test_bucketlist_creation(self):
+        """Tests that a user can create a bucketlist"""
         self.assertTrue(BucketList.objects.all())
         self.assertIn('bucketlist_one',
                       BucketList.objects.get(name='bucketlist_one').name)
         self.assertIsInstance(self.bucketlist, BucketList)
 
     def test_bucketlistitem_creation(self):
+        """Tests that a user can create an item"""
         self.assertTrue(BucketListItem.objects.all())
         self.assertIn('bucketlstitem_one',
                       BucketListItem.objects.get(name='bucketlstitem_one').name)
