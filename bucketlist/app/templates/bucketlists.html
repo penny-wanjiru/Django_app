@@ -9,13 +9,12 @@
     <div id="main">
         <div class="row" ng-controller="mainCtrl">
             <div class="s10 offset-s1 col">
-                <h2 style="font-family: Ubuntu; font-size: 32px;">Bucketlists</h2>
-                <!-- <h4 style="font-family: Bakery; font-size: 20px;">Do something cool today</h4>  -->
+                <h2 id="bckt-head">Bucketlists</h2>
             {% include "includes/flash-messages.html" %}
             <div class="row">
                 {% if not object_list %}
                   <div class="well panel-default" id="bucketlist">
-                    <h3 style="font-size:25px;"> You don't have any bucketlists yet! &#128513;</h3>
+                    <h3 id="bucket-msg"> You don't have any bucketlists yet! &#128513;</h3>
                   </div>
                 {% endif %}
                 {% for bucketlist in object_list %}
@@ -26,8 +25,8 @@
                         <div class="card-content center-align">
                             <div class="card-title truncate"><!-- {{u.user.username}} --></div>
                             <!-- <img class="circle" src="{{u.user.picture.medium}}"> -->
-                            <a href="{% url 'bucket_items' pk=bucketlist.pk %}"<i class="blue-text text-darken-4 font-family:Ubuntu;"style="font-size:25px; font-family:Ubuntu;">{{ bucketlist.name|upper }}</i></a>
-                            <em><p class="blue-text text-darken-4 " style="font-size:12px;"> Last updated:{{ bucketlist.date_updated}}</p></em>
+                            <a href="{% url 'bucketlist_items' pk=bucketlist.pk %}"<i class="blue-text text-darken-4 font-family:Ubuntu;" id="bucket-name">{{ bucketlist.name|upper }}</i></a>
+                            <em><p class="blue-text text-darken-4 " id="date"> Last updated:{{ bucketlist.date_updated}}</p></em>
 
                             <br>
                             <div class="row">
@@ -42,7 +41,7 @@
                         <div class="card-action center-align truncate">
                             <a href="#" class="blue-text text-darken-4"><!-- {{u.user.location.city}}, {{u.user.location.state}} --></a>
                         </div>
-                        <div class="fixed-action-btn horizontal click-to-toggle" style="bottom: 45px; right: 24px;">
+                        <div class="fixed-action-btn horizontal hover-to-toggle" >
                             <a class="menu btn-floating btn-large">
                               <i class="material-icons">menu</i>
                             </a>

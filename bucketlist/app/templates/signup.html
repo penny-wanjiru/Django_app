@@ -3,11 +3,11 @@
 {% block content %}
 
 <div class="row" id="main_row">
-    <div class="col m4" style="diplay:inline; margin-top:240px; margin-left:200px;">
-      <img src="/static/img/adventure.png" style="width:350px;height:200px;">
+    <div class="col m4" id="div-bcgrnd">
+      <img id="adventure-img" src="/static/img/adventure.png">
     </div>
     <div class="col m4 offset-m1">
-       <div style="margin-top:120px;" >
+       <div id="sign-tab" >
           <ul class="tabs">
           
             <li class="tab col s3"><a class="active" href="#signup">Sign up</a></li>
@@ -44,7 +44,7 @@
                               <label for="id_subject">Confirm password</label>
                               {{ form.password_two }}
                           </div>
-                              <input style="height:50px;width:200px; margin-left:70px; background-color: #20B5D8; border: 0pt" type="submit" value="SIGN UP" id="signup_btn" class="button1">
+                              <input type="submit" value="SIGN UP" id="signup_btn" class="button1">
                         </form>
                     </div>  
             </div> 
@@ -72,7 +72,7 @@
                             <label for="id_subject">Password</label>
                             {{ signin.password }}
                           </div> 
-                          <input style="height:50px; width:200px; margin-left:70px; margin-top:5px; background-color: #20B5D8; border: 0pt" type="submit" value="SIGN IN" class="button1">
+                          <input type="submit" value="SIGN IN" id="signin-btn" class="button1">
                         </form>
                     </div>  
             </div> 
