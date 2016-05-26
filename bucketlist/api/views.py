@@ -12,7 +12,6 @@ from rest_framework.generics import (
     DestroyAPIView,
     CreateAPIView
 )
-from rest_framework.views import APIView
 from rest_framework.permissions import (
     AllowAny,
     IsAuthenticated,
@@ -21,40 +20,23 @@ from rest_framework.permissions import (
 )
 from rest_framework import authentication
 from django.db.models import Q
-from rest_framework.response import Response
-from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
-from rest_framework.pagination import (LimitOffsetPagination, PageNumberPagination)
 from .permissions import IsOwnerOrReadOnly
 from app.models import BucketList, BucketListItem
 from .pagination import BucketlistLimitOffsetPagination, BucketlistPageNumberPagination
-
-from rest_framework.authtoken.models import Token
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
 
 class UserCreateAPIview(CreateAPIView):
+    """Handle the URL to  create user."""
     serializer_class = UserCreateSerializer
     queryset = User.objects.all()
 
 
-# class UserLoginAPIview(APIView):
-#     permissions_classes = [AllowAny]
-#     serializer_class = UserLoginSerializer
-
-#     def post(self, request, *args, **kwargs):
-#         data = request.data
-#         serializer = UserLoginSerializer(data=data)
-
-#         if serializer.is_valid(raise_exception=True):
-#             new_data = serializer.data
-#             return Response(new_data, status=HTTP_200_OK)
-#         return Response(serializer.error, status=HTTP_400_BAD_REQUEST)
-
-
-
 class BucketListCreateAPIview(CreateAPIView):
+    """Handle the URL to create bucketlists"""
+
     queryset = BucketList.objects.all()
     serializer_class = BucketlistSerializer
     authentication_classes = (
@@ -69,6 +51,7 @@ class BucketListCreateAPIview(CreateAPIView):
 
 
 class BucketListAPIview(ListAPIView):
+    """Handle the URL to query bucketlists"""
     serializer_class = BucketlistSerializer
     pagination_class = BucketlistPageNumberPagination
     authentication_classes = (
@@ -88,6 +71,7 @@ class BucketListAPIview(ListAPIView):
 
 
 class BucketListDetailAPIview(RetrieveAPIView):
+    """Handle the URL to list all bucketlists"""
     queryset = BucketList.objects.all()
     serializer_class = BucketlistSerializer
     authentication_classes = (
@@ -98,6 +82,7 @@ class BucketListDetailAPIview(RetrieveAPIView):
 
 
 class BucketListUpdateAPIview(UpdateAPIView):
+    """Handle the URL to update bucketlists"""
     queryset = BucketList.objects.all()
     serializer_class = BucketlistSerializer
     authentication_classes = (
@@ -111,6 +96,7 @@ class BucketListUpdateAPIview(UpdateAPIView):
 
 
 class BucketListDeleteAPIview(DestroyAPIView):
+    """Handle the URL to delete a bucketlists"""
     queryset = BucketList.objects.all()
     serializer_class = BucketlistSerializer
     authentication_classes = (
@@ -121,6 +107,7 @@ class BucketListDeleteAPIview(DestroyAPIView):
 
 
 class BucketlistItemAPIview(CreateAPIView):
+    """Handle the URL to create a bucketlist item"""
     serializer_class = BucketlistItemSerializer
     search_fields = ('name', )
     authentication_classes = (
@@ -135,6 +122,7 @@ class BucketlistItemAPIview(CreateAPIView):
 
 
 class BucketlistDetailItemAPIview(RetrieveAPIView):
+    """Handle the URL to list bucketlist items"""
     serializer_class = BucketlistItemSerializer
     authentication_classes = (
         authentication.BasicAuthentication,
@@ -148,6 +136,7 @@ class BucketlistDetailItemAPIview(RetrieveAPIView):
 
 
 class BucketlistItemUpdateAPIview(UpdateAPIView):
+    """Handle the URL to update bucketlist items"""
     serializer_class = BucketlistItemSerializer
     authentication_classes = (
         authentication.BasicAuthentication,
@@ -164,6 +153,7 @@ class BucketlistItemUpdateAPIview(UpdateAPIView):
 
 
 class BucketlistDeleteItemAPIview(DestroyAPIView):
+    """Handle the URL to delete bucketlist items"""
     serializer_class = BucketlistItemSerializer
     authentication_classes = (
         authentication.BasicAuthentication,

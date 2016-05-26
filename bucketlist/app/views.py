@@ -24,6 +24,9 @@ from .models import BucketList, BucketListItem
 
 
 class index_view(View):
+    """Handles the signing in of a user
+       methods:"GET","POST" 
+    """
     def get(self, request):
         form = SignUpForm(None)
         signin = UserLoginForm(None)
@@ -44,6 +47,9 @@ class index_view(View):
 
 
 class login_view(View):
+    """Handles the login of a user
+       methods:"POST" 
+    """
 
     def post(self, request):
         signin = UserLoginForm(request.POST or None)
@@ -58,6 +64,7 @@ class login_view(View):
 
 
 class logout_view(TemplateView):
+    """Handles logout of a user """
 
     def get(self, request):
         logout(request)
@@ -65,6 +72,7 @@ class logout_view(TemplateView):
 
 
 class BucketlistView(LoginRequiredMixin, generic.CreateView, generic.ListView):
+    """View to create and return list of bucketlist"""
     login_url = '/'
     redirect_field_name = 'login'
     template_name = 'bucketlists.html'
@@ -82,6 +90,7 @@ class BucketlistView(LoginRequiredMixin, generic.CreateView, generic.ListView):
 
 
 class BucketlistDeleteView(TemplateView):
+    """View that handles deleting of a bucketlist"""
 
     def get(self, request, **kwargs):
         """Retrieve bucketlist id from request body and delete it."""
@@ -95,6 +104,7 @@ class BucketlistDeleteView(TemplateView):
 
 
 class BucketlistUpdateView(TemplateView):
+    """View that handles updating of a bucketlist"""
     template_name = 'bucketlists.html'
 
     @csrf_exempt
@@ -110,6 +120,7 @@ class BucketlistUpdateView(TemplateView):
 
 
 class BucketlistItemsView(LoginRequiredMixin, View):
+    """View to create and return list of bucketlist items"""
     login_url = '/'
     redirect_field_name = 'login'
     template_name = 'bucketlistitems.html'
@@ -156,9 +167,9 @@ class BucketlistItemStatus(generic.TemplateView):
 
 
 class BucketlistItemDelete(TemplateView):
+    """View that handles deleting an item"""
 
     def get(self, request, **kwargs):
-        """Retrieve bucketlist id from request body and delete it."""
         bucketlist = kwargs['bucketlist']
         bucketlistitem = BucketListItem.objects.filter(
             id=kwargs['pk'], bucketlist_id=bucketlist).first()
@@ -170,7 +181,7 @@ class BucketlistItemDelete(TemplateView):
 
 
 class BucketlistItemUpdate(TemplateView):
-
+    """View that handles deleting an item"""
     @csrf_exempt
     def post(self, request, **kwargs):
         bucketlist = kwargs['bucketlist']

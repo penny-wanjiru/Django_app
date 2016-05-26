@@ -8,6 +8,8 @@ User = get_user_model()
 
 
 class UserCreateSerializer(ModelSerializer):
+    """Define user serializer fields."""
+
     class Meta:
         model = User
         fields = ['username', 'password', 'email']
@@ -34,38 +36,6 @@ class UserCreateSerializer(ModelSerializer):
         return validated_data
 
 
-# class UserLoginSerializer(ModelSerializer):
-#     # token = CharField(allow_blank=True, read_only=True)
-#     username = CharField(required=False, allow_blank=True)
-#     # email = EmailField(required=False, allow_blank=True)
-
-#     class Meta:
-#         model = User
-#         fields = ['username', 'password']
-
-#         extra_kwargs = {"password": {"write_only": True}}
-
-#     def validate(self, data):
-#         user_obj = None
-#         username = data.get('username', None)
-#         password = data["password"]
-#         if not username:
-#             raise ValidationError("You must provide username")
-#         user = User.objects.filter(
-#                Q(username=username)
-#             ).distinct()
-#         if user.exists() and user.count() == 1:
-#             user_obj = user.first()
-#         else:
-#             raise ValidationError("This username/email is not valid")
-#         if user_obj:
-#             if not user_obj.check_password(password):
-#                 raise ValidationError("Incorrect credentials please try again")
-#         # data["token"] = "SOMERANDOMTOKEN"
-#         return data
-
-
-
 class BucketlistItemSerializer(ModelSerializer):
     """Define bucketlistitems serializer fields."""
 
@@ -76,6 +46,7 @@ class BucketlistItemSerializer(ModelSerializer):
         read_only_fields = ('id', 'date_created', 'date_updated')
 
 class BucketlistSerializer(ModelSerializer):
+    """Define bucketlist serializer fields."""
     items = BucketlistItemSerializer(many=True, read_only=True)
 
     class Meta:
@@ -83,18 +54,5 @@ class BucketlistSerializer(ModelSerializer):
         fields = ['id', 'user', 'name', 'items', 'date_created', 'date_updated']
         read_only_fields = ('id', 'user', 'date_created', 'date_updated', 'items')
 
-
-# class BucketlistDetailSerializer(ModelSerializer):
-#     items = BucketlistItemSerializer(many=True, read_only=True)
-
-#     class Meta:
-#         model = BucketList
-#         fields = ['id', 'user', 'name', 'items', 'date_created', 'date_updated']
-
-
-# class BucketlistCreateUpdateSerializer(ModelSerializer):
-#     class Meta:
-#         model = BucketList
-#         fields = ['name']
 
 

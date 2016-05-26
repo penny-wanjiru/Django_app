@@ -6,19 +6,12 @@ from django.db import models
 
 
 class CustomUser(AbstractUser):
+    """Django's custom user model with custom field"""
     password_two = models.CharField(max_length=255)
-
-# class SignUp(models.Model):
-#     username = models.CharField(max_length=255)
-#     email = models.EmailField()
-#     password = models.CharField(max_length=255)
-#     password_two = models.CharField(max_length=255, default='password')
-
-#     def __unicode__(self):
-#         return u'%s' % self.email
 
 
 class BucketList(models.Model):
+    """Model for bucketlists"""
     name = models.CharField(unique=True, max_length=255,
                             default="BucketList")
     date_created = models.DateField(auto_now_add=True, editable=False)
@@ -30,6 +23,7 @@ class BucketList(models.Model):
 
 
 class BucketListItem(models.Model):
+    """Model for bucketlistitems"""
     name = models.CharField(unique=True, max_length=255,
                             default="BucketlistItem")
     date_updated = models.DateField(auto_now=True)
