@@ -21,6 +21,7 @@ class BucketlistViewTests(TestCase):
         BucketListItem.objects.all().delete()
 
     def test_index_view(self):
+        """Tests that user can register"""
         resp = self.client.post(reverse('index'), {'username': 'anotheruser1',
             'email': 'another1@gmail.com',
             'password': 'anotherpassword1',
@@ -28,6 +29,7 @@ class BucketlistViewTests(TestCase):
         self.assertEqual(resp.status_code, 302)
 
     def test_index_validation(self):
+        """Tests that a user has to fill in correct confirm password"""
         resp = self.client.post(reverse('index'), {'username': 'anotheruser1',
             'email': 'another1@gmail.com',
             'password': 'anotherpassword1',
@@ -36,12 +38,14 @@ class BucketlistViewTests(TestCase):
         self.assertContains(resp, "Passwords do not match", status_code=200)
 
     def test_login_view(self):
+        """Tests that a user can login"""
         resp = self.client.post(reverse('login'),
                                 {'username': 'anotheruser',
                                  'password': 'anotherpassword'})
         self.assertEqual(resp.status_code, 200)
 
     def test_auth_login_view(self):
+        """Tests that a user cannot submit empty fields"""
         resp = self.client.post(reverse('login'), {
             'username': '',
             'password': ''})
@@ -49,33 +53,31 @@ class BucketlistViewTests(TestCase):
         # self.assertContains(resp, "All fields are required!", status_code=400)
 
     def test_user_logout(self):
+        """Tests that a user can logout"""
         resp = self.client.post(reverse('logout'))
         self.assertEqual(resp.status_code, 405)
 
     def test_bucketlist_view(self):
+        """Tests creation of a bucketlist"""
         resp = self.client.get(reverse('bucket_add'))
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(BucketList.objects.count(), 1)
-        # self.assertIn(self.bucketlist, resp.context['bucketlist'])
+
 
     def test_bucketlist_delete(self):
+        """Tests deletion of a bucketlist"""
         resp = self.client.get(reverse('bucketlist_delete',
                                        kwargs={'pk': self.bucketlist.id}))
         self.assertEqual(resp.status_code, 302)
 
     def test_bucketlist_update(self):
+        """Tests updating of a bucketlist"""
         resp = self.client.post(
             reverse('bucketlist_edit',
                     kwargs={'pk': self.bucketlist.id}),
             {'name': 'Skydiving'})
         self.assertEqual(resp.status_code, 302)
 
-    # def test_bucketlist_item_view(self):
-    #     """Test creation of a bucketlist item."""
-    #     resp = self.client.post(
-    #         reverse('bucket_items', kwargs={'pk': self.bucketlist.id}),
-    #         {'name': 'chill'})
-    #     self.assertEqual(resp.status_code, 302)
 
     def test_item_update(self):
         """Test updating of a bucketlist item."""
@@ -88,7 +90,7 @@ class BucketlistViewTests(TestCase):
             'gliding')
 
     def test_item_delete(self):
-        """Test that a user can delete a bucektlist item."""
+        """Test deletion of a bucketlist item."""
         resp = self.client.get(
             reverse('bucketlistitems_delete',
                     kwargs={'pk': self.bucketlistitem.id,
