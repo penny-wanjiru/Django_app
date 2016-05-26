@@ -1,4 +1,4 @@
-from django.conf.urls import url, include
+from django.conf.urls import url
 from app.views import (login_view,
                        logout_view, index_view, BucketlistView,
                        BucketlistItemsView, BucketlistItemStatus,
@@ -37,5 +37,5 @@ urlpatterns = [
         BucketlistItemStatus.as_view(),
         name="bucketlistitems_status"),
 
-    url(r'^api/', include('api.urls')),
+
 ]

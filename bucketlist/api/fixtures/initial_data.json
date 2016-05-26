@@ -1,21 +1,20 @@
-[
+[   
     {
         "fields":{
-            "username": "brien",
-            "password": "pbkdf2_sha256$24000$r9dIwS51Ffr7$Ncru9BFrMwVKQqwyIrIFBT/A4CqFvnWPXHFHowThCcQ=",
+            "username": "penny",
+            "password": "pbkdf2_sha256$24000$58nDTcNlDzua$6sN4qxtXz7tS4voVXh9mFyd+vU2e6v9vmns5c8KZqVc=",
             "is_active": true,
-            "date_created": "2016-03-10 22:33:17.697483+03" ,
-            "date_updated": "2016-03-10 22:33:17.697483+03"
+            "is_superuser": true
             },
-        "model": "BucketList.CustomUser",
+        "model": "app.CustomUser",
         "pk": 1
-    },
+    }, 
     {
         "fields":{
             "name": "kamikaze",
             "user": 1,
-            "date_created": "2016-03-17T08:01:50.039089Z",
-            "date_updated": "2016-03-17T08:01:50.039118Z"
+            "date_created": "2016-02-2",
+            "date_updated": "2016-02-3"
             },
         "model": "app.BucketList",
         "pk": 1
@@ -24,8 +23,8 @@
         "fields":{
             "name": "just",
             "user": 1,
-            "date_created": "2016-03-17T08:01:50.039089Z",
-            "date_updated": "2016-03-17T08:01:50.039118Z"
+            "date_created": "2016-02-2",
+            "date_updated": "2016-02-3"
             },
         "model": "app.BucketList",
         "pk": 2
@@ -33,9 +32,9 @@
     {
         "fields":{
             "name": "explode",
-            "creator": 1,
-            "date_created": "2016-03-17T08:01:50.039089Z",
-            "date_updated": "2016-03-17T08:01:50.039118Z"
+            "user": 1,
+            "date_created": "2016-02-2",
+            "date_updated": "2016-02-3"
             },
         "model": "app.BucketList",
         "pk": 3
@@ -45,8 +44,8 @@
             "name": "tonight",
             "done": false,
             "bucketlist": 1,
-            "date_created": "2016-03-17T08:03:00.660591Z",
-            "date_updated": "2016-03-17T08:03:00.660614Z"
+            "date_created": "2016-02-3",
+            "date_updated": "2016-02-4"
             },
         "model": "app.BucketListItem",
         "pk": 1
@@ -56,8 +55,8 @@
             "name": "shoki",
             "done": false,
             "bucketlist": 2,
-            "date_created": "2016-03-17T08:03:00.660591Z",
-            "date_updated": "2016-03-17T08:03:00.660614Z"
+            "date_created": "2016-02-3",
+            "date_updated": "2016-02-4"
             },
         "model": "app.BucketListItem",
         "pk": 2
@@ -67,8 +66,8 @@
             "name": "yaaas",
             "done": false,
             "bucketlist": 2,
-            "date_created": "2016-03-17T08:03:00.660591Z",
-            "date_updated": "2016-03-17T08:03:00.660614Z"
+            "date_created": "2016-02-3",
+            "date_updated": "2016-02-4"
             },
         "model": "app.BucketListItem",
         "pk": 3
@@ -78,8 +77,8 @@
             "name": "years",
             "done": false,
             "bucketlist": 3,
-            "date_created": "2016-03-17T08:03:00.660591Z",
-            "date_updated": "2016-03-17T08:03:00.660614Z"
+            "date_created": "2016-02-3",
+            "date_updated": "2016-02-4"
             },
         "model": "app.BucketListItem",
         "pk": 4
