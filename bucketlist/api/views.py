@@ -1,6 +1,6 @@
 from .serializers import (
     UserCreateSerializer,
-    UserLoginSerializer,
+    # UserLoginSerializer,
     BucketlistSerializer,
     BucketlistItemSerializer,
      )
@@ -19,12 +19,16 @@ from rest_framework.permissions import (
     IsAdminUser,
     IsAuthenticatedOrReadOnly,
 )
+from rest_framework import authentication
 from django.db.models import Q
+from rest_framework.response import Response
+from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 from rest_framework.pagination import (LimitOffsetPagination, PageNumberPagination)
 from .permissions import IsOwnerOrReadOnly
 from app.models import BucketList, BucketListItem
 from .pagination import BucketlistLimitOffsetPagination, BucketlistPageNumberPagination
 
+from rest_framework.authtoken.models import Token
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
@@ -35,23 +39,29 @@ class UserCreateAPIview(CreateAPIView):
     queryset = User.objects.all()
 
 
-class UserLoginAPIview(APIView):
-    permissions_classes = [AllowAny]
-    serializer_class = UserLoginSerializer
+# class UserLoginAPIview(APIView):
+#     permissions_classes = [AllowAny]
+#     serializer_class = UserLoginSerializer
 
-    def post(self, request, *args, **kwargs):
-        data = request.data
-        serializer = UserLoginSerializer(data=data)
-        if serializer.is_valid(raise_exception=True):
-            new_data = serializer.data
-            return Response(new_data, status=HTTP_200_OK)
-        return Response(serializer.error, status=HTTP_400_BAD_REQUEST)
+#     def post(self, request, *args, **kwargs):
+#         data = request.data
+#         serializer = UserLoginSerializer(data=data)
+
+#         if serializer.is_valid(raise_exception=True):
+#             new_data = serializer.data
+#             return Response(new_data, status=HTTP_200_OK)
+#         return Response(serializer.error, status=HTTP_400_BAD_REQUEST)
 
 
 
 class BucketListCreateAPIview(CreateAPIView):
     queryset = BucketList.objects.all()
     serializer_class = BucketlistSerializer
+    authentication_classes = (
+        authentication.BasicAuthentication,
+        authentication.TokenAuthentication,
+    )
+
     permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
@@ -61,9 +71,14 @@ class BucketListCreateAPIview(CreateAPIView):
 class BucketListAPIview(ListAPIView):
     serializer_class = BucketlistSerializer
     pagination_class = BucketlistPageNumberPagination
+    authentication_classes = (
+        authentication.BasicAuthentication,
+        authentication.TokenAuthentication,
+    )
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self, *args, **kwargs):
-        queryset_list = BucketList.objects.all()
+        queryset_list = BucketList.objects.filter(user=self.request.user)
         query = self.request.GET.get('q')
         if query:
             queryset_list = queryset_list.filter(
@@ -75,11 +90,20 @@ class BucketListAPIview(ListAPIView):
 class BucketListDetailAPIview(RetrieveAPIView):
     queryset = BucketList.objects.all()
     serializer_class = BucketlistSerializer
+    authentication_classes = (
+        authentication.BasicAuthentication,
+        authentication.TokenAuthentication,
+    )
+    permission_classes = [IsAuthenticated]
 
 
 class BucketListUpdateAPIview(UpdateAPIView):
     queryset = BucketList.objects.all()
     serializer_class = BucketlistSerializer
+    authentication_classes = (
+        authentication.BasicAuthentication,
+        authentication.TokenAuthentication,
+    )
     permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
 
     def perform_update(self, serializer):
@@ -89,11 +113,47 @@ class BucketListUpdateAPIview(UpdateAPIView):
 class BucketListDeleteAPIview(DestroyAPIView):
     queryset = BucketList.objects.all()
     serializer_class = BucketlistSerializer
+    authentication_classes = (
+        authentication.BasicAuthentication,
+        authentication.TokenAuthentication,
+    )
     permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+
+
+class BucketlistItemAPIview(CreateAPIView):
+    serializer_class = BucketlistItemSerializer
+    search_fields = ('name', )
+    authentication_classes = (
+        authentication.BasicAuthentication,
+        authentication.TokenAuthentication,
+    )
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        list_id = self.kwargs['pk']
+        return BucketListItem.objects.filter(bucketlist=list_id)
+
+
+class BucketlistDetailItemAPIview(RetrieveAPIView):
+    serializer_class = BucketlistItemSerializer
+    authentication_classes = (
+        authentication.BasicAuthentication,
+        authentication.TokenAuthentication,
+    )
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        list_id = self.kwargs['pk']
+        return BucketListItem.objects.filter(bucketlist=list_id)
 
 
 class BucketlistItemUpdateAPIview(UpdateAPIView):
     serializer_class = BucketlistItemSerializer
+    authentication_classes = (
+        authentication.BasicAuthentication,
+        authentication.TokenAuthentication,
+    )
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         list_id = self.kwargs['list_id']
@@ -103,25 +163,12 @@ class BucketlistItemUpdateAPIview(UpdateAPIView):
         return bucketlistitem
 
 
-class BucketlistItemAPIview(CreateAPIView):
-    serializer_class = BucketlistItemSerializer
-    search_fields = ('name', )
-
-    def get_queryset(self):
-        list_id = self.kwargs['pk']
-        return BucketListItem.objects.filter(bucketlist=list_id)
-
-
-class BucketlistDetailItemAPIview(RetrieveAPIView):
-    serializer_class = BucketlistItemSerializer
-
-    def get_queryset(self):
-        list_id = self.kwargs['pk']
-        return BucketListItem.objects.filter(bucketlist=list_id)
-
-
 class BucketlistDeleteItemAPIview(DestroyAPIView):
     serializer_class = BucketlistItemSerializer
+    authentication_classes = (
+        authentication.BasicAuthentication,
+        authentication.TokenAuthentication,
+    )
     permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
 
     def delete_queryset(self):

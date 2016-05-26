@@ -18,7 +18,7 @@ class UserCreateSerializer(ModelSerializer):
         email = data['email']
         user_qs = User.objects.filter(email=email)
         if user_qs.exists():
-            raise ValidationError("This user already exists")
+            raise ValidationError("This email already exists")
         return data
 
     def create(self, validated_data):
@@ -34,35 +34,35 @@ class UserCreateSerializer(ModelSerializer):
         return validated_data
 
 
-class UserLoginSerializer(ModelSerializer):
-    token = CharField(allow_blank=True, read_only=True)
+# class UserLoginSerializer(ModelSerializer):
+#     # token = CharField(allow_blank=True, read_only=True)
+#     username = CharField(required=False, allow_blank=True)
+#     # email = EmailField(required=False, allow_blank=True)
 
-    class Meta:
-        model = User
-        fields = ['username', 'password', 'email', 'token']
+#     class Meta:
+#         model = User
+#         fields = ['username', 'password']
 
-        extra_kwargs = {"password": {"write_only": True}}
+#         extra_kwargs = {"password": {"write_only": True}}
 
-    def validate(self, data):
-        user_obj = None
-        username = data.get('username', None)
-        email = data.get('email', None)
-        password = data["password"]
-        if not email and not username:
-            raise ValidationError("You must provide username and email")
-        user = User.objects.filter(
-               Q(email=email)|
-               Q(username=username)
-            ).distinct()
-        if user.exists() and user.count() == 1:
-            user_obj = user.first()
-        else:
-            raise ValidationError("This username/email is not valid")
-        if user_obj:
-            if not user_obj.check_password(password):
-                raise ValidationError("Incorrect credentials please try again")
-        data["token"] = "SOME TOKEN"
-        return data
+#     def validate(self, data):
+#         user_obj = None
+#         username = data.get('username', None)
+#         password = data["password"]
+#         if not username:
+#             raise ValidationError("You must provide username")
+#         user = User.objects.filter(
+#                Q(username=username)
+#             ).distinct()
+#         if user.exists() and user.count() == 1:
+#             user_obj = user.first()
+#         else:
+#             raise ValidationError("This username/email is not valid")
+#         if user_obj:
+#             if not user_obj.check_password(password):
+#                 raise ValidationError("Incorrect credentials please try again")
+#         # data["token"] = "SOMERANDOMTOKEN"
+#         return data
 
 
 
