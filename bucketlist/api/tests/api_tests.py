@@ -28,7 +28,7 @@ class BucketlistAPITestCase(APITestCase):
     """Test buckelist methods"""
 
     def setUp(self):
-        token_url = reverse('login')
+        token_url = reverse('logins')
         data = {
             'username': 'penny', 'password': 'password'}
         self.response = self.client.post(token_url, data)
@@ -67,7 +67,7 @@ class BucketlistItemAPITestCase(APITestCase):
     fixtures = ['initial_data.json']
 
     def setUp(self):
-        token_url = reverse('login')
+        token_url = reverse('logins')
         data = {
             'username': 'penny', 'password': 'password'}
         self.response = self.client.post(token_url, data)
