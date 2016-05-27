@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'rest_framework_docs',
     'app',
     'api',
+    'django_nose',
 ]
 
 # Use nose to run all tests
