@@ -37,5 +37,4 @@ urlpatterns = [
         BucketlistItemStatus.as_view(),
         name="bucketlistitems_status"),
 
-
 ]

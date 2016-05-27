@@ -29,5 +29,5 @@ urlpatterns = [
     url(r'^bucketlist/(?P<pk>\d+)/items/(?P<list_id>\d+)$', BucketlistDetailItemAPIview.as_view()
         , name='item_detail'),
     url(r'^bucketlist/(?P<pk>\d+)/update/(?P<list_id>\d+)$', BucketlistItemUpdateAPIview.as_view(), name='item_update'),
-    url(r'^auth/login/$', 'rest_framework_jwt.views.obtain_jwt_token', name='login'),
+    url(r'^auth/login/$', 'rest_framework_jwt.views.obtain_jwt_token', name='logins'),
 ]
