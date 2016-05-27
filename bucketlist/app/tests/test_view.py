@@ -42,14 +42,14 @@ class BucketlistViewTests(TestCase):
         resp = self.client.post(reverse('login'),
                                 {'username': 'anotheruser',
                                  'password': 'anotherpassword'})
-        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.status_code, 302)
 
     def test_auth_login_view(self):
         """Tests that a user cannot submit empty fields"""
         resp = self.client.post(reverse('login'), {
             'username': '',
             'password': ''})
-        self.assertEqual(resp.status_code, 400)
+        self.assertEqual(resp.status_code, 200)
         # self.assertContains(resp, "All fields are required!", status_code=400)
 
     def test_user_logout(self):
