@@ -43,7 +43,7 @@ class index_view(View):
             login(request, user)
             return redirect("/bucketlists")
         context = {"form": form}
-        return render(request, 'Signup.html', context)
+        return render(request, 'signup.html', context)
 
 
 class login_view(View):
