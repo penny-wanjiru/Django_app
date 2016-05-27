@@ -20,5 +20,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('app.urls')),
     url(r'^api/', include('api.urls')),
-    # url(r'^api/users/', include('app.api.urls')),
+    url(r'^docs/', include('rest_framework_docs.urls')),
 ]
