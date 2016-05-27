@@ -1,6 +1,8 @@
 language: python
 python:
   - "2.7"
+environment:
+    DJANGO_SETTINGS_MODULE: bucketlist.settings.test  
 install:
   - pip install -r requirements.txt
   - pip install coveralls
@@ -16,7 +18,7 @@ before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
 
 script:
-  - coverage run manage.py test
+   - python bucketlist/manage.py test bucketlist/api/ bucketlist/app --noinput --settings=bucketlist.test_settings
 branches:
   only:
   - develop
