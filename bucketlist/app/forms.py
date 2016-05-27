@@ -53,6 +53,10 @@ class UserLoginForm(forms.ModelForm):
         model = CustomUser
         fields = ['username', 'password']
 
+        widgets = {
+            'password': forms.PasswordInput(),
+        }
+
     def clean(self):
         username = self.cleaned_data.get('username')
         password = self.cleaned_data.get('password')
