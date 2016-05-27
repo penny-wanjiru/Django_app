@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/andela-pwanjiru/Django_app.svg?branch=develop)](https://travis-ci.org/andela-pwanjiru/Django_app)
+[![Coverage Status](https://coveralls.io/repos/github/andela-pwanjiru/Django_app/badge.svg?branch=develop)](https://coveralls.io/github/andela-pwanjiru/Django_app?branch=develop)
+
 # Django bucketlist app
   This bucketlist app consists of an Rest API and a frontend built with django templates. 
 
