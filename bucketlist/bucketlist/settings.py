@@ -44,16 +44,9 @@ INSTALLED_APPS = [
     'rest_framework_docs',
     'app',
     'api',
-    'django_nose',
 ]
 
-# Use nose to run all tests
-TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
-# Tell nose to measure coverage on the 'foo' and 'bar' apps
-NOSE_ARGS = [
-    '--with-coverage',
-]   
 
 
 MIDDLEWARE_CLASSES = [
@@ -109,12 +102,6 @@ if 'ON_HEROKU' in os.environ:
     db_from_env = dj_database_url.config()
     DATABASES['default'].update(db_from_env)
 
-TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
-
-NOSE_ARGS = [
-    '--with-coverage',
-    '--cover-package=app',
-]
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators

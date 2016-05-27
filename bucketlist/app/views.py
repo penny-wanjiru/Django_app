@@ -34,6 +34,7 @@ class index_view(View):
         return render(request, 'signup.html', context)
 
     def post(self, request):
+        signin = UserLoginForm(request.POST or None)
         form = SignUpForm(request.POST or None)
         if form.is_valid():
             form.save()
@@ -42,7 +43,7 @@ class index_view(View):
                 password=request.POST['password'])
             login(request, user)
             return redirect("/bucketlists")
-        context = {"form": form}
+        context = {"signin": signin, "form": form}
         return render(request, 'signup.html', context)
 
 
