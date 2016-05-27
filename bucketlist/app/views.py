@@ -60,7 +60,7 @@ class login_view(View):
             user = authenticate(username=username, password=password)
             login(request, user)
             return redirect("/bucketlists")
-        return render(request, "Signup.html", {"signin": signin, "form": signup_form})
+        return render(request, "signup.html", {"signin": signin, "form": signup_form})
 
 
 class logout_view(TemplateView):
