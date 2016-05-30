@@ -39,10 +39,6 @@ class BucketListCreateAPIview(CreateAPIView):
 
     queryset = BucketList.objects.all()
     serializer_class = BucketlistSerializer
-    authentication_classes = (
-        authentication.TokenAuthentication,
-    )
-
     permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
