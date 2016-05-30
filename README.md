@@ -37,8 +37,8 @@
 * After installation, create a database on PostgreSQL for this app.
 
 * Perform database migrations.
-    `python manage.py makemigrations api`
-    `python manage.py migrate api`
+    `python manage.py makemigrations `
+    `python manage.py migrate `
 
 * Run the application
  `python manage.py runserver`
