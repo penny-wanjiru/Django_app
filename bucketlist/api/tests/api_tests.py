@@ -38,27 +38,27 @@ class BucketlistAPITestCase(APITestCase):
         """Tests that user can create bucketlists"""
         # Issue a POST request.
         resp = self.client.post('/api/bucketlist/create', {'name':'bucketlist'})
-        self.assertEqual(resp.status_code, 301)
+        self.assertEqual(resp.status_code, 200)
 
     def test_bucketlist_details(self):
         """Test that it return bucketlists"""
         # Issue a GET request.
         response = self.client.get('/api/bucketlist/')
-        self.assertEqual(response.status_code, 401)
+        self.assertEqual(response.status_code, 200)
 
     def test_bucketlist_edit(self):
         """Test that a user can edit a bucketlist"""
 
         create_resp = self.client.post('/api/bucketlist/create', {'name': 'surfing',},)
         edit_resp = self.client.put('/api/bucketlist/1/edit', { 'name': 'paragliding',},)
-        self.assertEqual(edit_resp.status_code, 301)
+        self.assertEqual(edit_resp.status_code, 200)
 
     def test_bucketlist_delete(self):
         """Test that a user can delete a bucketlist."""
         create_resp = self.client.post('/api/bucketlist/create', {'name': 'surfing',},)
 
         delete_resp = self.client.delete('/api/bucketlist/1/delete')
-        self.assertEqual(delete_resp.status_code, 301)
+        self.assertEqual(delete_resp.status_code, 200)
 
 
 class BucketlistItemAPITestCase(APITestCase):
@@ -76,7 +76,7 @@ class BucketlistItemAPITestCase(APITestCase):
     def test_bucketlist_item_creation(self):
         """Test that a user can create a bucketlist item."""
         response = self.client.post('/api/bucketlist/1/items', {'name': 'hiking'})
-        self.assertEqual(response.status_code, 301)    
+        self.assertEqual(response.status_code, 200)    
 
     def test_bucketlistitem_edit(self):
         """Test that a bucketlistitem can be updated."""
@@ -84,10 +84,10 @@ class BucketlistItemAPITestCase(APITestCase):
         edited_item = {'name': 'sunrise', 'bucketlist': 1}
 
         response = self.client.put('/api/bucketlist/1/update/1', edited_item)
-        self.assertEqual(response.status_code, 401)
+        self.assertEqual(response.status_code, 200)
 
     def test_deleting_bucketlist_item(self):
         """Test that item can be deleted"""
         delete_resp = self.client.delete('/api/bucketlist/1/items/1')
 
-        self.assertEqual(delete_resp.status_code, 401)
+        self.assertEqual(delete_resp.status_code, 200)
