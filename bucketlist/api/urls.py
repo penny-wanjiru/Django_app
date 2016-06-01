@@ -1,7 +1,6 @@
 from django.conf.urls import url
-from django.contrib import admin
 
-from rest_framework_jwt.views import obtain_jwt_token
+import rest_framework_jwt.views
 
 from .views import (
     UserCreateAPIview,
@@ -10,10 +9,8 @@ from .views import (
     BucketListUpdateAPIview,
     BucketListDeleteAPIview,
     BucketListCreateAPIview,
-    BucketlistItemAPIview,
-    BucketlistItemUpdateAPIview,
-    BucketlistDetailItemAPIview,
-    BucketlistDeleteItemAPIview
+    BucketlistItemCreateAPIView,
+    BucketlistItemUpdateDeleteAPIView
 )
 
 urlpatterns = [
@@ -23,11 +20,9 @@ urlpatterns = [
     url(r'^bucketlist/(?P<pk>\d+)/$', BucketListDetailAPIview.as_view(), name='bucket_detail'),
     url(r'^bucketlist/(?P<pk>\d+)/delete/$', BucketListDeleteAPIview.as_view(), name='bucket_del'),
     url(r'^bucketlist/(?P<pk>\d+)/edit/$', BucketListUpdateAPIview.as_view(), name='bucket_edit'),
-    url(r'^bucketlist/(?P<pk>\d+)/items/$', BucketlistItemAPIview.as_view(), name='bucket_items'),
-    url(r'^bucketlist/(?P<pk>\d+)/items/(?P<list_id>\d+)/delete/$', BucketlistDeleteItemAPIview.as_view()
-        , name='bucket_itmdel'),
-    url(r'^bucketlist/(?P<pk>\d+)/items/(?P<list_id>\d+)$', BucketlistDetailItemAPIview.as_view()
-        , name='item_detail'),
-    url(r'^bucketlist/(?P<pk>\d+)/update/(?P<list_id>\d+)$', BucketlistItemUpdateAPIview.as_view(), name='item_update'),
-    url(r'^auth/login/$', 'rest_framework_jwt.views.obtain_jwt_token', name='logins'),
+    url(r'^bucketlist/(?P<bucketlist_id>[0-9]+)/items/$',
+        BucketlistItemCreateAPIView.as_view()),
+    url(r'^bucketlist/(?P<bucketlist_id>[0-9]+)/items/(?P<pk>[0-9]+)$',
+        BucketlistItemUpdateDeleteAPIView.as_view()),
+    url(r'^auth/login/$', rest_framework_jwt.views.obtain_jwt_token, name='logins'),
 ]
