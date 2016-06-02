@@ -77,3 +77,8 @@ class BucketListItemForm(forms.ModelForm):
     class Meta:
         model = BucketListItem
         fields = ['name']
+
+    def clean(self):
+        if (not bucketlist):
+            raise forms.ValidationError("All fields are required!")
+        return self.cleaned_data    
