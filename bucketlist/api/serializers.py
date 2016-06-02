@@ -51,7 +51,7 @@ class BucketlistSerializer(ModelSerializer):
 
     class Meta:
         model = BucketList
-        fields = ['id', 'user', 'name', 'items', 'date_created', 'date_updated']
+        fields = ('id', 'user', 'name', 'items', 'date_created', 'date_updated')
         read_only_fields = ('user',)
 
 
