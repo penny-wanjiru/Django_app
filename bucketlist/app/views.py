@@ -14,9 +14,11 @@ from django.template import RequestContext
 from django.shortcuts import render, redirect
 from .forms import UserLoginForm, SignUpForm, BucketListForm, BucketListItemForm
 from .models import BucketList, BucketListItem
+from django.http import Http404
+from django.shortcuts import render_to_response
 
 
-class Index_view(View):
+class Register_view(View):
     """Handles the signing in of a user
        methods:"GET","POST"
     """
@@ -118,11 +120,18 @@ class BucketlistItemsView(LoginRequiredMixin, View):
     login_url = '/'
     redirect_field_name = 'login'
     template_name = 'bucketlistitems.html'
+    template_names = '404.html'
 
     def get(self, request, *args, **kwargs):
-        bucketlist = BucketList.objects.get(pk=kwargs.get('pk'))
-        items = BucketListItem.objects.filter(bucketlist=bucketlist)
-        return render(request, self.template_name, {'items': items, 'bucketlist': bucketlist})
+        try:
+            bucketlist = BucketList.objects.get(pk=kwargs.get('pk'),
+                                                user=self.request.user)
+            items = BucketListItem.objects.filter(bucketlist=bucketlist)
+            return render(request, self.template_name,
+                          {'items': items, 'bucketlist': bucketlist})
+        except:
+            return render_to_response(self.template_names,
+                                      context_instance=RequestContext(request))
 
     def post(self, request, **kwargs):
         form = BucketListItemForm(request.POST or None)
@@ -140,7 +149,7 @@ class BucketlistItemsView(LoginRequiredMixin, View):
             )
         else:
             messages.error(
-                request, 'Error at creation!')
+                request, 'You did not input correct data, try again!')
             return redirect(
                 '/bucketlists/' + kwargs['pk'] + '/items/',
                 context_instance=RequestContext(request)
