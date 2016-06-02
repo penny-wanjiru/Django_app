@@ -1,15 +1,15 @@
 from django.conf.urls import url
-from app.views import (login_view,
-                       logout_view, index_view, BucketlistView,
+from app.views import (Login_view,
+                       Logout_view, Index_view, BucketlistView,
                        BucketlistItemsView, BucketlistItemStatus,
                        BucketlistDeleteView, BucketlistUpdateView,
                        BucketlistItemDelete, BucketlistItemUpdate
                        )
 
 urlpatterns = [
-    url(r'^$', index_view.as_view(), name='index'),
-    url(r'^login/$', login_view.as_view(), name='login'),
-    url(r'^logout/$', logout_view.as_view(), name='logout'),
+    url(r'^$', Index_view.as_view(), name='index'),
+    url(r'^login/$', Login_view.as_view(), name='login'),
+    url(r'^logout/$', Logout_view.as_view(), name='logout'),
 
     url(r'^bucketlists/$', BucketlistView.as_view(), name="bucket_add"),
 

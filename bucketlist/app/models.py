@@ -16,7 +16,7 @@ class BucketList(models.Model):
                             default="BucketList")
     date_created = models.DateField(auto_now_add=True, editable=False)
     date_updated = models.DateField(auto_now=True)
-    user = models.ForeignKey(CustomUser)
+    user = models.ForeignKey(CustomUser, related_name="user")
 
     def __unicode__(self):
         return u'%s' % self.name

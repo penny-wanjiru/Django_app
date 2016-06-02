@@ -20,7 +20,6 @@ class SignUpForm(forms.ModelForm):
         fields = ['username', 'email', 'password', 'password_two']
 
         widgets = {
-            'username': forms.TextInput(attrs={'class': 'myfieldclass'}),
             'password': forms.PasswordInput(),
             'password_two': forms.PasswordInput()
         }
@@ -38,11 +37,10 @@ class SignUpForm(forms.ModelForm):
             raise forms.ValidationError("Passwords do not match")
         return self.cleaned_data
 
-    def save(self, commit=True):
+    def save(self):
         user = super(SignUpForm, self).save(commit=False)
         user.set_password(self.cleaned_data["password"])
-        if commit:
-            user.save()
+        user.save()
         return user
 
 
@@ -78,4 +76,4 @@ class BucketListItemForm(forms.ModelForm):
 
     class Meta:
         model = BucketListItem
-        fields = ['name']            
+        fields = ['name']

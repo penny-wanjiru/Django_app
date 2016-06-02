@@ -81,9 +81,11 @@ class BucketlistItemCreateAPIView(CreateAPIView):
     permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
+        import pdb; pdb.set_trace()
         bucket_pk = self.kwargs.get('bucketlist_id')
         related_bucket = BucketList(pk=bucket_pk)
         serializer.save(bucketlist=related_bucket)
+
 
 
 class BucketlistItemUpdateDeleteAPIView(UpdateAPIView, DestroyAPIView):
