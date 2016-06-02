@@ -1,38 +1,33 @@
-import json
-from django.contrib import auth
 from django.contrib.auth import(
     authenticate,
     get_user_model,
     login,
     logout,
 )
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic.edit import View, CreateView, DeleteView
 from django.views.decorators.csrf import csrf_exempt
-from django.views.generic.detail import DetailView
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, View
 from django.views import generic
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.template import RequestContext
 from django.shortcuts import render, redirect
-from django.core.urlresolvers import reverse_lazy
-from django.http import Http404
 from .forms import UserLoginForm, SignUpForm, BucketListForm, BucketListItemForm
 from .models import BucketList, BucketListItem
 
 
-class index_view(View):
+class Index_view(View):
     """Handles the signing in of a user
-       methods:"GET","POST" 
+       methods:"GET","POST"
     """
+    # display blank form
     def get(self, request):
         form = SignUpForm(None)
         signin = UserLoginForm(None)
         context = {"form": form, "signin": signin}
         return render(request, 'signup.html', context)
 
+    # process form data
     def post(self, request):
         signin = UserLoginForm(request.POST or None)
         form = SignUpForm(request.POST or None)
@@ -47,9 +42,9 @@ class index_view(View):
         return render(request, 'signup.html', context)
 
 
-class login_view(View):
+class Login_view(View):
     """Handles the login of a user
-       methods:"POST" 
+       methods:"POST"
     """
 
     def post(self, request):
@@ -64,7 +59,7 @@ class login_view(View):
         return render(request, "signup.html", {"signin": signin, "form": signup_form})
 
 
-class logout_view(TemplateView):
+class Logout_view(TemplateView):
     """Handles logout of a user """
 
     def get(self, request):
@@ -75,7 +70,6 @@ class logout_view(TemplateView):
 class BucketlistView(LoginRequiredMixin, generic.CreateView, generic.ListView):
     """View to create and return list of bucketlist"""
     login_url = '/'
-    redirect_field_name = 'login'
     template_name = 'bucketlists.html'
     success_url = '/bucketlists/'
     model = BucketList
@@ -112,7 +106,6 @@ class BucketlistUpdateView(TemplateView):
     def post(self, request, **kwargs):
         bucketlist = BucketList.objects.filter(
             id=kwargs['pk'], user=self.request.user).first()
-        # bucketlist.name = json.loads(request.body)['name']
         bucketlist.name = request.POST.get('name')
         bucketlist.save()
         messages.success(
@@ -155,7 +148,7 @@ class BucketlistItemsView(LoginRequiredMixin, View):
 
 
 class BucketlistItemStatus(generic.TemplateView):
-    """View logic for marking item as done or not."""
+    """View to handle the marking of an item as done or not."""
 
     def get(self, request, **kwargs):
         """Retrieve item id from url passed."""
@@ -193,4 +186,3 @@ class BucketlistItemUpdate(TemplateView):
         messages.success(
             request, 'You have updated successfully!')
         return redirect('/bucketlists/'+kwargs['bucketlist']+'/items/')
-
