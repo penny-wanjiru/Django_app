@@ -32,7 +32,7 @@ class BucketListCreateAPIview(CreateAPIView):
 
     queryset = BucketList.objects.all()
     serializer_class = BucketlistSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
@@ -42,7 +42,7 @@ class BucketListAPIview(ListAPIView):
     """Handle the URL to query bucketlists"""
     serializer_class = BucketlistSerializer
     pagination_class = BucketlistPageNumberPagination
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
     filter_backends = [SearchFilter]
     search_fields = ['name']
 
@@ -55,7 +55,7 @@ class BucketListDetailAPIview(RetrieveAPIView):
     """Handle the URL to list all bucketlists"""
     queryset = BucketList.objects.all()
     serializer_class = BucketlistSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
 
 class BucketListUpdateAPIview(UpdateAPIView):
@@ -81,7 +81,6 @@ class BucketlistItemCreateAPIView(CreateAPIView):
     permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
-        import pdb; pdb.set_trace()
         bucket_pk = self.kwargs.get('bucketlist_id')
         related_bucket = BucketList(pk=bucket_pk)
         serializer.save(bucketlist=related_bucket)
