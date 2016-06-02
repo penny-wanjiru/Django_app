@@ -11,8 +11,8 @@ from rest_framework.generics import (
     DestroyAPIView,
     CreateAPIView
 )
-from .pagination import (BucketlistPageNumberPagination,
-                         BucketlistLimitOffsetPagination)
+
+from .pagination import BucketlistLimitOffsetPagination
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import get_user_model
 
@@ -41,8 +41,7 @@ class BucketListCreateAPIview(CreateAPIView):
 class BucketListAPIview(ListAPIView):
     """Handle the URL to query bucketlists"""
     serializer_class = BucketlistSerializer
-    pagination_class = (BucketlistPageNumberPagination,
-                        BucketlistLimitOffsetPagination)
+    pagination_class = BucketlistLimitOffsetPagination
     permission_classes = [IsAuthenticated]
     filter_backends = [SearchFilter]
     search_fields = ['name']
