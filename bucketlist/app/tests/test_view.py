@@ -1,12 +1,12 @@
 from django.core.urlresolvers import reverse
 from django.test import TestCase
-from app.models import CustomUser, BucketList, BucketListItem
+from app.models import User, BucketList, BucketListItem
 
 
 class BucketlistViewTests(TestCase):
 
     def setUp(self):
-        self.user = CustomUser.objects.create_user(
+        self.user = User.objects.create_user(
             username='anotheruser',
             password='anotherpassword')
         self.login = self.client.login(

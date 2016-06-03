@@ -1,10 +1,8 @@
 from rest_framework.serializers import (ModelSerializer, CharField, EmailField)
 from app.models import BucketList, BucketListItem
 from django.core.exceptions import ValidationError
-from django.contrib.auth import get_user_model
 from django.db.models import Q
-
-User = get_user_model()
+from django.contrib.auth.models import User
 
 
 class UserCreateSerializer(ModelSerializer):
@@ -27,11 +25,8 @@ class UserCreateSerializer(ModelSerializer):
         username = validated_data['username']
         email = validated_data['email']
         password = validated_data['password']
-        user_obj = User(
-            username=username,
-            email=email
-            )
-        user_obj.set_password(password)
+        user_obj = User.objects.create_user(username=username,
+            email=email, password=password)
         user_obj.save()
         return validated_data
 
@@ -45,6 +40,7 @@ class BucketlistItemSerializer(ModelSerializer):
                   'date_created', 'date_updated')
         read_only_fields = ('id', 'bucketlist', 'date_created', 'date_updated')
 
+
 class BucketlistSerializer(ModelSerializer):
     """Define bucketlist serializer fields."""
     items = BucketlistItemSerializer(many=True, read_only=True)
@@ -53,6 +49,5 @@ class BucketlistSerializer(ModelSerializer):
         model = BucketList
         fields = ('id', 'user', 'name', 'items', 'date_created', 'date_updated')
         read_only_fields = ('user',)
-
 
 

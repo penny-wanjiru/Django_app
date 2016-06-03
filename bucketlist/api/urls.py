@@ -14,7 +14,8 @@ from .views import (
 )
 
 urlpatterns = [
-    url(r'^register/$', UserCreateAPIview.as_view(), name='reg'),
+    url(r'^auth/register/$', UserCreateAPIview.as_view(), name='reg'),
+    url(r'^auth/login/$', rest_framework_jwt.views.obtain_jwt_token, name='logins'),
     url(r'^bucketlist/$', BucketListAPIview.as_view(), name='bucket_view'),
     url(r'^bucketlist/create/$', BucketListCreateAPIview.as_view(), name='bucket_create'),
     url(r'^bucketlist/(?P<pk>\d+)/$', BucketListDetailAPIview.as_view(), name='bucket_detail'),
@@ -24,5 +25,5 @@ urlpatterns = [
         BucketlistItemCreateAPIView.as_view()),
     url(r'^bucketlist/(?P<bucketlist_id>[0-9]+)/items/(?P<pk>[0-9]+)$',
         BucketlistItemUpdateDeleteAPIView.as_view()),
-    url(r'^auth/login/$', rest_framework_jwt.views.obtain_jwt_token, name='logins'),
+    
 ]

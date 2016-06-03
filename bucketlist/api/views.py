@@ -14,11 +14,11 @@ from rest_framework.generics import (
 
 from .pagination import BucketlistLimitOffsetPagination
 from rest_framework.permissions import IsAuthenticated
-from django.contrib.auth import get_user_model
+# from django.contrib.auth import get_user_model
 
 from app.models import BucketList, BucketListItem
-
-User = get_user_model()
+from django.contrib.auth.models import User
+# User = get_user_model()
 
 
 class UserCreateAPIview(CreateAPIView):
@@ -56,6 +56,10 @@ class BucketListDetailAPIview(RetrieveAPIView):
     queryset = BucketList.objects.all()
     serializer_class = BucketlistSerializer
     permission_classes = [IsAuthenticated]
+
+    def get_queryset(self, *args, **kwargs):
+        queryset_list = BucketList.objects.filter(user=self.request.user)
+        return queryset_list
 
 
 class BucketListUpdateAPIview(UpdateAPIView):

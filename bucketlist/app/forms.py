@@ -1,10 +1,10 @@
 from django import forms
-from .models import CustomUser, BucketList, BucketListItem
+from .models import User, BucketList, BucketListItem
 from django.contrib.auth import(
-    get_user_model,
     login,
     logout,
 )
+from django.contrib.auth.models import User
 
 
 class SignUpForm(forms.ModelForm):
@@ -14,14 +14,15 @@ class SignUpForm(forms.ModelForm):
 
         for fieldname in ['username', 'email', 'password', 'password_two']:
             self.fields[fieldname].help_text = None
+    
+    password_two = forms.CharField(widget=forms.PasswordInput())
 
     class Meta:
-        model = CustomUser
-        fields = ['username', 'email', 'password', 'password_two']
+        model = User
+        fields = ['username', 'email', 'password']
 
         widgets = {
             'password': forms.PasswordInput(),
-            'password_two': forms.PasswordInput()
         }
 
     def clean(self):
@@ -48,7 +49,7 @@ class UserLoginForm(forms.ModelForm):
     """Registration form validation for user login"""
 
     class Meta:
-        model = CustomUser
+        model = User
         fields = ['username', 'password']
 
         widgets = {
