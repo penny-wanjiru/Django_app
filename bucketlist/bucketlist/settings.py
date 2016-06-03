@@ -79,7 +79,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'bucketlist.wsgi.application'
 
-AUTH_USER_MODEL = 'app.CustomUser'
+# AUTH_USER_MODEL = 'app.CustomUser'
 
 #Authentication backends
 AUTHENTICATION_BACKENDS = [
@@ -92,7 +92,7 @@ AUTHENTICATION_BACKENDS = [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'bucketlistapp',
+        'NAME': 'newdb',
         'USER': 'postgres',
         'PASSWORD': 'Andela2015'
     }

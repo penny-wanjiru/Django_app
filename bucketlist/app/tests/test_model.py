@@ -1,11 +1,11 @@
 from django.test import TestCase
-from app.models import CustomUser, BucketList, BucketListItem
+from app.models import User, BucketList, BucketListItem
 
 
 class BucketlistModelTests(TestCase):
 
     def setUp(self):
-        self.user = CustomUser.objects.create(
+        self.user = User.objects.create(
             username='pennyuser',
             password='password')
         self.bucketlist = BucketList.objects.create(
@@ -14,14 +14,14 @@ class BucketlistModelTests(TestCase):
             name='bucketlstitem_one', bucketlist=self.bucketlist)
 
     def tearDown(self):
-        CustomUser.objects.all().delete()
+        User.objects.all().delete()
         BucketList.objects.all().delete()
         BucketListItem.objects.all().delete()
 
     def test_user_registration(self):
         """Tests that a user can create an account"""
         self.assertEqual(self.user.get_username(), 'pennyuser')
-        self.assertIsInstance(self.user, CustomUser)
+        self.assertIsInstance(self.user, User)
 
     def test_bucketlist_creation(self):
         """Tests that a user can create a bucketlist"""

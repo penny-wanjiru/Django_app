@@ -1,7 +1,7 @@
 from django.core.urlresolvers import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
-from app.models import CustomUser, BucketList, BucketListItem
+from app.models import User, BucketList, BucketListItem
 from django.test import Client
 
 
@@ -13,10 +13,9 @@ class UserAPITestCase(APITestCase):
 
     def test_user_creation(self):
         """Test user can create account"""
-        resp = self.client.post('/api/register/', {'username': 'samantha',
+        resp = self.client.post('/api/auth/register/', {'username': 'samantha',
                                         'email': 'sam@gmail.com',
                                         'password': 'password'})
-
         self.assertEqual(resp.status_code, 201)
 
     def test_unauthorized_access(self):
@@ -29,7 +28,7 @@ class BucketlistAPITestCase(APITestCase):
     """Test buckelist methods"""
 
     def setUp(self):
-        resp = self.client.post('/api/register/', {'username': 'samantha',
+        resp = self.client.post('/api/auth/register/', {'username': 'samantha',
                                         'email': 'sam@gmail.com',
                                         'password': 'password'})
 
@@ -71,10 +70,8 @@ class BucketlistAPITestCase(APITestCase):
 class BucketlistItemAPITestCase(APITestCase):
     """Test buckelistitem methods"""
 
-    fixtures = ['initial_data.json']
-
     def setUp(self):
-        resp = self.client.post('/api/register/', {'username': 'samantha',
+        resp = self.client.post('/api/auth/register/', {'username': 'samantha',
                                         'email': 'sam@gmail.com',
                                         'password': 'password'})
         token_url = reverse('logins')
@@ -83,6 +80,8 @@ class BucketlistItemAPITestCase(APITestCase):
         response = self.client.post(token_url, data)
         token = 'JWT ' + response.data.get('token')
         self.client.credentials(HTTP_AUTHORIZATION=token)
+
+        # import pdb; pdb.set_trace()
 
     def test_bucketlist_item_creation(self):
         """Test that a user can create a bucketlist item."""
@@ -93,13 +92,21 @@ class BucketlistItemAPITestCase(APITestCase):
 
     def test_bucketlistitem_edit(self):
         """Test that a bucketlistitem can be updated."""
+        resp = self.client.post('/api/bucketlist/create/', {'name': 'bucketlist'})
+        resps = self.client.post('/api/bucketlist/1/items/', {'name': 'hiking'})
+        # import pdb; pdb.set_trace()
         edited_item = {'name': 'sunrise', 'bucketlist': 1}
-        resp = self.client.put('/api/bucketlist/1/items/1', edited_item)
+        resp = self.client.put('/api/bucketlist/4/items/2', edited_item)
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.data.get('name'), 'sunrise')
 
     def test_deleting_bucketlist_item(self):
         """Test that a bucketlistitem can be deleted"""
-        delete_resp = self.client.delete('/api/bucketlist/1/items/1')
+
+        resp = self.client.post('/api/bucketlist/create/', {'name': 'bucketlist'})
+        bid = BucketList.objects.all()[0].id
+        resps = self.client.post('/api/bucketlist/'+ str(bid)+'/items/', {'name': 'hiking'})
+        biid = BucketListItem.objects.all()[0].id
+        delete_resp = self.client.delete('/api/bucketlist/5/items/'+ str(biid))
         self.assertEqual(delete_resp.status_code, 204)
-        self.assertEqual(BucketListItem.objects.count(), 3)
+        self.assertEqual(BucketListItem.objects.count(), 0)
