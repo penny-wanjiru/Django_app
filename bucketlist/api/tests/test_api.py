@@ -88,7 +88,8 @@ class BucketlistItemAPITestCase(APITestCase):
         self.assertEqual(BucketListItem.objects.filter(name='hiking')
                          .first().bucketlist_id, 1)
 
-    def test_unauthorized_access(self):  
+    def test_unauthorized_access(self): 
+        """Test that a user cannot access another user's bucketlists""" 
         self.client.post('/api/bucketlist/1/items/', {'name': 'hiking'})
         resp = self.client.get('/api/bucketlist/1/')
         self.assertEqual(resp.status_code, 404)
