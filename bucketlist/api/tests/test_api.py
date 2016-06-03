@@ -79,9 +79,7 @@ class BucketlistItemAPITestCase(APITestCase):
             'username': 'samantha', 'password': 'password'}
         response = self.client.post(token_url, data)
         token = 'JWT ' + response.data.get('token')
-        self.client.credentials(HTTP_AUTHORIZATION=token)
-
-        # import pdb; pdb.set_trace()
+        self.client.credentials(HTTP_AUTHORIZATION=token)  
 
     def test_bucketlist_item_creation(self):
         """Test that a user can create a bucketlist item."""
@@ -89,6 +87,12 @@ class BucketlistItemAPITestCase(APITestCase):
         self.assertEqual(resp.status_code, 201)
         self.assertEqual(BucketListItem.objects.filter(name='hiking')
                          .first().bucketlist_id, 1)
+
+    def test_unauthorized_access(self):  
+        self.client.post('/api/bucketlist/1/items/', {'name': 'hiking'})
+        resp = self.client.get('/api/bucketlist/1/')
+        self.assertEqual(resp.status_code, 404)
+
 
     def test_bucketlistitem_edit(self):
         """Test that a bucketlistitem can be updated."""

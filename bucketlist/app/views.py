@@ -56,8 +56,16 @@ class Login_view(View):
             username = request.POST['username']
             password = request.POST['password']
             user = authenticate(username=username, password=password)
-            login(request, user)
-            return redirect("/bucketlists")
+            if user:
+                login(request, user)
+                return redirect("/bucketlists")
+            else:    
+                messages.error(
+                        request, 'Incorrect username or password')
+                return redirect(
+                        '/',
+                        context_instance=RequestContext(request)
+                )             
         return render(request, "signup.html", {"signin": signin, "form": signup_form})
 
 
