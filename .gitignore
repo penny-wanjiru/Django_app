@@ -1,3 +1,8 @@
+static/css
+static/font
+static/images
+static/js/materialize.js
+static/materialize.min.js
 venv/*
 pytest
 
