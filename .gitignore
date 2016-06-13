@@ -7,7 +7,8 @@ static/js/materialize.js
 static/materialize.min.js
 venv/*
 pytest
-migrations/
+bucketlist/app/migrations/
+bucketlist/api/migrations/
 
 staticfiles/
 .coverage
