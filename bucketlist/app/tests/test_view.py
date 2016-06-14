@@ -50,7 +50,6 @@ class BucketlistViewTests(TestCase):
             'username': '',
             'password': ''})
         self.assertEqual(resp.status_code, 200)
-        # self.assertContains(resp, "All fields are required!", status_code=400)
 
     def test_user_logout(self):
         """Tests that a user can logout"""

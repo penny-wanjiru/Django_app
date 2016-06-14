@@ -8,8 +8,6 @@ static/materialize.min.js
 venv
 venv/*
 pytest
-bucketlist/app/migrations/
-bucketlist/api/migrations/
 
 staticfiles/
 .coverage

@@ -1,13 +1,13 @@
 from django.conf.urls import url
 from app.views import (Login_view,
-                       Logout_view, Register_view, BucketlistView,
+                       Logout_view, RegisterView, BucketlistView,
                        BucketlistItemsView, BucketlistItemStatus,
                        BucketlistDeleteView, BucketlistUpdateView,
                        BucketlistItemDelete, BucketlistItemUpdate
                        )
 
 urlpatterns = [
-    url(r'^$', Register_view.as_view(), name='index'),
+    url(r'^$', RegisterView.as_view(), name='index'),
     url(r'^login/$', Login_view.as_view(), name='login'),
     url(r'^logout/$', Logout_view.as_view(), name='logout'),
 

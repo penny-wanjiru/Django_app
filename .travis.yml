@@ -18,7 +18,7 @@ before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
 
 script:
-   - coverage run bucketlist/manage.py test bucketlist/api/ bucketlist/app --noinput --settings=bucketlist.settings
+   - coverage run bucketlist/manage.py migrate test bucketlist/api/ bucketlist/app --noinput --settings=bucketlist.settings
 branches:
   only:
   - develop

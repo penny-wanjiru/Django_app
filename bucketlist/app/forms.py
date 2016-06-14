@@ -12,10 +12,10 @@ class SignUpForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(SignUpForm, self).__init__(*args, **kwargs)
 
-        for fieldname in ['username', 'email', 'password', 'password_two']:
+        for fieldname in ['username', 'email', 'password', 'password_conf']:
             self.fields[fieldname].help_text = None
     
-    password_two = forms.CharField(widget=forms.PasswordInput())
+    password_conf = forms.CharField(widget=forms.PasswordInput())
 
     class Meta:
         model = User
@@ -29,14 +29,19 @@ class SignUpForm(forms.ModelForm):
         username = self.cleaned_data.get('username')
         email = self.cleaned_data.get('email')
         password = self.cleaned_data.get('password')
-        password_two = self.cleaned_data.get('password_two')
+        password_conf = self.cleaned_data.get('password_conf')
 
-        if (not password) or (not username) or (not email) or (not password_two):
+        if User.objects.filter(username=username).exists():
+            raise forms.ValidationError("Username already exists")
+
+        if (not password) or (not username) or (not email) or (not password_conf):
             raise forms.ValidationError("All fields are required!")
 
-        if not (password == password_two):
+        if not (password == password_conf):
             raise forms.ValidationError("Passwords do not match")
         return self.cleaned_data
+
+
 
     def save(self):
         user = super(SignUpForm, self).save(commit=False)
@@ -62,6 +67,8 @@ class UserLoginForm(forms.ModelForm):
         if (not password) or (not username):
             raise forms.ValidationError("All fields are required!")
         return self.cleaned_data
+
+       
 
 
 class BucketListForm(forms.ModelForm):

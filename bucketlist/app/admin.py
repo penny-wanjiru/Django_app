@@ -5,10 +5,9 @@ from models import User
 
 class SignUpAdmin(admin.ModelAdmin):
     list_display = ["__unicode__", "username"]
-    
+
     class Meta:
         model = User
-
 
 
 class BucketListAdmin(admin.ModelAdmin):
@@ -24,6 +23,5 @@ class BucketListItemAdmin(admin.ModelAdmin):
     search_fields = ('name',)
     list_per_page = 25
 
-# admin.site.register(User, SignUpAdmin)
 admin.site.register(BucketList, BucketListAdmin)
 admin.site.register(BucketListItem, BucketListItemAdmin)

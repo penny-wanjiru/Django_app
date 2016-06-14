@@ -18,7 +18,7 @@ from django.http import Http404
 from django.shortcuts import render_to_response
 
 
-class Register_view(View):
+class RegisterView(View):
     """Handles the signing in of a user
        methods:"GET","POST"
     """
