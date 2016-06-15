@@ -1,11 +1,11 @@
 $(".btn-edit").on("click", function(event) {
-    var dataUrl = $(this).data("url");
-    $("#updateBucketList").attr('action', dataUrl);
+  var dataUrl = $(this).data("url");
+  $("#updateBucketList").attr('action', dataUrl);
 });
 
 $(".btn-item").on("click", function(event) {
-    var dataUrl = $(this).data("url");
-    $("#updateitem").attr('action', dataUrl);
+  var dataUrl = $(this).data("url");
+  $("#updateitem").attr('action', dataUrl);
 });
 
 $(".delete-item").on("click", function(event) {
