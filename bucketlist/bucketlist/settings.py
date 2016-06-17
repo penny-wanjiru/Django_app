@@ -15,12 +15,7 @@ import os.path
 import dj_database_url
 import datetime
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'haeh1le(15g&z@b6^i)tb(@k+fr63r!q4g*^&u%f&8n!g_a=+c'
@@ -77,16 +72,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'bucketlist.wsgi.application'
 
-# AUTH_USER_MODEL = 'app.CustomUser'
-
 #Authentication backends
 AUTHENTICATION_BACKENDS = [
         'django.contrib.auth.backends.ModelBackend'
     ]
 
 # Database
-# https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -121,8 +112,6 @@ AUTH_PASSWORD_VALIDATORS = [
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        # 'rest_framework.authentication.SessionAuthentication',
-        # 'rest_framework.authentication.BasicAuthentication',
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
     ),
 }

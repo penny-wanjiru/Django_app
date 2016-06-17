@@ -14,8 +14,6 @@ from rest_framework.generics import (
 
 from .pagination import BucketlistLimitOffsetPagination
 from rest_framework.permissions import IsAuthenticated
-
-
 from app.models import BucketList, BucketListItem
 from django.contrib.auth.models import User
 
@@ -79,6 +77,7 @@ class BucketListDeleteAPIview(DestroyAPIView):
 
 
 class BucketlistItemCreateAPIView(CreateAPIView):
+    """Handle the URL to create buckelist items"""
     queryset = BucketListItem.objects.all()
     serializer_class = BucketlistItemSerializer
     permission_classes = [IsAuthenticated]
@@ -90,6 +89,7 @@ class BucketlistItemCreateAPIView(CreateAPIView):
 
 
 class BucketlistItemUpdateDeleteAPIView(UpdateAPIView, DestroyAPIView):
+    """Handle the URL to update and delete bucketlist items"""
     permission_classes = [IsAuthenticated]
     serializer_class = BucketlistItemSerializer
     queryset = BucketListItem.objects.all()

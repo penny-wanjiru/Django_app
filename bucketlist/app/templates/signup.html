@@ -7,87 +7,85 @@
       <img id="adventure-img" src="/static/img/adventure.png">
     </div>
     <div class="col m4 offset-m1">
-       <div id="sign-tab" >
-          <ul class="tabs">
-            {% if messages %}
-              <li class="tab col s3"><a id="signup_tab" href="#signup">Sign up</a></li>
-              <li class="tab col s3"><a id="signin_tab" class="active" href="#signin">Login</a></li>
-            {% else %}
-              <li class="tab col s3"><a id="signup_tab" class="active" href="#signup">Sign up</a></li>
-              <li class="tab col s3"><a id="signin_tab" href="#signin">Login</a></li>
-            {% endif %}   
-          </ul>
-        </div>
+      <div id="sign-tab" >
+        <ul class="tabs">
+          {% if messages %}
+            <li class="tab col s3"><a id="signup_tab" href="#signup">Sign up</a></li>
+            <li class="tab col s3"><a id="signin_tab" class="active" href="#signin">Login</a></li>
+          {% else %}
+            <li class="tab col s3"><a id="signup_tab" class="active" href="#signup">Sign up</a></li>
+            <li class="tab col s3"><a id="signin_tab" href="#signin">Login</a></li>
+          {% endif %}   
+        </ul>
+      </div>
       <!-- signup form -->
       <div id="signup" class="col s12">
         <div id="signup_div" class="name col m12">
           <div class="card crd">
             <div class="card-content">
-                    <div class="col-sm-12">
+              <div class="col-sm-12">
+              </div>
+              <div class="row " >
+                 <form class="col s12" method='POST' action="/">
+                    {% csrf_token %}
+                    {{ form.non_field_errors }}
+                    <div class="input-field">
+                        <label for="id_subject">Username</label>
+                        {{ form.username }}
+                    </div>    
+                    <div class="input-field">
+                        <label for="id_subject">Email</label>
+                        {{ form.email }}
                     </div>
-                    <div class="row " >
-                       <form class="col s12" method='POST' action="/">
-                          {% csrf_token %}
-                          {{ form.non_field_errors }}
-                          <div class="input-field">
-                              <label for="id_subject">Username</label>
-                              {{ form.username }}
-                          </div>    
-                          <div class="input-field">
-                              <label for="id_subject">Email</label>
-                              {{ form.email }}
-                          </div>
-                          <div class="input-field">    
-                              <label for="id_subject">Password</label>
-                              {{ form.password }}
-                          </div> 
-                          <div class="input-field">   
-                              <label for="id_subject">Confirm password</label>
-                              {{ form.password_conf }}
-                          </div>
-                              <input type="submit" value="SIGN UP" id="signup_btn" class="button1">
-                        </form>
-                    </div>  
+                    <div class="input-field">    
+                        <label for="id_subject">Password</label>
+                        {{ form.password }}
+                    </div> 
+                    <div class="input-field">   
+                        <label for="id_subject">Confirm password</label>
+                        {{ form.password_conf }}
+                    </div>
+                        <input type="submit" value="SIGN UP" id="signup_btn" class="button1">
+                  </form>
+              </div>  
             </div> 
           </div>
         </div>
       </div>
-
       <!-- sign in -->
       <div id="signin" class="col s12">
         <div id="signin_div" class="name col m12">
           <div class="card crd">
             <div class="card-content">   
-                    <div class="col-sm-12">  
+              <div class="col-sm-12">  
+              </div>
+              <div class="row">
+                  <form class="col s12" method='POST' action="login/">{% csrf_token %}
+                    {% if messages %}
+                      {% for message in messages %}
+                      <div class="alert alert-{{ message.tags }}" role="alert">
+                        {{ message }}
+                      </div>
+                      {% endfor %}
+                    {% endif %}
+                    {{ signin.non_field_errors }}
+                    <div class="input-field">
+                      <label for="id_subject">Username</label>
+                      {{ signin.username }}
                     </div>
-                    <div class="row">
-                        <form class="col s12" method='POST' action="login/">{% csrf_token %}
-                          {% if messages %}
-                            {% for message in messages %}
-                            <div class="alert alert-{{ message.tags }}" role="alert">
-                              {{ message }}
-                            </div>
-                            {% endfor %}
-                          {% endif %}
-                          {{ signin.non_field_errors }}
-                          <div class="input-field">
-                            <label for="id_subject">Username</label>
-                            {{ signin.username }}
-                          </div>
-                          <div class="input-field">  
-                            <label for="id_subject">Password</label>
-                            {{ signin.password }}
-                          </div> 
-                          <input type="submit" value="SIGN IN" id="signin-btn" class="button1">
-                        </form>
-                    </div>  
+                    <div class="input-field">  
+                      <label for="id_subject">Password</label>
+                      {{ signin.password }}
+                    </div> 
+                    <input type="submit" value="SIGN IN" id="signin-btn" class="button1">
+                  </form>
+              </div>  
             </div> 
           </div>
         </div>
       </div>
-
-      </div>
-    </div>   
+    </div>
+  </div>   
 </div>
         
 {% endblock %}           
