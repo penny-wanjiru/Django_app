@@ -4,12 +4,12 @@
 {% block content %}
     {% block navbar %}
     {% include "includes/navbar.html" %}
-{% endblock %} 
+    {% endblock %} 
 
     <div id="main">
         <div class="row" ng-controller="mainCtrl">
             <div class="s10 offset-s1 col">
-                <h2 id="bckt-head">Bucketlists</h2>
+            <h2 id="bckt-head">Bucketlists</h2>
             {% include "includes/flash-messages.html" %}
             <div class="row">
                 {% if not object_list %}
@@ -24,9 +24,9 @@
                     <div class="card" id="yaya" >
                         <div class="card-content center-align">
                             <div class="card-title truncate"></div>
-                            <a href="{% url 'bucketlist_items' pk=bucketlist.pk %}"<i class="blue-text text-darken-4 font-family:Ubuntu;" id="bucket-name">{{ bucketlist.name|upper }}</i></a>
+                            <a href="{% url 'bucketlist_items' pk=bucketlist.pk %}"<i class="blue-text text-darken-4 font-family:Ubuntu;" id="bucket-name">{{ bucketlist.name|upper }}</i>
+                            </a>
                             <em><p class="blue-text text-darken-4 " id="date"> Last updated:{{ bucketlist.date_updated}}</p></em>
-
                             <br>
                             <div class="row">
                                 <div class="col m2 hide-on-small-only">&nbsp;</div>
@@ -45,35 +45,31 @@
                               <i class="material-icons">menu</i>
                             </a>
                             <ul>
-                            
-                            <li><a class="btn-edit btn-floating blue modal-trigger" data-url="{% url 'bucketlist_edit' pk=bucketlist.pk %}" data-target="modal3"><i class="material-icons linker">mode_edit</i></a>
-                            </li>   
-                            <li><a href="{% url 'bucketlist_items' pk=bucketlist.pk %}" class="btn-floating cyan"><i class="material-icons">visibility</i></a>
-                            </li>
-            
-                            <li><a href="{% url 'bucketlist_delete' pk=bucketlist.pk %}" class="btn-floating red"><i class="material-icons delete-bucket" links="{% url 'bucketlist_delete' pk=bucketlist.pk %}">delete</i></a></li>
+                                <li><a class="btn-edit btn-floating blue modal-trigger" data-url="{% url 'bucketlist_edit' pk=bucketlist.pk %}" data-target="modal3"><i class="material-icons linker">mode_edit</i></a>
+                                </li>   
+                                <li><a href="{% url 'bucketlist_items' pk=bucketlist.pk %}" class="btn-floating cyan"><i class="material-icons">visibility</i></a>
+                                </li>
+                
+                                <li><a href="{% url 'bucketlist_delete' pk=bucketlist.pk %}" class="btn-floating red"><i class="material-icons delete-bucket" links="{% url 'bucketlist_delete' pk=bucketlist.pk %}">delete</i></a></li>
                             </ul>   
                         </div>
-                    </div>
-                      
-                    </div>
-                         
+                    </div>   
+                </div>          
                 {% endfor %}
-
-                </div>
             </div>
+        </div>
             <a href="{% url 'bucket_add' %}">
-                    <a class="btn-floating btn-large waves-effect waves-light #f06292 pink lighten-2 btn modal-trigger" style="margin-top:20px;" data-target="modal1"><i class="material-icons">add</i></a>
-                    </a>
-                <!-- Modal Structure -->
-                <form class="form-horizontal"  action="" method="POST">
-                    {% csrf_token %}
-                    {% include "includes/bucketlist_add.html"%}
-                </form>
-                <form id="updateBucketList" class="form-horizontal"  action="" method="POST">
-                    {% csrf_token %}
-                    {% include "includes/edit_bucketlist.html"%}
-                </form>             
+                <a class="btn-floating btn-large waves-effect waves-light #f06292 pink lighten-2 btn modal-trigger" style="margin-top:20px;" data-target="modal1"><i class="material-icons">add</i></a>
+            </a>
+            <!-- Modal Structure -->
+            <form class="form-horizontal"  action="" method="POST">
+                {% csrf_token %}
+                {% include "includes/bucketlist_add.html"%}
+            </form>
+            <form id="updateBucketList" class="form-horizontal"  action="" method="POST">
+                {% csrf_token %}
+                {% include "includes/edit_bucketlist.html"%}
+            </form>             
             </div>
         </div>
     </div>    
