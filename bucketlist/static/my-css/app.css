@@ -1,134 +1,148 @@
 /* label color */
+
 .input-field label {
-  left:0px;
-  color: #585656;
+    left: 0px;
+    color: #585656;
 }
 
- /* label focus color */
+
+/* label focus color */
+
 .input-field input[type=text]:focus + label {
-  color: #20B5D8 ;
+    color: #20B5D8;
 }
 
- /* label underline focus color  for email*/
+
+/* label underline focus color  for email*/
+
 .input-field input[type=email]:focus {
-  border-bottom: 1px solid #000000;
-  box-shadow: 0 0px 0 0 #255;
+    border-bottom: 1px solid #000000;
+    box-shadow: 0 0px 0 0 #255;
 }
 
 .input-field input[type=password]:focus {
-  border-bottom: 1px solid #000000;
-  box-shadow: 0 0px 0 0 #255;
+    border-bottom: 1px solid #000000;
+    box-shadow: 0 0px 0 0 #255;
 }
 
- /* label underline focus color */
+
+/* label underline focus color */
+
 .input-field input[type=text]:focus {
-  border-bottom: 1px solid #000000;
-  box-shadow: 0 0px 0 0 #255;
+    border-bottom: 1px solid #000000;
+    box-shadow: 0 0px 0 0 #255;
 }
 
- /* valid color */
+
+/* valid color */
+
 .input-field input[type=text].valid {
-  border-bottom: 1px solid #000 ;
-  box-shadow: 0 1px 0 0 #000 ;
+    border-bottom: 1px solid #000;
+    box-shadow: 0 1px 0 0 #000;
 }
 
- /* invalid color */
+
+/* invalid color */
+
 .input-field input[type=text].invalid {
-  border-bottom: 1px solid #000 ;
-  box-shadow: 0 1px 0 0 #000 ;
+    border-bottom: 1px solid #000;
+    box-shadow: 0 1px 0 0 #000;
 }
 
- /* icon prefix focus color */
+
+/* icon prefix focus color */
+
 .input-field .prefix.active {
-  color: #20B5D8 ;
+    color: #20B5D8;
 }
 
 .name {
-  margin-top: 0px;
-  opacity: 10.6;
+    margin-top: 0px;
+    opacity: 10.6;
 }
 
 #signin_div {
-  padding: 0px;
+    padding: 0px;
 }
 
 .crd {
-  margin: 0px;
+    margin: 0px;
 }
 
 #signup_div {
-  padding: 0px;
+    padding: 0px;
 }
 
-.tabs{
-  opacity: 0.7; 
+.tabs {
+    opacity: 0.7;
 }
 
 .tabs .indicator {
-  background-color: #20B5D8;
+    background-color: #20B5D8;
 }
 
 .tabs .tab a {
- color: #20B5D8;
+    color: #20B5D8;
 }
 
 .tabs .tab a:hover {
     color: #20B5D8;
 }
 
-.card { 
-  background: rgba(255, 255, 255, .6); 
+.card {
+    background: rgba(255, 255, 255, .6);
 }
 
 #signup {
-  padding: 0px;
-  min-height: 470px;
+    padding: 0px;
+    min-height: 470px;
 }
 
 #signin {
-  padding: 0px;
-  min-height: 470px;
+    padding: 0px;
+    min-height: 470px;
 }
 
 .item-card {
-  background: rgb(255, 255, 255); 
-  background: rgba(255, 255, 255, .5); 
+    background: rgb(255, 255, 255);
+    background: rgba(255, 255, 255, .5);
 }
 
 .btns {
-  color: red;
+    color: red;
 }
 
 .h3 {
-  font-family: "Art Brewery";
-  src: url(..static/fonts/Art Brewery.ttf) format("truetype");
+    font-family: "Art Brewery";
+    src: url(..static/fonts/Art Brewery.ttf) format("truetype");
 }
 
 .errors {
-  color: white;
+    color: white;
 }
 
 .nav-wrapper {
-  background-color: rgba(16, 14, 14, 0.9); 
+    background-color: rgba(16, 14, 14, 0.9);
 }
 
-.pull-left {    
-  margin-left: 20px;
-  margin-top: 15px;
+.pull-left {
+    margin-left: 20px;
+    margin-top: 15px;
 }
 
 .button1 {
-background-color: rgba(32, 181, 216);
-} 
+    background-color: rgba(32, 181, 216);
+}
 
 #main_row {
-  max-height: 3000px;
+    max-height: 3000px;
 }
 
 .btn-floating {
-background-color: rgba(0, 211, 255, 1);
+    background-color: rgba(0, 211, 255, 1);
 }
-[type="checkbox"]:checked+label:before{
-  border-right: 2px solid  #000000; 
-  border-bottom: 2px solid #000000; 
+
+[type="checkbox"]:checked+label:before {
+    border-right: 2px solid #000000;
+    border-bottom: 2px solid #000000;
 }

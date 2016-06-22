@@ -60,13 +60,14 @@
                         <div class="col-sm-12">  
                         </div>
                         <div class="row">
-                            <form class="col s12" method='POST' action="login/">{% csrf_token %}
+                            <form class="col s12" method='POST' action="login/">
+                            {% csrf_token %}
                                 {% if messages %}
-                                {% for message in messages %}
-                                <div class="alert alert-{{ message.tags }}" role="alert">
-                                    {{ message }}
-                                </div>
-                                {% endfor %}
+                                    {% for message in messages %}
+                                        <div class="alert alert-{{ message.tags }}" role="alert">
+                                            {{ message }}
+                                        </div>
+                                    {% endfor %}
                                 {% endif %}
                                 {{ signin.non_field_errors }}
                                 <div class="input-field">
