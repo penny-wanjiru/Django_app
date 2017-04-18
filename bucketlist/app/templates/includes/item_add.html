@@ -1,0 +1,17 @@
+<div id="modal2" class="modal">
+    <div class="modal-content">
+      <h4>Add an Item</h4>
+      
+        <div class="input-field col s12">
+          <input placeholder="New bucketlist name" id="new_item_name" name="name" type="text" class="validate" required>
+            <span class="text-danger small">{{ field.error }}</span>
+            <label for="new_item_name" class="active">{{ field.label_tag }}</label>
+            <div class="col-sm-10">{{ field }}</div>          
+        </div>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class=" modal-action modal-close waves-effect  btn-flat ">close</a> 
+      <button type="submit" class="btn btn-sucess #ffecb3 blue lighten">Submit</button>
+      <!-- <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">create</a> -->
+    </div>
+</div>

@@ -1,0 +1,9 @@
+{% if messages %}
+    <div class="col-sm-12">
+      {% for message in messages %}
+      <div class="alert alert-{{ message.tags }} flash-message" role="alert">
+        {{ message }}
+      </div>
+      {% endfor %}
+    </div>
+{% endif %}

@@ -1,0 +1,78 @@
+{% extends "header.html" %}
+{% load static %}
+
+
+{% block content %}
+  {% block navbar %}
+    {% include "includes/navbar.html" %}
+  {% endblock %}
+ 
+<div id="itms">
+  <div class="row" id="main-div">
+    <div class="right-align">
+        <a class="btn-floating btn-large waves-effect waves-light #ec407a pink lighten-1 btn modal-trigger" data-target="modal2"><i class="material-icons">add</i></a>
+    </div>
+  </div>
+  <div class="row" id="items">
+    <div class="name col m6 offset-m3">
+      <div class="item-card">
+        <div class="card-content">
+            <!-- Modal Structure -->
+            <form class="form-horizontal"  action="" method="POST">
+                {% csrf_token %}
+                {% include "includes/item_add.html"%}
+            </form>
+            {% include "includes/flash-messages.html" %}
+            <!-- task-card -->
+            <ul id="task-card" class="collection with-header">
+              <li class="collection-header #01D1FD blue">
+                  <p class="task-card-date">{{ bucketlist.name|upper }}</p>
+              </li>
+              {% if not items %}
+                  <div class="well panel-default" id="bucketlistitem">
+                    <h3 id="item-msg"> You don't have any items yet! &#128513;</h3>
+                  </div>
+              {% endif %}
+              {% for item in items %}
+              <li class="collection-item dismissable">
+                {% if item.done %}
+                  <input type="checkbox" style="color: blue;" id="{{item.id}}" onclick="sendCheck({{item.id}}, '0')" checked/>
+                {% else %}
+                  <input type="checkbox" id="{{item.id}}" onclick="sendCheck({{item.id}}, '1')"/>
+                {% endif %}
+
+                <label for="{{item.id}}"><a href="#" class="secondary-content"><span class="ultra-small" id="itm-nm">{{ item.name }}</span></a>
+                </label> 
+                <div class="right">
+                  <a id="anchor" data-url="/bucketlists/{{bucketlist.pk}}/items/{{item.pk}}/delete/" >
+                    <i class="material-icons delete-item" link="/bucketlists/{{bucketlist.pk}}/items/{{item.pk}}/delete/">delete</i>
+                  </a>
+                  
+                  <a class="btn-item modal-trigger" data-url="/bucketlists/{{bucketlist.id}}/items/{{item.id}}/edit/" data-target="modal4"><i class=" btn-item material-icons">edit</i></a>
+                 </div> 
+              </li>
+
+              {% endfor %}
+
+            </ul>
+            <!-- task-card -->
+            <form id="updateitem" class="form-horizontal"  action="" method="POST">
+                {% csrf_token %}
+                {% include "includes/edit_items.html"%}
+            </form>
+            
+        </div> 
+      </div>
+    </div>
+  </div>
+</div>
+  <script type="text/javascript">
+  // 1 means send done, 0 means send not done.
+  // function sendCheck (itemId, status) {
+  //   window.location.href += itemId + '/status';
+  // }
+  </script>
+
+ </div>              
+{% endblock %}           
+

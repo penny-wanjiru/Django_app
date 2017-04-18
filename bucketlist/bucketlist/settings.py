@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+import os.path
+import dj_database_url
+import datetime
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -31,21 +34,25 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'app',
-    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'rest_framework_docs',
+    'app',
+    'api',
 ]
+
+
+
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -57,7 +64,7 @@ ROOT_URLCONF = 'bucketlist.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -72,16 +79,28 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'bucketlist.wsgi.application'
 
+# AUTH_USER_MODEL = 'app.CustomUser'
+
+#Authentication backends
+AUTHENTICATION_BACKENDS = [
+        'django.contrib.auth.backends.ModelBackend'
+    ]
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'newdb',
+        'USER': 'postgres',
+        'PASSWORD': 'Andela2015'
     }
 }
+
+if 'ON_HEROKU' in os.environ:
+    db_from_env = dj_database_url.config()
+    DATABASES['default'].update(db_from_env)
 
 
 # Password validation
@@ -102,6 +121,18 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        # 'rest_framework.authentication.SessionAuthentication',
+        # 'rest_framework.authentication.BasicAuthentication',
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+    ),
+}
+
+JWT_AUTH = {
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=12000)
+}
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
@@ -119,5 +150,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 
 STATIC_URL = '/static/'
