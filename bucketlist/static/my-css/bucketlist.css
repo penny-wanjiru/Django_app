@@ -1,0 +1,159 @@
+#main{
+  background-image: url('../img/the_image.png');
+  height:100%;
+  background-size: repeat-x repeat-y;
+  min-height:100vh;
+}
+
+#itms{
+  min-height:100vh;
+  background-color: white;
+  margin-bottom: -20px;
+}
+
+#items{
+margin-bottom: 0px;
+}
+body{  
+
+    background-image: url('/static/img/watercoaster.jpg'), linear-gradient(#3d72b4, #525252);
+    background-color: rgba(0, 0, 0, 0.60);
+    background-blend-mode: overlay;
+    background-size: cover;
+    height:100%;
+
+    /*overflow:hidden;*/
+  }
+  
+#yaya{
+ 
+ background: #0091ea;
+}
+
+#div-bcgrnd{
+  diplay:inline; 
+  margin-top:240px; 
+  margin-left:200px;
+}
+#adventure-img{
+  width:350px;
+  height:200px;
+}
+#sign-tab{
+  margin-top:120px;
+}
+#signup_btn{
+  height:50px;
+  width:200px;
+  margin-left:70px;
+  background-color: #20B5D8;
+  border: 0pt;
+}
+#signin-btn{
+  height:50px; 
+  width:200px; 
+  margin-left:70px; 
+  margin-top:5px; 
+  background-color: #20B5D8; 
+  border: 0pt; 
+}
+#item-msg{
+  font-size:15px;
+  margin-left:200px;
+}
+#bckt-head{
+  font-family: Ubuntu;
+  font-size: 32px;
+}
+
+#bucket-msg{
+  font-size:25px;
+}
+
+#bucket-name{
+  font-size:25px;
+  font-family:Ubuntu;
+}
+#date{
+  font-size:12px;
+}
+.fixed-action-btn{
+  bottom: 45px;
+  right: 24px;
+
+}
+
+.btn-floating.btn-large:hover{ 
+    background-color: white;}
+
+/*items page*/
+#main-div{
+ width:61%;
+ padding-top:1%;
+}
+.right-align{
+  margin-top:10px;
+}
+.task-card-date{
+ font-family:Ubuntu;
+ font-size:20px;
+}
+.btn-item{
+ font-size: 1.5rem;
+ color:#0091ea;
+ cursor:pointer;
+}
+.delete-item{
+ font-size: 1.5rem;
+ color:#c62828; 
+ cursor:pointer;
+}
+#itm-nm{
+ color:#000000;
+}
+.right{
+ font-family:ubuntu;
+ margin-right:40px;
+ font-size:15px;"
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
