@@ -76,23 +76,38 @@ body {
 #bucket-name {
 	font-family: "Karla-Regular";
 	src: url(..static/fonts/Karla-Regular.ttf) format("truetype");
-	font-size: 18px;
+	font-size: 15px;
 	color: #FFFFFF;
-	letter-spacing: 3px;
-	font-weight:lighter;
+	letter-spacing: 10px;
+	font-weight:100;
 }
 
 .back-rectangle{
 	background-color: #7c655c;
 	height: 70px;
   width: 200px;
-	margin:auto;
+	position: relative;
+	padding: 14px;
+	margin: auto;
+	margin-top: 34px;
+	max-width:100%;
+  max-height:100%;
+	overflow:auto;
+
+}
+
+.row{
+	margin-bottom: 0px;
+	margin-left: 0px;
+	margin-right: 0px;
 }
 
 #date {
 	font-family: "Karla-Regular";
 	src: url(..static/fonts/Karla-Regular.ttf) format("truetype");
   font-size: 12px;
+	font-weight: 100px;
+	color: #eee7e4 !important;
 }
 
 .blue-text.text-darken-4 {
@@ -102,8 +117,14 @@ body {
 .fixed-action-btn {
 	position: relative;
 	float:right;
-  bottom: 70px;
-  right: 24px;
+  bottom: 60px;
+  right: 12px;
+}
+#blush{
+	background-color: #fbd2d7
+}
+.btn-floating{
+	background-color: #b7aeaf;
 }
 
 .btn-floating.btn-large:hover {
