@@ -2,14 +2,14 @@
 {% load static %}
 
 {% block content %}
-{% block navbar %} 
+{% block navbar %}
 {% include "includes/navbar.html" %}
 {% endblock %}
 
 <div id="main">
     <div class="row" ng-controller="mainCtrl">
         <div class="s10 offset-s1 col">
-            <h2 id="bckt-head">Bucketlists</h2> 
+            <h2 id="bckt-head">Bucketlists</h2>
             {% include "includes/flash-messages.html" %}
             <div class="row">
                 {% if not object_list %}
@@ -23,9 +23,12 @@
                         <div class="card" id="yaya">
                             <div class="card-content center-align">
                                 <div class="card-title truncate"></div>
-                                <a href="{% url 'bucketlist_items' pk=bucketlist.pk %}" <i class="blue-text text-darken-4 font-family:Ubuntu;" id="bucket-name">{{ bucketlist.name|upper }}</i>
-                                </a>
-                                <em><p class="blue-text text-darken-4 " id="date"> Last updated:{{ bucketlist.date_updated}}</p></em>
+															<div class="back-rectangle">
+																<a href="{% url 'bucketlist_items' pk=bucketlist.pk %}" <i class="blue-text text-darken-4 font-family:Ubuntu;" id="bucket-name">{{ bucketlist.name|upper }}</i>
+																</a>
+																<p class="blue-text text-darken-4 " id="date"> LAST UPDATED:{{ bucketlist.date_updated}}</p>
+															</div>
+
                                 <br>
                                 <div class="row">
                                     <div class="col m2 hide-on-small-only">&nbsp;</div>
@@ -61,7 +64,7 @@
         </a>
         <!-- Modal Structure -->
         <form class="form-horizontal" action="" method="POST">
-            {% csrf_token %} 
+            {% csrf_token %}
             {% include "includes/bucketlist_add.html"%}
         </form>
         <form id="updateBucketList" class="form-horizontal" action="" method="POST">

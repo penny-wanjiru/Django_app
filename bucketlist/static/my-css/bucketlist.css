@@ -24,7 +24,7 @@ body {
 }
 
 #yaya {
-  background: #0091ea;
+  background-image: url('/static/img/marble.png');
 }
 
 #div-bcgrnd {
@@ -74,12 +74,29 @@ body {
 }
 
 #bucket-name {
-  font-size: 25px;
-  font-family: Ubuntu;
+	font-family: "Karla-Regular";
+	src: url(..static/fonts/Karla-Regular.ttf) format("truetype");
+	font-size: 18px;
+	color: #FFFFFF;
+	letter-spacing: 3px;
+	font-weight:lighter;
+}
+
+.back-rectangle{
+	background-color: #7c655c;
+	height: 70px;
+  width: 200px;
+	margin:auto;
 }
 
 #date {
+	font-family: "Karla-Regular";
+	src: url(..static/fonts/Karla-Regular.ttf) format("truetype");
   font-size: 12px;
+}
+
+.blue-text.text-darken-4 {
+  color: #FFFFFF !important;
 }
 
 .fixed-action-btn {
