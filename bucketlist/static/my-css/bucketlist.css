@@ -83,7 +83,9 @@ body {
 }
 
 .fixed-action-btn {
-  bottom: 45px;
+	position: relative;
+	float:right;
+  bottom: 70px;
   right: 24px;
 }
 
