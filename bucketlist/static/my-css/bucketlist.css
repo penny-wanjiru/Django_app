@@ -53,7 +53,7 @@
 	margin-left: 136px;
   margin-top: 25px;
 	border-style: none;
-	background-color: #8593ac;
+	background-color: #9799BA;
   border-radius: 100px;
 	font-family: "Karla-Regular";
 	src: url(..static/fonts/Karla-Regular.ttf) format("truetype");
@@ -64,7 +64,7 @@
 	width: 130px;
 	margin-left: 136px;
   margin-top: 25px;
-  background-color: #8593ac;
+  background-color: #9799BA;
 	border-radius: 100px;
   border-style: none;
 	font-family: "Karla-Regular";
@@ -98,13 +98,16 @@
 	font-color: #8593ac;
 }
 
+.tabs .tab a:hover {
+	 color: #FEADB9;
+}
 
 .tabs .tab a {
     color: #898a8a;
 }
 
 .tabs .indicator {
-    background-color: #e4a199;
+    background-color: #FEADB9;
 }
 
 #item-msg {
@@ -167,9 +170,11 @@ input:-webkit-autofill {
   bottom: 60px;
   right: 12px;
 }
+
 #blush{
 	background-color: #fbd2d7
 }
+
 .btn-floating{
 	background-color: #b7aeaf;
 }
@@ -177,7 +182,6 @@ input:-webkit-autofill {
 .btn-floating.btn-large:hover {
   background-color: white;
 }
-
 
 /*items page*/
 
