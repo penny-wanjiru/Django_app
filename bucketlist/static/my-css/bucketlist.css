@@ -60,28 +60,53 @@
 }
 
 #signin-btn {
-  height: 50px;
-  width: 200px;
-  margin-left: 136px;
-  margin-top: 50px;
-  background-color: #20B5D8;
-  border: 0pt;
+	height: 40px;
+	width: 130px;
+	margin-left: 136px;
+  margin-top: 25px;
+  background-color: #8593ac;
+	border-radius: 100px;
+  border-style: none;
+	font-family: "Karla-Regular";
 }
 
 #signup_div{
 	border-bottom-left-radius: 200px;
+	border-radius: 0 0 13px 13px;
 }
 
 #signup {
 	font-family: "Karla-Regular";
 	src: url(..static/fonts/Karla-Regular.ttf) format("truetype");
 }
+
 .card .card-content {
 	background-color: #101010;
+	border-radius: 0 0 13px 13px;
 }
+
+.card{
+	border-radius: 0 0 13px 13px;
+}
+
 .tabs {
 	background-color: #101010;
+	border-radius: 13px 13px 0 0;
+	opacity: 0.9;
+	font-family: "Karla-Regular";
+	font-size: 16px;
+	font-color: #8593ac;
 }
+
+
+.tabs .tab a {
+    color: #898a8a;
+}
+
+.tabs .indicator {
+    background-color: #e4a199;
+}
+
 #item-msg {
   font-size: 15px;
   margin-left: 200px;
@@ -119,10 +144,9 @@
 
 }
 
-.row{
-	margin-bottom: 0px;
-	margin-left: 0px;
-	margin-right: 0px;
+input:-webkit-autofill {
+  -webkit-box-shadow: inset 0 0 0px 9999px #0f0f0f!important;
+	-webkit-text-fill-color: white;
 }
 
 #date {
