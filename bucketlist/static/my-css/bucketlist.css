@@ -19,13 +19,15 @@
 }
 
 #main_row {
-  background-image: url('/static/img/foggy.jpg'), linear-gradient(#3d72b4, #525252);
+  background-image: url('/static/img/foggy.jpg');
   /* background-color: rgba(0, 0, 0, 0.60);
   background-blend-mode: overlay; */
-  /* background-size: cover; */
+  background-size: cover;
 	width:100vw;
 	height: 100vh;
-	overflow:auto;
+}
+body{
+	overflow: hidden;
 }
 
 #yaya {
