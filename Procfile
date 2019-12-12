@@ -1,1 +1,1 @@
-web: python bucketlist/manage.py migrate; gunicorn project.wsgi:application --preload --workers 1
+web: python bucketlist/manage.py migrate; gunicorn bucketlist.wsgi --pythonpath=bucketlist --log-file -
