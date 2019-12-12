@@ -1,8 +1,11 @@
 #main {
-  background-image: url('../img/the_image.png');
-  height: 100%;
+  background-color: #d4c2c4;
+	max-width:100%;
+  max-height:100%;
+	overflow:auto;
+  /* height: 100%;
   background-size: repeat-x repeat-y;
-  min-height: 100vh;
+  min-height: 100vh; */
 }
 
 #itms {
@@ -15,12 +18,14 @@
   margin-bottom: 0px;
 }
 
-body {
-  background-image: url('/static/img/watercoaster.jpg'), linear-gradient(#3d72b4, #525252);
-  background-color: rgba(0, 0, 0, 0.60);
-  background-blend-mode: overlay;
-  background-size: cover;
-  height: 100%;
+#main_row {
+  background-image: url('/static/img/foggy.jpg'), linear-gradient(#3d72b4, #525252);
+  /* background-color: rgba(0, 0, 0, 0.60);
+  background-blend-mode: overlay; */
+  /* background-size: cover; */
+	width:100vw;
+	height: 100vh;
+	overflow:auto;
 }
 
 #yaya {
@@ -43,22 +48,40 @@ body {
 }
 
 #signup_btn {
-  height: 50px;
-  width: 200px;
-  margin-left: 70px;
-  background-color: #20B5D8;
-  border: 0pt;
+	height: 40px;
+	width: 130px;
+	margin-left: 136px;
+  margin-top: 25px;
+	border-style: none;
+	background-color: #8593ac;
+  border-radius: 100px;
+	font-family: "Karla-Regular";
+	src: url(..static/fonts/Karla-Regular.ttf) format("truetype");
 }
 
 #signin-btn {
   height: 50px;
   width: 200px;
-  margin-left: 70px;
-  margin-top: 5px;
+  margin-left: 136px;
+  margin-top: 50px;
   background-color: #20B5D8;
   border: 0pt;
 }
 
+#signup_div{
+	border-bottom-left-radius: 200px;
+}
+
+#signup {
+	font-family: "Karla-Regular";
+	src: url(..static/fonts/Karla-Regular.ttf) format("truetype");
+}
+.card .card-content {
+	background-color: #101010;
+}
+.tabs {
+	background-color: #101010;
+}
 #item-msg {
   font-size: 15px;
   margin-left: 200px;
@@ -76,7 +99,7 @@ body {
 #bucket-name {
 	font-family: "Karla-Regular";
 	src: url(..static/fonts/Karla-Regular.ttf) format("truetype");
-	font-size: 15px;
+	font-size: 13px;
 	color: #FFFFFF;
 	letter-spacing: 10px;
 	font-weight:100;

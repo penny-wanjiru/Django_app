@@ -15,7 +15,7 @@
                 {% else %}
                     <li class="tab col s3"><a id="signup_tab" class="active" href="#signup">Sign up</a></li>
                     <li class="tab col s3"><a id="signin_tab" href="#signin">Login</a></li>
-                {% endif %}   
+                {% endif %}
             </ul>
         </div>
       <!-- signup form -->
@@ -32,23 +32,23 @@
                                 <div class="input-field">
                                     <label for="id_subject">Username</label>
                                     {{ form.username }}
-                                </div>    
+                                </div>
                                 <div class="input-field">
                                     <label for="id_subject">Email</label>
                                     {{ form.email }}
                                 </div>
-                                <div class="input-field">    
+                                <div class="input-field">
                                     <label for="id_subject">Password</label>
                                     {{ form.password }}
-                                </div> 
-                                <div class="input-field">   
+                                </div>
+                                <div class="input-field">
                                     <label for="id_subject">Confirm password</label>
                                     {{ form.password_conf }}
                                 </div>
-                                <input type="submit" value="SIGN UP" id="signup_btn" class="button1">
+                                <button type="submit" value="SIGN UP" id="signup_btn" class="button1">SIGN UP</button>
                             </form>
-                        </div>  
-                    </div> 
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -56,8 +56,8 @@
         <div id="signin" class="col s12">
             <div id="signin_div" class="name col m12">
                 <div class="card crd">
-                    <div class="card-content">   
-                        <div class="col-sm-12">  
+                    <div class="card-content">
+                        <div class="col-sm-12">
                         </div>
                         <div class="row">
                             <form class="col s12" method='POST' action="login/">
@@ -74,18 +74,18 @@
                                     <label for="id_subject">Username</label>
                                     {{ signin.username }}
                                 </div>
-                                <div class="input-field">  
+                                <div class="input-field">
                                     <label for="id_subject">Password</label>
                                     {{ signin.password }}
-                                </div> 
+                                </div>
                                 <input type="submit" value="SIGN IN" id="signin-btn" class="button1">
                             </form>
-                        </div>  
-                    </div> 
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>   
+</div>
 
-{% endblock %}           
+{% endblock %}
