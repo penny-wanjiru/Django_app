@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import BucketList, BucketListItem
-from models import User
+from django.contrib.auth.models import User
 
 
 class SignUpAdmin(admin.ModelAdmin):
