@@ -12,7 +12,7 @@ django-debug-toolbar==1.4
 django-filter==0.13.0
 django-registration==2.0.4
 django-test==0.4030
-djangorestframework==3.9.4
+djangorestframework==3.11.2
 djangorestframework-jwt==1.8.0
 docopt==0.6.2
 drfdocs==0.0.10
