@@ -31,7 +31,7 @@ pickleshare==0.7.2
 psycopg2-binary==2.8.3
 ptyprocess==0.5.1
 pudb==2016.1
-Pygments==2.1.3
+Pygments==2.7.4
 PyJWT==1.4.0
 pytz==2019.3
 requests==2.22.0
